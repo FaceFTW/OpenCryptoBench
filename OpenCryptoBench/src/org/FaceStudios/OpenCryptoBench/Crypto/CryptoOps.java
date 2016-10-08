@@ -9,7 +9,7 @@ public class CryptoOps {
 	//A Universal Enum representing the mode
 	public enum Mode{ENCRYPTION, DECRYPTION};
 	//Enum representing the functions
-	public enum Algorithm{AES, DES, DES3, BLOWFISH};
+	public enum Algorithm{AES, DES, DES3, BLOWFISH, RC2, RC4, RC5, RSA, ECIES, CCM, GCM, ARCFOUR};
 	
 	public static void invokeCrypto(Algorithm method, int bitlen, Mode mode){
 		switch(method){
@@ -24,6 +24,30 @@ public class CryptoOps {
 			//Code
 			break;
 		case BLOWFISH:
+			//Code
+			break;
+		case RC2:
+			//Code
+			break;
+		case RC4:
+			//Code
+			break;
+		case RC5:
+			//Code
+			break;
+		case RSA:
+			//Code
+			break;
+		case ECIES:
+			//Code
+			break;
+		case CCM:
+			//Code
+			break;
+		case GCM:
+			//Code
+			break;
+		case ARCFOUR:
 			//Code
 			break;
 		}

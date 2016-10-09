@@ -11,7 +11,6 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
 import org.FaceStudios.OpenCryptoBench.Crypto.CryptoObject;
-import org.FaceStudios.OpenCryptoBench.Crypto.CryptoOps;
 import org.apache.commons.codec.binary.Hex;
 
 import com.google.common.base.Stopwatch;
@@ -95,7 +94,7 @@ public class RCAlgorithmSetCryptoOps {
 				LOGGER.info("END RC2 PROCEDURE");
 				LOGGER.info("#################################################################");
 			}
-			public static void performRC4(CryptoOps.Mode mode, CryptoObject thing){
+			public static void performRC4(CryptoObject thing){
 				LOGGER.info("##############################################################");
 				LOGGER.info("BEGIN RC4 PROCEDURE");
 				LOGGER.info("##############################################################");
@@ -163,7 +162,7 @@ public class RCAlgorithmSetCryptoOps {
 				LOGGER.info("#################################################################");
 			}
 			
-			public static void performRC5(CryptoOps.Mode mode, CryptoObject thing){
+			public static void performRC5(CryptoObject thing){
 				LOGGER.info("##############################################################");
 				LOGGER.info("BEGIN RC5 PROCEDURE");
 				LOGGER.info("##############################################################");
@@ -231,7 +230,7 @@ public class RCAlgorithmSetCryptoOps {
 				LOGGER.info("#################################################################");
 			}
 			
-			public static void performARCFOUR(CryptoOps.Mode mode, CryptoObject thing){
+			public static void performARCFOUR(CryptoObject thing){
 				LOGGER.info("##############################################################");
 				LOGGER.info("BEGIN ARCFOUR PROCEDURE");
 				LOGGER.info("##############################################################");

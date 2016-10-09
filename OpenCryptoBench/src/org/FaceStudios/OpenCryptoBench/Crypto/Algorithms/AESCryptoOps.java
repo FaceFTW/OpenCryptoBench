@@ -8,7 +8,6 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
-import javax.xml.crypto.dsig.spec.C14NMethodParameterSpec;
 
 import org.FaceStudios.OpenCryptoBench.Crypto.CryptoObject;
 import org.apache.commons.codec.binary.Hex;
@@ -24,6 +23,7 @@ public class AESCryptoOps {
 	//Stopwatch Implementation
 	private static Stopwatch stopwatch;
 	private static Cipher c;
+	private static Cipher c1;
 	
 	public static void performAES(int bitlen, CryptoObject thing){
 		LOGGER.info("##############################################################");
@@ -67,7 +67,6 @@ public class AESCryptoOps {
 		LOGGER.info("Using Output string "+out+" for decryption");
 		LOGGER.info("Using SecretKey "+Hex.encodeHexString(thing.getKey().getEncoded())+" as SecretKey for decryption");
 		LOGGER.info("Starting Decryption process for AES, "+bitlen+" bit key");
-		Cipher c1 = null;
 		try {
 			c1 = Cipher.getInstance("AES/PKCS5Padding");
 			c1.init(Cipher.DECRYPT_MODE, thing.getKey());

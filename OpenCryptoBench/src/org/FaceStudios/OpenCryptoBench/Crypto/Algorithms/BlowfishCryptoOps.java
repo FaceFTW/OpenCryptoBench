@@ -11,7 +11,6 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
 import org.FaceStudios.OpenCryptoBench.Crypto.CryptoObject;
-import org.FaceStudios.OpenCryptoBench.Crypto.CryptoOps;
 import org.apache.commons.codec.binary.Hex;
 
 import com.google.common.base.Stopwatch;
@@ -28,7 +27,7 @@ public class BlowfishCryptoOps {
 		private static Cipher c;
 		private static Cipher c1;
 		//TODO Adjust Procedure As Needed
-		public static void performBlowfish(CryptoOps.Mode mode, CryptoObject thing){
+		public static void performBlowfish(CryptoObject thing){
 			LOGGER.info("##############################################################");
 			LOGGER.info("BEGIN BLOWFISH PROCEDURE");
 			LOGGER.info("##############################################################");

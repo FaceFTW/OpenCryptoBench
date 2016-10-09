@@ -8,6 +8,8 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+import javax.xml.crypto.dsig.spec.C14NMethodParameterSpec;
+
 import org.FaceStudios.OpenCryptoBench.Crypto.CryptoObject;
 import org.apache.commons.codec.binary.Hex;
 import com.google.common.base.Stopwatch;
@@ -24,6 +26,9 @@ public class AESCryptoOps {
 	private static Cipher c;
 	
 	public static void performAES(int bitlen, CryptoObject thing){
+		LOGGER.info("##############################################################");
+		LOGGER.info("BEGIN AES PROCEDURE");
+		LOGGER.info("##############################################################");
 		LOGGER.info("Starting Stopwatch");
 		stopwatch = Stopwatch.createStarted();
 		LOGGER.info("Starting Encryption procedures for AES");
@@ -32,7 +37,7 @@ public class AESCryptoOps {
 		LOGGER.config("Bit-size of key for encryption is "+bitlen+" bits");
 		LOGGER.info("Initializing Cipher as AES, "+bitlen+" bit key");
 		try {
-			c = Cipher.getInstance("AES/PKCS5 Padding");
+			c = Cipher.getInstance("AES/PKCS5Padding");
 			c.init(Cipher.ENCRYPT_MODE, thing.getKey());
 		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
 			LOGGER.severe("ERROR: Cipher object could not initialize with given algorithm and parameter");
@@ -43,7 +48,7 @@ public class AESCryptoOps {
 		String out = "";
 		LOGGER.config("Starting Encryption");
 		try {
-			out = Hex.encodeHexString(c.doFinal());
+			out = Hex.encodeHexString(c.doFinal(thing.getInput().getBytes()));
 		} catch (IllegalBlockSizeException | BadPaddingException e) {
 			LOGGER.severe("ERROR: Cipher could not execute encryption");
 			e.printStackTrace();
@@ -56,6 +61,38 @@ public class AESCryptoOps {
 		LOGGER.info("Resetting Stopwatch");
 		stopwatch.reset();
 		LOGGER.config("Success in resetting stopwatch");
+		//TODO Finish Encryption
+		LOGGER.info("Restarting Stopwatch");
+		stopwatch.start();		
+		LOGGER.info("Using Output string "+out+" for decryption");
+		LOGGER.info("Using SecretKey "+Hex.encodeHexString(thing.getKey().getEncoded())+" as SecretKey for decryption");
+		LOGGER.info("Starting Decryption process for AES, "+bitlen+" bit key");
+		Cipher c1 = null;
+		try {
+			c1 = Cipher.getInstance("AES/PKCS5Padding");
+			c1.init(Cipher.DECRYPT_MODE, thing.getKey());
+		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
+			LOGGER.severe("ERROR: Could not initialize the cipher object with given parameters");
+			e.printStackTrace();
+		}
+		LOGGER.config("Success in initializing a Cipher");
+		LOGGER.config("Creating an output String");
+		String out1 = "";
+		LOGGER.info("Starting Decryption");
+		try {
+			out = new String(c1.doFinal(out1.getBytes()));
+		} catch (IllegalBlockSizeException | BadPaddingException e) {
+			LOGGER.severe("ERROR: Could Not Decrypt Data");
+			e.printStackTrace();
+		}
+		LOGGER.info("Success");
+		LOGGER.info("Output string is"+out);
+		LOGGER.info("Stopping Stopwatch");
+		stopwatch.stop();
+		LOGGER.info("Time elapsed is "+ stopwatch.elapsed(TimeUnit.MILLISECONDS));
+		LOGGER.info("#################################################################");
+		LOGGER.info("END AES PROCEDURE");
+		LOGGER.info("#################################################################");
 		}
 }
 	

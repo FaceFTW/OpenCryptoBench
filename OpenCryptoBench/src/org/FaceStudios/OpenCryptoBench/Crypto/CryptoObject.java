@@ -1,24 +1,37 @@
 package org.FaceStudios.OpenCryptoBench.Crypto;
 
-import javax.crypto.SecretKey;
-
-public class CryptoObject {
+public class CryptoObject{
 	//This intends to be a class that creates an object with data already localized
 	//The Object is intended only for use with the crypto programs
 	private String input;
-	private SecretKey secret; //Battleblock Theatre Reference
+	//timeEncrypt and timeDecrypt are in ms
+	private long timeEncrypt;
+	private long timeDecrypt;
 	//Constructor
-	public CryptoObject(String i, SecretKey s){
+	public CryptoObject(String i){
 		input = i;
-		secret = s;
+		timeEncrypt = 0;
+		timeDecrypt = 0;
 	}
 	
 	//Return Methods
 	public String getInput(){
 		return input;
 	}
-	//TODO Figure out if SecretKey class allows the actual key to be returned to another function
-	public SecretKey getKey(){
-		return secret;
+	
+	public synchronized void writeEncryptTime(long in){
+		timeEncrypt = in;
+	}
+	
+	public long getEncryptTime(){
+		return timeEncrypt;
+	}
+	
+	public synchronized void writeDecryptTime(long in){
+		timeDecrypt = in;
+	}
+	
+	public long getDecryptTime(){
+		return timeDecrypt;
 	}
 }

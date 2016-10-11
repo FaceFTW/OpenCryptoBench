@@ -1,14 +1,18 @@
 package org.FaceStudios.OpenCryptoBench.Crypto.Algorithms;
 
+import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
+import javax.crypto.SecretKey;
 
 import org.FaceStudios.OpenCryptoBench.Crypto.CryptoObject;
 import org.apache.commons.codec.binary.Hex;
@@ -26,20 +30,38 @@ public class DESCryptoOps {
 	private static Stopwatch stopwatch;
 	private static Cipher c;
 	private static Cipher c1;
-	//TODO Adjust Procedure As Needed
-	public static void performDES(CryptoObject thing){
+	private static SecretKey secret;
+	protected static KeyGenerator gen;
+
+	public static void performDES(int bitlen, CryptoObject thing, String file){
+		try {
+			LOGGER.addHandler(new FileHandler(file));
+		} catch (SecurityException | IOException e2) {
+			e2.printStackTrace();
+		}
 		LOGGER.info("##############################################################");
 		LOGGER.info("BEGIN DES PROCEDURE");
 		LOGGER.info("##############################################################");
 		LOGGER.info("Starting Stopwatch");
 		stopwatch = Stopwatch.createStarted();
 		LOGGER.info("Starting Encryption procedures for DES");
+		LOGGER.config("Making a SecretKey Generator");
+		try {
+			gen = KeyGenerator.getInstance("AES");
+		} catch (NoSuchAlgorithmException e1) {
+			LOGGER.severe("ERROR: Algorithm AES Could not be registered");
+			e1.printStackTrace();
+		}
+		LOGGER.config("Initializing KeyGenerator Object");
+		gen.init(bitlen);
+		LOGGER.config("Generating SecretKey of bitlength "+bitlen+" bits");
+		secret = gen.generateKey();
 		LOGGER.config("CryptoObject's input string is "+thing.getInput());
-		LOGGER.config("CryptoObject's SecretKey Object is "+Hex.encodeHexString(thing.getKey().getEncoded()));
+		LOGGER.config("CryptoObject's SecretKey Object is "+Hex.encodeHexString(secret.getEncoded()));
 		LOGGER.info("Initializing Cipher as DES");
 		try {
 			c = Cipher.getInstance("DES/PKCS5Padding");
-			c.init(Cipher.ENCRYPT_MODE, thing.getKey());
+			c.init(Cipher.ENCRYPT_MODE, secret);
 		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
 			LOGGER.severe("ERROR: Cipher object could not initialize with given algorithm and parameter");
 			e.printStackTrace();
@@ -66,11 +88,11 @@ public class DESCryptoOps {
 		LOGGER.info("Restarting Stopwatch");
 		stopwatch.start();		
 		LOGGER.info("Using Output string "+out+" for decryption");
-		LOGGER.info("Using SecretKey "+Hex.encodeHexString(thing.getKey().getEncoded())+" as SecretKey for decryption");
+		LOGGER.info("Using SecretKey "+Hex.encodeHexString(secret.getEncoded())+" as SecretKey for decryption");
 		LOGGER.info("Starting Decryption process for DES");
 		try {
 			c1 = Cipher.getInstance("DES/PKCS5Padding");
-			c1.init(Cipher.DECRYPT_MODE, thing.getKey());
+			c1.init(Cipher.DECRYPT_MODE, secret);
 		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
 			LOGGER.severe("ERROR: Could not initialize the cipher object with given parameters");
 			e.printStackTrace();
@@ -95,25 +117,41 @@ public class DESCryptoOps {
 		LOGGER.info("#################################################################");
 	}
 	
-	public static void perform3DES(CryptoObject thing){
+	public static void perform3DES(int bitlen, CryptoObject thing, String file){
 		//Enter 3DES Code Here
 		//TODO Establish 3DES with known structural mechanism
 		/*3DES is essentially DES, but goes through 3 rounds of encryption and decryption
 		 * Should try and make three different keys
 		 * Use a for loop, and mention each iteration
 		 * have a final output after the for loop*/
+		try {
+			LOGGER.addHandler(new FileHandler(file));
+		} catch (SecurityException | IOException e2) {
+			e2.printStackTrace();
+		}
 		LOGGER.info("##############################################################");
 		LOGGER.info("BEGIN 3DES PROCEDURE");
 		LOGGER.info("##############################################################");
 		LOGGER.info("Starting Stopwatch");
 		stopwatch = Stopwatch.createStarted();
 		LOGGER.info("Starting Encryption procedures for 3DES");
+		LOGGER.config("Making a SecretKey Generator");
+		try {
+			gen = KeyGenerator.getInstance("AES");
+		} catch (NoSuchAlgorithmException e1) {
+			LOGGER.severe("ERROR: Algorithm AES Could not be registered");
+			e1.printStackTrace();
+		}
+		LOGGER.config("Initializing KeyGenerator Object");
+		gen.init(bitlen);
+		LOGGER.config("Generating SecretKey of bitlength "+bitlen+" bits");
+		secret = gen.generateKey();
 		LOGGER.config("CryptoObject's input string is "+thing.getInput());
-		LOGGER.config("CryptoObject's SecretKey Object is "+Hex.encodeHexString(thing.getKey().getEncoded()));
+		LOGGER.config("CryptoObject's SecretKey Object is "+Hex.encodeHexString(secret.getEncoded()));
 		LOGGER.info("Initializing Cipher as 3DES");
 		try {
 			c = Cipher.getInstance("DESede/PKCS5Padding");
-			c.init(Cipher.ENCRYPT_MODE, thing.getKey());
+			c.init(Cipher.ENCRYPT_MODE, secret);
 		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
 			LOGGER.severe("ERROR: Cipher object could not initialize with given algorithm and parameter");
 			e.printStackTrace();
@@ -140,11 +178,11 @@ public class DESCryptoOps {
 		LOGGER.info("Restarting Stopwatch");
 		stopwatch.start();		
 		LOGGER.info("Using Output string "+out+" for decryption");
-		LOGGER.info("Using SecretKey "+Hex.encodeHexString(thing.getKey().getEncoded())+" as SecretKey for decryption");
+		LOGGER.info("Using SecretKey "+Hex.encodeHexString(secret.getEncoded())+" as SecretKey for decryption");
 		LOGGER.info("Starting Decryption process for 3DES");
 		try {
 			c1 = Cipher.getInstance("DESede/PKCS5Padding");
-			c1.init(Cipher.DECRYPT_MODE, thing.getKey());
+			c1.init(Cipher.DECRYPT_MODE, secret);
 		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
 			LOGGER.severe("ERROR: Could not initialize the cipher object with given parameters");
 			e.printStackTrace();

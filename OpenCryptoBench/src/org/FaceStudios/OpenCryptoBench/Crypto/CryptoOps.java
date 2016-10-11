@@ -44,22 +44,22 @@ public class CryptoOps {
 		case RC2:
 			LOGGER.info("Detected Algorithm RC2");
 			LOGGER.config("Invoking RC2 Procedure");
-			RCAlgorithmSetCryptoOps.performRC2(crypto);
+			RCAlgorithmSetCryptoOps.performRC2(bitlen, crypto, file);
 			break;
 		case RC4:
 			LOGGER.info("Detected Algorithm RC4");
 			LOGGER.config("Invoking RC4 Procedure");
-			RCAlgorithmSetCryptoOps.performRC4(crypto);
+			RCAlgorithmSetCryptoOps.performRC4(bitlen, crypto, file);
 			break;
 		case RC5:
 			LOGGER.info("Detected Algorithm ");
 			LOGGER.config("Invoking RC5 Procedure");
-			RCAlgorithmSetCryptoOps.performRC5(crypto);
+			RCAlgorithmSetCryptoOps.performRC5(bitlen, crypto, file);
 			break;
 		case ECIES:
 			LOGGER.info("Detected Algorithm ECIES");
 			LOGGER.config("Invoking ECIES Procedure");
-			ECIESCryptoOps.performECIES(crypto);
+			ECIESCryptoOps.performECIES(bitlen, crypto, file);
 			break;
 		case CCM:
 			LOGGER.info("Detected Algorithm CCM");
@@ -69,12 +69,12 @@ public class CryptoOps {
 		case GCM:
 			LOGGER.info("Detected Algorithm GCM");
 			LOGGER.config("Invoking GCM Procedure");
-			GCMCryptoOps.performGCM(crypto);
+			GCMCryptoOps.performGCM(bitlen, crypto, file);
 			break;
 		case ARCFOUR:
 			LOGGER.info("Detected Algorithm ARCFOUR");
 			LOGGER.config("Invoking ARCFOUR Procedure");
-			RCAlgorithmSetCryptoOps.performARCFOUR(crypto);
+			RCAlgorithmSetCryptoOps.performARCFOUR(bitlen, crypto, file);
 			break;
 		}
 	}

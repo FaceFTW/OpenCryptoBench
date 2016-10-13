@@ -10,7 +10,6 @@ public class MainGUI {
 	//This class will serve as a mainstream GUI for the program
 	//All the swing components...
 	private JPanel mainFrame;
-	
 	private JScrollBar outPanel;
 	private JTextArea termOut;
 	
@@ -19,4 +18,6 @@ public class MainGUI {
 		outPanel = new JScrollBar();
 		termOut = new JTextArea();
 	}
+	
+	
 }

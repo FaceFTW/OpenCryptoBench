@@ -4,10 +4,8 @@ import java.util.logging.Logger;
 
 import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.AESCryptoOps;
 import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.BlowfishCryptoOps;
-import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.CCMCryptoOps;
 import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.DESCryptoOps;
 import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.ECIESCryptoOps;
-import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.GCMCryptoOps;
 import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.RCAlgorithmSetCryptoOps;
 
 public class CryptoOps {
@@ -15,7 +13,7 @@ public class CryptoOps {
 	//This will be used to attach a logger to a encryption invoked by the program
 	private static final Logger LOGGER = Logger.getLogger(CryptoOps.class.getName());
 	//Enum representing the functions
-	public enum Algorithm{AES, DES, DES3, BLOWFISH, RC2, RC4, RC5, ECIES, CCM, GCM, ARCFOUR};
+	public enum Algorithm{AES, DES, DES3, BLOWFISH, RC2, RC4, RC5, ECIES, ARCFOUR};
 	
 	public static void invokeCrypto(Algorithm method, int bitlen, CryptoObject crypto, String file){
 		LOGGER.info("Detecting Algorithm");
@@ -60,16 +58,6 @@ public class CryptoOps {
 			LOGGER.info("Detected Algorithm ECIES");
 			LOGGER.config("Invoking ECIES Procedure");
 			ECIESCryptoOps.performECIES(bitlen, crypto, file);
-			break;
-		case CCM:
-			LOGGER.info("Detected Algorithm CCM");
-			LOGGER.config("Invoking  Procedure");
-			CCMCryptoOps.performCCM(bitlen,crypto,file);
-			break;
-		case GCM:
-			LOGGER.info("Detected Algorithm GCM");
-			LOGGER.config("Invoking GCM Procedure");
-			GCMCryptoOps.performGCM(bitlen, crypto, file);
 			break;
 		case ARCFOUR:
 			LOGGER.info("Detected Algorithm ARCFOUR");

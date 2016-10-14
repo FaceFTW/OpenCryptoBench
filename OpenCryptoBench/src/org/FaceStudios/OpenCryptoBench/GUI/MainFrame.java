@@ -43,15 +43,17 @@ public class MainFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public MainFrame() {
+		setTitle("OpenCryptoBench");
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 600, 300);
+		setBounds(100, 100, 700, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel configPanel = new JPanel();
-		configPanel.setBounds(5, 5, 574, 152);
+		configPanel.setBounds(5, 5, 689, 169);
 		contentPane.add(configPanel);
 		configPanel.setLayout(null);
 		
@@ -66,63 +68,94 @@ public class MainFrame extends JFrame {
 		
 		JPanel methodPanel = new JPanel();
 		methodPanel.setBorder(new TitledBorder(null, "Methods", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		methodPanel.setBounds(0, 41, 574, 111);
+		methodPanel.setBounds(0, 30, 689, 139);
 		configPanel.add(methodPanel);
-		methodPanel.setLayout(new GridLayout(6, 10, 0, 0));
+		methodPanel.setLayout(new GridLayout(1, 10, 0, 0));
+		
+		JPanel aesPanel = new JPanel();
+		aesPanel.setBorder(new TitledBorder(null, "AES", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		methodPanel.add(aesPanel);
+		aesPanel.setLayout(new GridLayout(3, 1, 0, 0));
 		
 		JCheckBox aes128 = new JCheckBox("AES (128-bit)");
-		methodPanel.add(aes128);
-		
-		JCheckBox des56 = new JCheckBox("DES (56-bit)");
-		methodPanel.add(des56);
-		
-		JCheckBox blowfish64 = new JCheckBox("Blowfish (64-bit)");
-		methodPanel.add(blowfish64);
+		aesPanel.add(aes128);
 		
 		JCheckBox aes192 = new JCheckBox("AES (192-bit)");
-		methodPanel.add(aes192);
-		
-		JCheckBox desede56 = new JCheckBox("3DES (56-bit)");
-		methodPanel.add(desede56);
-		
-		JCheckBox blowfish32 = new JCheckBox("Blowfish (32-bit)");
-		methodPanel.add(blowfish32);
+		aesPanel.add(aes192);
 		
 		JCheckBox aes256 = new JCheckBox("AES (256-bit)");
-		methodPanel.add(aes256);
+		aesPanel.add(aes256);
 		
-		JCheckBox chckbxNewCheckBox_3 = new JCheckBox("New check box");
-		methodPanel.add(chckbxNewCheckBox_3);
+		JPanel desPanel = new JPanel();
+		desPanel.setBorder(new TitledBorder(null, "DES", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		methodPanel.add(desPanel);
+		desPanel.setLayout(new GridLayout(4, 1, 0, 0));
 		
-		JCheckBox chckbxNewCheckBox_12 = new JCheckBox("New check box");
-		methodPanel.add(chckbxNewCheckBox_12);
+		JCheckBox des56 = new JCheckBox("DES (56-bit)");
+		desPanel.add(des56);
 		
-		JCheckBox aes512 = new JCheckBox("AES (512-bit)");
-		methodPanel.add(aes512);
+		JCheckBox desede56 = new JCheckBox("3DES (56-bit)");
+		desPanel.add(desede56);
 		
-		JCheckBox chckbxNewCheckBox_9 = new JCheckBox("New check box");
-		methodPanel.add(chckbxNewCheckBox_9);
+		JCheckBox desede112 = new JCheckBox("3DES (112-bit)");
+		desPanel.add(desede112);
 		
-		JCheckBox chckbxNewCheckBox_11 = new JCheckBox("New check box");
-		methodPanel.add(chckbxNewCheckBox_11);
+		JCheckBox desede168 = new JCheckBox("3DES (168-bit)");
+		desPanel.add(desede168);
+		
+		JPanel blowfishPanel = new JPanel();
+		blowfishPanel.setBorder(new TitledBorder(null, "Blowfish", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		methodPanel.add(blowfishPanel);
+		blowfishPanel.setLayout(new GridLayout(6, 1, 0, 0));
+		
+		JCheckBox blowfish32 = new JCheckBox("Blowfish (32-bit)");
+		blowfishPanel.add(blowfish32);
+		
+		JCheckBox blowfish64 = new JCheckBox("Blowfish (64-bit)");
+		blowfishPanel.add(blowfish64);
 		
 		JCheckBox blowfish128 = new JCheckBox("Blowfish (128-bit)");
-		methodPanel.add(blowfish128);
+		blowfishPanel.add(blowfish128);
 		
-		JCheckBox chckbxNewCheckBox_14 = new JCheckBox("New check box");
-		methodPanel.add(chckbxNewCheckBox_14);
+		JCheckBox blowfish256 = new JCheckBox("Blowfish (256-bit)");
+		blowfishPanel.add(blowfish256);
 		
-		JCheckBox chckbxNewCheckBox_15 = new JCheckBox("New check box");
-		methodPanel.add(chckbxNewCheckBox_15);
+		JCheckBox blowfish384 = new JCheckBox("Blowfish (384-bit)");
+		blowfishPanel.add(blowfish384);
 		
-		Component verticalStrut = Box.createVerticalStrut(20);
-		methodPanel.add(verticalStrut);
+		JCheckBox blowfish448 = new JCheckBox("Blowfish (448-bit)");
+		blowfishPanel.add(blowfish448);
 		
-		Component verticalStrut_1 = Box.createVerticalStrut(20);
-		methodPanel.add(verticalStrut_1);
+		JPanel ARC2Panel = new JPanel();
+		ARC2Panel.setBorder(new TitledBorder(null, "RC2", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		methodPanel.add(ARC2Panel);
+		ARC2Panel.setLayout(new GridLayout(6, 1, 0, 0));
+		
+		JCheckBox rc2_8 = new JCheckBox("RC2 (8-bit)");
+		ARC2Panel.add(rc2_8);
+		
+		JCheckBox rc2_16 = new JCheckBox("RC2 (16-bit)");
+		ARC2Panel.add(rc2_16);
+		
+		JCheckBox rc2_32 = new JCheckBox("RC2 (32-bit)");
+		ARC2Panel.add(rc2_32);
+		
+		JCheckBox rc2_64 = new JCheckBox("RC2 (64-bit)");
+		ARC2Panel.add(rc2_64);
+		
+		JCheckBox rc2_128 = new JCheckBox("RC2 (128-bit)");
+		ARC2Panel.add(rc2_128);
+		
+		JCheckBox rc2_256 = new JCheckBox("RC2 (256-bit)");
+		ARC2Panel.add(rc2_256);
+		
+		JPanel ARCFOURPanel = new JPanel();
+		ARCFOURPanel.setBorder(new TitledBorder(null, "RC4", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		methodPanel.add(ARCFOURPanel);
+		ARCFOURPanel.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		JScrollPane LoggerArea = new JScrollPane();
-		LoggerArea.setBounds(5, 158, 574, 97);
+		LoggerArea.setBounds(15, 174, 689, 97);
 		contentPane.add(LoggerArea);
 		
 		JTextPane LogPane = new JTextPane();

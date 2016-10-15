@@ -13,7 +13,7 @@ public class CryptoOps {
 	//This will be used to attach a logger to a encryption invoked by the program
 	private static final Logger LOGGER = Logger.getLogger(CryptoOps.class.getName());
 	//Enum representing the functions
-	public enum Algorithm{AES, DES, DES3, BLOWFISH, RC2, RC4, RC5, ECIES, ARCFOUR};
+	public enum Algorithm{AES, DES, DES3, BLOWFISH, RC2, RC4, RC5, ECIES};
 	
 	public static void invokeCrypto(Algorithm method, int bitlen, CryptoObject crypto, String file){
 		LOGGER.info("Detecting Algorithm");
@@ -58,11 +58,6 @@ public class CryptoOps {
 			LOGGER.info("Detected Algorithm ECIES");
 			LOGGER.config("Invoking ECIES Procedure");
 			ECIESCryptoOps.performECIES(bitlen, crypto, file);
-			break;
-		case ARCFOUR:
-			LOGGER.info("Detected Algorithm ARCFOUR");
-			LOGGER.config("Invoking ARCFOUR Procedure");
-			RCAlgorithmSetCryptoOps.performARCFOUR(bitlen, crypto, file);
 			break;
 		}
 	}

@@ -1,22 +1,20 @@
 package org.FaceStudios.OpenCryptoBench.GUI;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
-import javax.swing.JTextField;
-import java.awt.Component;
-import javax.swing.Box;
-import javax.swing.JLabel;
-import java.awt.FlowLayout;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextPane;
-import javax.swing.border.TitledBorder;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
 
 public class MainFrame extends JFrame {
 
@@ -46,14 +44,14 @@ public class MainFrame extends JFrame {
 		setTitle("OpenCryptoBench");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 700, 300);
+		setBounds(100, 100, 750, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel configPanel = new JPanel();
-		configPanel.setBounds(5, 5, 689, 169);
+		configPanel.setBounds(5, 5, 737, 169);
 		contentPane.add(configPanel);
 		configPanel.setLayout(null);
 		
@@ -68,7 +66,7 @@ public class MainFrame extends JFrame {
 		
 		JPanel methodPanel = new JPanel();
 		methodPanel.setBorder(new TitledBorder(null, "Methods", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		methodPanel.setBounds(0, 30, 689, 139);
+		methodPanel.setBounds(0, 30, 738, 139);
 		configPanel.add(methodPanel);
 		methodPanel.setLayout(new GridLayout(1, 10, 0, 0));
 		
@@ -152,13 +150,66 @@ public class MainFrame extends JFrame {
 		JPanel ARCFOURPanel = new JPanel();
 		ARCFOURPanel.setBorder(new TitledBorder(null, "RC4", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		methodPanel.add(ARCFOURPanel);
-		ARCFOURPanel.setLayout(new GridLayout(0, 1, 0, 0));
+		ARCFOURPanel.setLayout(new GridLayout(6, 1, 0, 0));
+		
+		JCheckBox arcfour40 = new JCheckBox("RC4 (40-bit)");
+		ARCFOURPanel.add(arcfour40);
+		
+		JCheckBox arcfour64 = new JCheckBox("RC4 (64-bit)");
+		ARCFOURPanel.add(arcfour64);
+		
+		JCheckBox arcfour128 = new JCheckBox("RC4 (128-bit)");
+		ARCFOURPanel.add(arcfour128);
+		
+		JCheckBox arcfour256 = new JCheckBox("RC4 (256-bit)");
+		ARCFOURPanel.add(arcfour256);
+		
+		JCheckBox arcfour512 = new JCheckBox("RC4 (512-bit)");
+		ARCFOURPanel.add(arcfour512);
+		
+		JCheckBox arcfour1024 = new JCheckBox("RC4 (1024-bit)");
+		ARCFOURPanel.add(arcfour1024);
+		
+		JPanel RC5Panel = new JPanel();
+		RC5Panel.setBorder(new TitledBorder(null, "RC5", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		methodPanel.add(RC5Panel);
+		RC5Panel.setLayout(new GridLayout(6, 1, 0, 0));
+		
+		JCheckBox rc5_64 = new JCheckBox("RC5 (64-bit)");
+		RC5Panel.add(rc5_64);
+		
+		JCheckBox rc5_128 = new JCheckBox("RC5 (128-bit)");
+		RC5Panel.add(rc5_128);
+		
+		JCheckBox rc5_256 = new JCheckBox("RC5 (256-bit)");
+		RC5Panel.add(rc5_256);
+		
+		JCheckBox rc5_512 = new JCheckBox("RC5 (512-bit)");
+		RC5Panel.add(rc5_512);
+		
+		JCheckBox rc5_1024 = new JCheckBox("RC5 (1024-bit)");
+		RC5Panel.add(rc5_1024);
+		
+		JCheckBox rc5_2040 = new JCheckBox("RC5 (2040-bit)");
+		RC5Panel.add(rc5_2040);
+		
+		JButton btnStart = new JButton("Start");
+		btnStart.addActionListener(new StartListener());
+		btnStart.setBounds(512, 4, 89, 23);
+		configPanel.add(btnStart);
 		
 		JScrollPane LoggerArea = new JScrollPane();
-		LoggerArea.setBounds(15, 174, 689, 97);
+		LoggerArea.setBounds(5, 174, 737, 97);
 		contentPane.add(LoggerArea);
 		
 		JTextPane LogPane = new JTextPane();
 		LoggerArea.setViewportView(LogPane);
+	}
+	
+	private class StartListener implements ActionListener{
+		public void actionPerformed(ActionEvent arg0) {
+		
+		}
+
 	}
 }

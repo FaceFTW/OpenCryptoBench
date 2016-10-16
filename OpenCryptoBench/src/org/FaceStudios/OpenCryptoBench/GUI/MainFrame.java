@@ -18,6 +18,10 @@ import javax.swing.border.TitledBorder;
 
 public class MainFrame extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4646343597441301669L;
 	private JPanel contentPane;
 	private JTextField inField;
 

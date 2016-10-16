@@ -50,9 +50,14 @@ public class BlowfishCryptoOps {
 				e1.printStackTrace();
 			}
 			LOGGER.config("Initializing the generator for bitlength of "+bitlen+" bits");
+		
 			gen.init(bitlen);
+			
 			LOGGER.config("Generating Key");
+			
 			secret = gen.generateKey();
+			
+			
 			LOGGER.config("CryptoObject's input string is "+thing.getInput());
 			LOGGER.config("CryptoObject's SecretKey Object is "+Hex.encodeHexString(secret.getEncoded()));
 			LOGGER.info("Initializing Cipher as Blowfish");

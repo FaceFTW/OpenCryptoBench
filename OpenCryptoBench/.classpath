@@ -13,7 +13,11 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="libs/ecj-4.5.1.jar"/>
-	<classpathentry kind="lib" path="libs/tomcat-dbcp.jar"/>
+	<classpathentry kind="lib" path="libs/tomcat-dbcp.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/OpenCryptoBench/libs/apache-tomcat-9.0.0.M11-fulldocs.tar.gz!/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="lib" path="libs/tomcat-embed-core.jar"/>
 	<classpathentry kind="lib" path="libs/tomcat-embed-el.jar"/>
 	<classpathentry kind="lib" path="libs/tomcat-embed-jasper.jar"/>

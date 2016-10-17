@@ -5,7 +5,6 @@ import java.util.logging.Logger;
 import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.AESCryptoOps;
 import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.BlowfishCryptoOps;
 import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.DESCryptoOps;
-import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.ECIESCryptoOps;
 import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.RCAlgorithmSetCryptoOps;
 
 public class CryptoOps {

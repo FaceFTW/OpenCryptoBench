@@ -1,4 +1,4 @@
-package org.FaceStudios.OpenCryptoBench.GUI;
+package org.FaceStudios.OpenCryptoBench.Executable;
 
 import java.awt.EventQueue;
 import java.awt.GridLayout;

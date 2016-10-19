@@ -35,19 +35,17 @@ public class NOGUI {
 		//CryptoOps.invokeCrypto(Algorithm.BLOWFISH, 384, thing, file);
 		//CryptoOps.invokeCrypto(Algorithm.BLOWFISH, 448, thing, file);
 		//RC2
-		CryptoOps.invokeCrypto(Algorithm.RC2, 8, thing, file);
-		CryptoOps.invokeCrypto(Algorithm.RC2, 16, thing, file);
-		CryptoOps.invokeCrypto(Algorithm.RC2, 32, thing, file);
+		CryptoOps.invokeCrypto(Algorithm.RC2, 40, thing, file);
 		CryptoOps.invokeCrypto(Algorithm.RC2, 64, thing, file);
 		CryptoOps.invokeCrypto(Algorithm.RC2, 128, thing, file);
-		//CryptoOps.invokeCrypto(Algorithm.RC2, 256, thing, file);
-		//CryptoOps.invokeCrypto(Algorithm.RC2, 384, thing, file);
-		//CryptoOps.invokeCrypto(Algorithm.RC2, 448, thing, file);
-		//CryptoOps.invokeCrypto(Algorithm.RC2, 512, thing, file);
-		//CryptoOps.invokeCrypto(Algorithm.RC2, 640, thing, file);
-		//CryptoOps.invokeCrypto(Algorithm.RC2, 768, thing, file);
-		//CryptoOps.invokeCrypto(Algorithm.RC2, 896, thing, file);
-		//CryptoOps.invokeCrypto(Algorithm.RC2, 1024, thing, file);
+		CryptoOps.invokeCrypto(Algorithm.RC2, 256, thing, file);
+		CryptoOps.invokeCrypto(Algorithm.RC2, 384, thing, file);
+		CryptoOps.invokeCrypto(Algorithm.RC2, 448, thing, file);
+		CryptoOps.invokeCrypto(Algorithm.RC2, 512, thing, file);
+		CryptoOps.invokeCrypto(Algorithm.RC2, 640, thing, file);
+		CryptoOps.invokeCrypto(Algorithm.RC2, 768, thing, file);
+		CryptoOps.invokeCrypto(Algorithm.RC2, 896, thing, file);
+		CryptoOps.invokeCrypto(Algorithm.RC2, 1024, thing, file);
 		//RC4
 		CryptoOps.invokeCrypto(Algorithm.RC4, 40, thing, file);
 		CryptoOps.invokeCrypto(Algorithm.RC4, 64, thing, file);

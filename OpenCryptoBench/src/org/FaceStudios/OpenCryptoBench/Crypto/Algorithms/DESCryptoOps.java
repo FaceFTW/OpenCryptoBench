@@ -1,10 +1,8 @@
 package org.FaceStudios.OpenCryptoBench.Crypto.Algorithms;
 
-import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
 import javax.crypto.BadPaddingException;
@@ -40,8 +38,9 @@ public class DESCryptoOps {
 	private static Cipher c1;
 	private static SecretKey secret;
 	protected static KeyGenerator gen;
-	
+
 	public static void performDES(int bitlen,CryptoObject thing, String file){
+		LOGGER.setUseParentHandlers(true);
 		encryptTime = 0;
 		encryptAgTime = 0;
 		decryptTime = 0;
@@ -49,11 +48,11 @@ public class DESCryptoOps {
 		keygenTime = 0;
 		cryptoTime=  0;
 		totalTime=  0;
-		try {
+		/*try {
 			LOGGER.addHandler(new FileHandler(file));
 		} catch (SecurityException | IOException e2) {
 			e2.printStackTrace();
-		}
+		}*/
 		LOGGER.info("##############################################################");
 		LOGGER.info("BEGIN DES PROCEDURE");
 		LOGGER.info("##############################################################");
@@ -169,6 +168,7 @@ public class DESCryptoOps {
 	}
 	
 	public static void perform3DES(int bitlen,CryptoObject thing, String file){
+		LOGGER.setUseParentHandlers(true);
 		encryptTime = 0;
 		encryptAgTime = 0;
 		decryptTime = 0;
@@ -176,11 +176,11 @@ public class DESCryptoOps {
 		keygenTime = 0;
 		cryptoTime=  0;
 		totalTime=  0;
-		try {
+		/*try {
 			LOGGER.addHandler(new FileHandler(file));
 		} catch (SecurityException | IOException e2) {
 			e2.printStackTrace();
-		}
+		}*/
 		LOGGER.info("##############################################################");
 		LOGGER.info("BEGIN DESede PROCEDURE");
 		LOGGER.info("##############################################################");

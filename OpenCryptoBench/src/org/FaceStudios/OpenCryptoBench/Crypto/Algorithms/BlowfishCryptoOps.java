@@ -1,19 +1,20 @@
 package org.FaceStudios.OpenCryptoBench.Crypto.Algorithms;
 
-import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.FileHandler;
 import java.util.logging.Logger;
+
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
+
 import org.FaceStudios.OpenCryptoBench.Crypto.CryptoObject;
 import org.apache.commons.codec.binary.Hex;
+
 import com.google.common.base.Stopwatch;
 
 public class BlowfishCryptoOps {
@@ -38,6 +39,7 @@ public class BlowfishCryptoOps {
 		protected static KeyGenerator gen;
 		
 		public static void performBlowfish(int bitlen,CryptoObject thing, String file){
+			LOGGER.setUseParentHandlers(true);
 			encryptTime = 0;
 			encryptAgTime = 0;
 			decryptTime = 0;
@@ -45,11 +47,11 @@ public class BlowfishCryptoOps {
 			keygenTime = 0;
 			cryptoTime=  0;
 			totalTime=  0;
-			try {
+			/*try {
 				LOGGER.addHandler(new FileHandler(file));
 			} catch (SecurityException | IOException e2) {
 				e2.printStackTrace();
-			}
+			}*/
 			LOGGER.info("##############################################################");
 			LOGGER.info("BEGIN BLOWFISH PROCEDURE");
 			LOGGER.info("##############################################################");

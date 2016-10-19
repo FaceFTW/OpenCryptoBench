@@ -1,10 +1,8 @@
 package org.FaceStudios.OpenCryptoBench.Crypto.Algorithms;
 
-import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
 import javax.crypto.BadPaddingException;
@@ -42,6 +40,7 @@ public class RCAlgorithmSetCryptoOps {
 			protected static KeyGenerator gen;
 			
 			public static void performRC2(int bitlen,CryptoObject thing, String file){
+				LOGGER.setUseParentHandlers(true);
 				encryptTime = 0;
 				encryptAgTime = 0;
 				decryptTime = 0;
@@ -49,11 +48,11 @@ public class RCAlgorithmSetCryptoOps {
 				keygenTime = 0;
 				cryptoTime=  0;
 				totalTime=  0;
-				try {
+				/*try {
 					LOGGER.addHandler(new FileHandler(file));
 				} catch (SecurityException | IOException e2) {
 					e2.printStackTrace();
-				}
+				}*/
 				LOGGER.info("##############################################################");
 				LOGGER.info("BEGIN RC2 PROCEDURE");
 				LOGGER.info("##############################################################");
@@ -167,6 +166,7 @@ public class RCAlgorithmSetCryptoOps {
 				LOGGER.info("#################################################################");
 			}
 			public static void performRC4(int bitlen,CryptoObject thing, String file){
+				LOGGER.setUseParentHandlers(true);
 				encryptTime = 0;
 				encryptAgTime = 0;
 				decryptTime = 0;
@@ -174,11 +174,11 @@ public class RCAlgorithmSetCryptoOps {
 				keygenTime = 0;
 				cryptoTime=  0;
 				totalTime=  0;
-				try {
-					LOGGER.addHandler(new FileHandler(file));
-				} catch (SecurityException | IOException e2) {
-					e2.printStackTrace();
-				}
+			//	try {
+				//	LOGGER.addHandler(new FileHandler(file));
+				//} catch (SecurityException | IOException e2) {
+			//	e2.printStackTrace();
+				//}
 				LOGGER.info("##############################################################");
 				LOGGER.info("BEGIN RC4 PROCEDURE");
 				LOGGER.info("##############################################################");
@@ -294,6 +294,7 @@ public class RCAlgorithmSetCryptoOps {
 			}
 			
 			public static void performRC5(int bitlen,CryptoObject thing, String file){
+				LOGGER.setUseParentHandlers(true);
 				encryptTime = 0;
 				encryptAgTime = 0;
 				decryptTime = 0;
@@ -301,11 +302,11 @@ public class RCAlgorithmSetCryptoOps {
 				keygenTime = 0;
 				cryptoTime=  0;
 				totalTime=  0;
-				try {
+				/*try {
 					LOGGER.addHandler(new FileHandler(file));
 				} catch (SecurityException | IOException e2) {
 					e2.printStackTrace();
-				}
+				}*/
 				LOGGER.info("##############################################################");
 				LOGGER.info("BEGIN RC5 PROCEDURE");
 				LOGGER.info("##############################################################");

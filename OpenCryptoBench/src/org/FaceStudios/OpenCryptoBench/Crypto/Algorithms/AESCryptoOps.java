@@ -21,7 +21,7 @@ public class AESCryptoOps {
 	//This will allow data to be logged and processed
 	//All methods should be static
 	//Logger Implementaion
-	private static final Logger LOGGER = Logger.getLogger(AESCryptoOps.class.getName());
+	private static final Logger LOGGER = Logger.getLogger("Crypto");
 	private static Stopwatch stopwatch;
 	private static Stopwatch s2;
 	private static long keygenTime;
@@ -78,7 +78,7 @@ public class AESCryptoOps {
 		LOGGER.config("CryptoObject's SecretKey Object is "+Hex.encodeHexString(secret.getEncoded()));
 		LOGGER.info("Initializing Cipher as AES");
 		try {
-			c = Cipher.getInstance("AES/PKCS5Padding");
+			c = Cipher.getInstance("AES");
 			c.init(Cipher.ENCRYPT_MODE, secret);
 		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
 			LOGGER.severe("ERROR: Cipher object could not initialize with given algorithm and parameter");
@@ -117,7 +117,7 @@ public class AESCryptoOps {
 		LOGGER.info("Using SecretKey "+Hex.encodeHexString(secret.getEncoded())+" as SecretKey for decryption");
 		LOGGER.info("Starting Decryption process for AES");
 		try {
-			c1 = Cipher.getInstance("AES/PKCS5Padding");
+			c1 = Cipher.getInstance("AES");
 			c1.init(Cipher.DECRYPT_MODE, secret);
 		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
 			LOGGER.severe("ERROR: Could not initialize the cipher object with given parameters");
@@ -154,6 +154,9 @@ public class AESCryptoOps {
 		LOGGER.info("Decryption Aggregate Time: "+decryptAgTime+" ms");
 		LOGGER.info("Cryptography Operation Time: "+cryptoTime+" ms");
 		LOGGER.info("Total Operation Time: "+totalTime+" ms");
+		LOGGER.info("Input String: "+thing.getInput());
+		LOGGER.info("Key: "+Hex.encodeHexString(secret.getEncoded()));
+		LOGGER.info("Encrypted Output: "+outBytes.toString());
 		LOGGER.info("#################################################################");
 		LOGGER.info("END AES PROCEDURE");
 		LOGGER.info("#################################################################");

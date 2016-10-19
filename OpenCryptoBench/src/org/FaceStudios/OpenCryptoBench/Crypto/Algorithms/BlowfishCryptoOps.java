@@ -79,7 +79,7 @@ public class BlowfishCryptoOps {
 			LOGGER.config("CryptoObject's SecretKey Object is "+Hex.encodeHexString(secret.getEncoded()));
 			LOGGER.info("Initializing Cipher as Blowfish");
 			try {
-				c = Cipher.getInstance("Blowfish/PKCS5Padding");
+				c = Cipher.getInstance("Blowfish");
 				c.init(Cipher.ENCRYPT_MODE, secret);
 			} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
 				LOGGER.severe("ERROR: Cipher object could not initialize with given algorithm and parameter");
@@ -118,7 +118,7 @@ public class BlowfishCryptoOps {
 			LOGGER.info("Using SecretKey "+Hex.encodeHexString(secret.getEncoded())+" as SecretKey for decryption");
 			LOGGER.info("Starting Decryption process for Blowfish");
 			try {
-				c1 = Cipher.getInstance("Blowfish/PKCS5Padding");
+				c1 = Cipher.getInstance("Blowfish");
 				c1.init(Cipher.DECRYPT_MODE, secret);
 			} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
 				LOGGER.severe("ERROR: Could not initialize the cipher object with given parameters");
@@ -155,6 +155,9 @@ public class BlowfishCryptoOps {
 			LOGGER.info("Decryption Aggregate Time: "+decryptAgTime+" ms");
 			LOGGER.info("Cryptography Operation Time: "+cryptoTime+" ms");
 			LOGGER.info("Total Operation Time: "+totalTime+" ms");
+			LOGGER.info("Input String: "+thing.getInput());
+			LOGGER.info("Key: "+Hex.encodeHexString(secret.getEncoded()));
+			LOGGER.info("Encrypted Output: "+outBytes.toString());
 			LOGGER.info("#################################################################");
 			LOGGER.info("END BLOWFISH PROCEDURE");
 			LOGGER.info("#################################################################");

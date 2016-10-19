@@ -83,7 +83,7 @@ public class DESCryptoOps {
 		LOGGER.config("CryptoObject's SecretKey Object is "+Hex.encodeHexString(secret.getEncoded()));
 		LOGGER.info("Initializing Cipher as DES");
 		try {
-			c = Cipher.getInstance("DES/PKCS5Padding");
+			c = Cipher.getInstance("DES");
 			c.init(Cipher.ENCRYPT_MODE, secret);
 		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
 			LOGGER.severe("ERROR: Cipher object could not initialize with given algorithm and parameter");
@@ -122,7 +122,7 @@ public class DESCryptoOps {
 		LOGGER.info("Using SecretKey "+Hex.encodeHexString(secret.getEncoded())+" as SecretKey for decryption");
 		LOGGER.info("Starting Decryption process for DES");
 		try {
-			c1 = Cipher.getInstance("DES/PKCS5Padding");
+			c1 = Cipher.getInstance("DES");
 			c1.init(Cipher.DECRYPT_MODE, secret);
 		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
 			LOGGER.severe("ERROR: Could not initialize the cipher object with given parameters");
@@ -159,6 +159,9 @@ public class DESCryptoOps {
 		LOGGER.info("Decryption Aggregate Time: "+decryptAgTime+" ms");
 		LOGGER.info("Cryptography Operation Time: "+cryptoTime+" ms");
 		LOGGER.info("Total Operation Time: "+totalTime+" ms");
+		LOGGER.info("Input String: "+thing.getInput());
+		LOGGER.info("Key: "+Hex.encodeHexString(secret.getEncoded()));
+		LOGGER.info("Encrypted Output: "+outBytes.toString());
 		LOGGER.info("#################################################################");
 		LOGGER.info("END DES PROCEDURE");
 		LOGGER.info("#################################################################");
@@ -207,7 +210,7 @@ public class DESCryptoOps {
 		LOGGER.config("CryptoObject's SecretKey Object is "+Hex.encodeHexString(secret.getEncoded()));
 		LOGGER.info("Initializing Cipher as DESede");
 		try {
-			c = Cipher.getInstance("DESede/PKCS5Padding");
+			c = Cipher.getInstance("DESede");
 			c.init(Cipher.ENCRYPT_MODE, secret);
 		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
 			LOGGER.severe("ERROR: Cipher object could not initialize with given algorithm and parameter");
@@ -246,7 +249,7 @@ public class DESCryptoOps {
 		LOGGER.info("Using SecretKey "+Hex.encodeHexString(secret.getEncoded())+" as SecretKey for decryption");
 		LOGGER.info("Starting Decryption process for DESede");
 		try {
-			c1 = Cipher.getInstance("DESede/PKCS5Padding");
+			c1 = Cipher.getInstance("DESede");
 			c1.init(Cipher.DECRYPT_MODE, secret);
 		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
 			LOGGER.severe("ERROR: Could not initialize the cipher object with given parameters");
@@ -283,6 +286,9 @@ public class DESCryptoOps {
 		LOGGER.info("Decryption Aggregate Time: "+decryptAgTime+" ms");
 		LOGGER.info("Cryptography Operation Time: "+cryptoTime+" ms");
 		LOGGER.info("Total Operation Time: "+totalTime+" ms");
+		LOGGER.info("Input String: "+thing.getInput());
+		LOGGER.info("Key: "+Hex.encodeHexString(secret.getEncoded()));
+		LOGGER.info("Encrypted Output: "+outBytes.toString());
 		LOGGER.info("#################################################################");
 		LOGGER.info("END DESede PROCEDURE");
 		LOGGER.info("#################################################################");

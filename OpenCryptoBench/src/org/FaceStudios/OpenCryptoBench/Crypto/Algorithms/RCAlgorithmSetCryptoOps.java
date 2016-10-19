@@ -83,7 +83,7 @@ public class RCAlgorithmSetCryptoOps {
 				LOGGER.config("CryptoObject's SecretKey Object is "+Hex.encodeHexString(secret.getEncoded()));
 				LOGGER.info("Initializing Cipher as RC2");
 				try {
-					c = Cipher.getInstance("RC2/PKCS5Padding");
+					c = Cipher.getInstance("RC2");
 					c.init(Cipher.ENCRYPT_MODE, secret);
 				} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
 					LOGGER.severe("ERROR: Cipher object could not initialize with given algorithm and parameter");
@@ -122,7 +122,7 @@ public class RCAlgorithmSetCryptoOps {
 				LOGGER.info("Using SecretKey "+Hex.encodeHexString(secret.getEncoded())+" as SecretKey for decryption");
 				LOGGER.info("Starting Decryption process for RC2");
 				try {
-					c1 = Cipher.getInstance("RC2/PKCS5Padding");
+					c1 = Cipher.getInstance("RC2");
 					c1.init(Cipher.DECRYPT_MODE, secret);
 				} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
 					LOGGER.severe("ERROR: Could not initialize the cipher object with given parameters");
@@ -159,6 +159,9 @@ public class RCAlgorithmSetCryptoOps {
 				LOGGER.info("Decryption Aggregate Time: "+decryptAgTime+" ms");
 				LOGGER.info("Cryptography Operation Time: "+cryptoTime+" ms");
 				LOGGER.info("Total Operation Time: "+totalTime+" ms");
+				LOGGER.info("Input String: "+thing.getInput());
+				LOGGER.info("Key: "+Hex.encodeHexString(secret.getEncoded()));
+				LOGGER.info("Encrypted Output: "+outBytes.toString());
 				LOGGER.info("#################################################################");
 				LOGGER.info("END RC2 PROCEDURE");
 				LOGGER.info("#################################################################");
@@ -205,7 +208,7 @@ public class RCAlgorithmSetCryptoOps {
 				LOGGER.config("CryptoObject's SecretKey Object is "+Hex.encodeHexString(secret.getEncoded()));
 				LOGGER.info("Initializing Cipher as RC4");
 				try {
-					c = Cipher.getInstance("RC4/PKCS5Padding");
+					c = Cipher.getInstance("RC4");
 					c.init(Cipher.ENCRYPT_MODE, secret);
 				} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
 					LOGGER.severe("ERROR: Cipher object could not initialize with given algorithm and parameter");
@@ -244,7 +247,7 @@ public class RCAlgorithmSetCryptoOps {
 				LOGGER.info("Using SecretKey "+Hex.encodeHexString(secret.getEncoded())+" as SecretKey for decryption");
 				LOGGER.info("Starting Decryption process for RC4");
 				try {
-					c1 = Cipher.getInstance("RC4/PKCS5Padding");
+					c1 = Cipher.getInstance("RC4");
 					c1.init(Cipher.DECRYPT_MODE, secret);
 				} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
 					LOGGER.severe("ERROR: Could not initialize the cipher object with given parameters");
@@ -281,6 +284,9 @@ public class RCAlgorithmSetCryptoOps {
 				LOGGER.info("Decryption Aggregate Time: "+decryptAgTime+" ms");
 				LOGGER.info("Cryptography Operation Time: "+cryptoTime+" ms");
 				LOGGER.info("Total Operation Time: "+totalTime+" ms");
+				LOGGER.info("Input String: "+thing.getInput());
+				LOGGER.info("Key: "+Hex.encodeHexString(secret.getEncoded()));
+				LOGGER.info("Encrypted Output: "+outBytes.toString());
 				LOGGER.info("#################################################################");
 				LOGGER.info("END RC4 PROCEDURE");
 				LOGGER.info("#################################################################");
@@ -329,7 +335,7 @@ public class RCAlgorithmSetCryptoOps {
 				LOGGER.config("CryptoObject's SecretKey Object is "+Hex.encodeHexString(secret.getEncoded()));
 				LOGGER.info("Initializing Cipher as RC5");
 				try {
-					c = Cipher.getInstance("RC5/PKCS5Padding");
+					c = Cipher.getInstance("RC5");
 					c.init(Cipher.ENCRYPT_MODE, secret);
 				} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
 					LOGGER.severe("ERROR: Cipher object could not initialize with given algorithm and parameter");
@@ -368,7 +374,7 @@ public class RCAlgorithmSetCryptoOps {
 				LOGGER.info("Using SecretKey "+Hex.encodeHexString(secret.getEncoded())+" as SecretKey for decryption");
 				LOGGER.info("Starting Decryption process for RC5");
 				try {
-					c1 = Cipher.getInstance("RC5/PKCS5Padding");
+					c1 = Cipher.getInstance("RC5");
 					c1.init(Cipher.DECRYPT_MODE, secret);
 				} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
 					LOGGER.severe("ERROR: Could not initialize the cipher object with given parameters");
@@ -405,6 +411,9 @@ public class RCAlgorithmSetCryptoOps {
 				LOGGER.info("Decryption Aggregate Time: "+decryptAgTime+" ms");
 				LOGGER.info("Cryptography Operation Time: "+cryptoTime+" ms");
 				LOGGER.info("Total Operation Time: "+totalTime+" ms");
+				LOGGER.info("Input String: "+thing.getInput());
+				LOGGER.info("Key: "+Hex.encodeHexString(secret.getEncoded()));
+				LOGGER.info("Encrypted Output: "+outBytes.toString());
 				LOGGER.info("#################################################################");
 				LOGGER.info("END RC5 PROCEDURE");
 				LOGGER.info("#################################################################");

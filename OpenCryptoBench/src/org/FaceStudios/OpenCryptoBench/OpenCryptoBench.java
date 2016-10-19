@@ -1,4 +1,4 @@
-package org.FaceStudios.OpenCryptoBench.Crypto;
+package org.FaceStudios.OpenCryptoBench;
 
 import org.FaceStudios.OpenCryptoBench.Executable.NOGUI;
 

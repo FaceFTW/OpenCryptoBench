@@ -31,7 +31,7 @@ public class NOGUI {
 		CryptoOps.invokeCrypto(Algorithm.BLOWFISH, 32, thing, file);
 		CryptoOps.invokeCrypto(Algorithm.BLOWFISH, 64, thing, file);
 		CryptoOps.invokeCrypto(Algorithm.BLOWFISH, 128, thing, file);
-		CryptoOps.invokeCrypto(Algorithm.BLOWFISH, 256, thing, file);
+		//CryptoOps.invokeCrypto(Algorithm.BLOWFISH, 256, thing, file);
 		//CryptoOps.invokeCrypto(Algorithm.BLOWFISH, 384, thing, file);
 		//CryptoOps.invokeCrypto(Algorithm.BLOWFISH, 448, thing, file);
 		//RC2
@@ -40,7 +40,7 @@ public class NOGUI {
 		CryptoOps.invokeCrypto(Algorithm.RC2, 32, thing, file);
 		CryptoOps.invokeCrypto(Algorithm.RC2, 64, thing, file);
 		CryptoOps.invokeCrypto(Algorithm.RC2, 128, thing, file);
-		CryptoOps.invokeCrypto(Algorithm.RC2, 256, thing, file);
+		//CryptoOps.invokeCrypto(Algorithm.RC2, 256, thing, file);
 		//CryptoOps.invokeCrypto(Algorithm.RC2, 384, thing, file);
 		//CryptoOps.invokeCrypto(Algorithm.RC2, 448, thing, file);
 		//CryptoOps.invokeCrypto(Algorithm.RC2, 512, thing, file);
@@ -52,7 +52,7 @@ public class NOGUI {
 		CryptoOps.invokeCrypto(Algorithm.RC4, 40, thing, file);
 		CryptoOps.invokeCrypto(Algorithm.RC4, 64, thing, file);
 		CryptoOps.invokeCrypto(Algorithm.RC4, 128, thing, file);
-		CryptoOps.invokeCrypto(Algorithm.RC4, 256, thing, file);
+		//CryptoOps.invokeCrypto(Algorithm.RC4, 256, thing, file);
 		//CryptoOps.invokeCrypto(Algorithm.RC4, 384, thing, file);
 		//CryptoOps.invokeCrypto(Algorithm.RC4, 448, thing, file);
 		//CryptoOps.invokeCrypto(Algorithm.RC4, 512, thing, file);
@@ -74,7 +74,7 @@ public class NOGUI {
 		CryptoOps.invokeCrypto(Algorithm.RC5, 32, thing, file);
 		CryptoOps.invokeCrypto(Algorithm.RC5, 64, thing, file);
 		CryptoOps.invokeCrypto(Algorithm.RC5, 128, thing, file);
-		CryptoOps.invokeCrypto(Algorithm.RC5, 256, thing, file);
+		//CryptoOps.invokeCrypto(Algorithm.RC5, 256, thing, file);
 		//CryptoOps.invokeCrypto(Algorithm.RC5, 384, thing, file);
 		//CryptoOps.invokeCrypto(Algorithm.RC5, 448, thing, file);
 		//CryptoOps.invokeCrypto(Algorithm.RC5, 512, thing, file);

@@ -1,12 +1,20 @@
 package org.FaceStudios.OpenCryptoBench.Executable;
 
+import java.io.IOException;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+
 import org.FaceStudios.OpenCryptoBench.Crypto.CryptoObject;
 import org.FaceStudios.OpenCryptoBench.Crypto.CryptoOps;
 import org.FaceStudios.OpenCryptoBench.Crypto.CryptoOps.Algorithm;
 
 public class NOGUI {
-	
+	private static final Logger LOGGER = Logger.getLogger("NOGUI");
 	public static void doNOGUI(String f){
+		
+		LOGGER.info("####################################################################");
+		LOGGER.info("PERFORMING NOGUI OPERATION");
+		LOGGER.info("####################################################################");
 		//Create a CryptoObject
 		CryptoObject thing = new CryptoObject("Dank Memes");
 		String file;
@@ -16,7 +24,11 @@ public class NOGUI {
 		else{
 			file = f;
 		}
-		
+		try {
+			LOGGER.addHandler(new FileHandler(file));
+		} catch (SecurityException | IOException e) {
+			e.printStackTrace();
+		}
 		//Execute all different benchmarks
 		//AES
 		CryptoOps.invokeCrypto(Algorithm.AES, 128, thing, file);
@@ -88,5 +100,8 @@ public class NOGUI {
 		//CryptoOps.invokeCrypto(Algorithm.RC5, 1796, thing, file);
 		//CryptoOps.invokeCrypto(Algorithm.RC5, 1924, thing, file);
 		//CryptoOps.invokeCrypto(Algorithm.RC5, 2040, thing, file);
+		LOGGER.info("####################################################################");
+		LOGGER.info("FINISHED NOGUI OPERATION");
+		LOGGER.info("####################################################################");
 	}
 }

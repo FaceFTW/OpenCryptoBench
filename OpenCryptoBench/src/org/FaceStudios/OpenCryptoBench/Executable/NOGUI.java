@@ -67,11 +67,11 @@ public class NOGUI {
 		//CryptoOps.invokeCrypto(Algorithm.RC4, 1924, thing, file);
 		//CryptoOps.invokeCrypto(Algorithm.RC4, 2048, thing, file);
 		//RC5
-		CryptoOps.invokeCrypto(Algorithm.RC5, 8, thing, file);
-		CryptoOps.invokeCrypto(Algorithm.RC5, 16, thing, file);
-		CryptoOps.invokeCrypto(Algorithm.RC5, 32, thing, file);
-		CryptoOps.invokeCrypto(Algorithm.RC5, 64, thing, file);
-		CryptoOps.invokeCrypto(Algorithm.RC5, 128, thing, file);
+		//CryptoOps.invokeCrypto(Algorithm.RC5, 8, thing, file);
+		//CryptoOps.invokeCrypto(Algorithm.RC5, 16, thing, file);
+		//CryptoOps.invokeCrypto(Algorithm.RC5, 32, thing, file);
+		//CryptoOps.invokeCrypto(Algorithm.RC5, 64, thing, file);
+		//CryptoOps.invokeCrypto(Algorithm.RC5, 128, thing, file);
 		//CryptoOps.invokeCrypto(Algorithm.RC5, 256, thing, file);
 		//CryptoOps.invokeCrypto(Algorithm.RC5, 384, thing, file);
 		//CryptoOps.invokeCrypto(Algorithm.RC5, 448, thing, file);

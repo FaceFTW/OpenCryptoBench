@@ -23,6 +23,7 @@ public class BlowfishCryptoOps {
 		//This will allow data to be logged and processed
 		//All methods should be static
 		//Logger Implementaion
+		@SuppressWarnings("static-access")
 		public static final Logger LOGGER =  OpenCryptoBench.GLOBALLOG.getLogger(BlowfishCryptoOps.class.getName());
 		//Stopwatch Implementation
 		private static Stopwatch stopwatch;
@@ -74,7 +75,7 @@ public class BlowfishCryptoOps {
 			s2 = Stopwatch.createStarted();
 			secret = gen.generateKey();
 			s2.stop();
-			keygenTime = s2.elapsed(TimeUnit.MILLISECONDS);
+			keygenTime = s2.elapsed(TimeUnit.NANOSECONDS);
 			cryptoTime = cryptoTime+keygenTime;
 			LOGGER.config("Key Generation took "+keygenTime+" ms");
 			s2.reset();
@@ -101,7 +102,7 @@ public class BlowfishCryptoOps {
 				e.printStackTrace();
 			}
 			s2.stop();
-			encryptTime = s2.elapsed(TimeUnit.MILLISECONDS);
+			encryptTime = s2.elapsed(TimeUnit.NANOSECONDS);
 			cryptoTime = cryptoTime+encryptTime;
 			LOGGER.info("Success");
 			LOGGER.info("Encryption Operation took "+encryptTime+" ms");
@@ -109,7 +110,7 @@ public class BlowfishCryptoOps {
 			LOGGER.info("Output string is " +Hex.encodeHexString(outBytes));
 			LOGGER.info("Stopping Stopwatch for Encryption");
 			stopwatch.stop();
-			encryptAgTime = stopwatch.elapsed(TimeUnit.MILLISECONDS);
+			encryptAgTime = stopwatch.elapsed(TimeUnit.NANOSECONDS);
 			totalTime = totalTime+encryptAgTime;
 			LOGGER.info("Time Elapsed for Encryption is "+encryptAgTime+" ms" );
 			LOGGER.info("Resetting Stopwatch");
@@ -139,13 +140,13 @@ public class BlowfishCryptoOps {
 				e.printStackTrace();
 			}
 			s2.stop();
-			decryptTime = s2.elapsed(TimeUnit.MILLISECONDS);
+			decryptTime = s2.elapsed(TimeUnit.NANOSECONDS);
 			cryptoTime = cryptoTime+decryptTime;
 			LOGGER.info("Success");
 			LOGGER.info("Output string is"+out1Bytes.toString());
 			LOGGER.info("Stopping Stopwatch");
 			stopwatch.stop();
-			decryptAgTime = stopwatch.elapsed(TimeUnit.MILLISECONDS);
+			decryptAgTime = stopwatch.elapsed(TimeUnit.NANOSECONDS);
 			totalTime = totalTime+decryptAgTime;
 			LOGGER.info("Time elapsed is "+ decryptAgTime+" ms");
 			LOGGER.info("//////////////////////////////////////////");

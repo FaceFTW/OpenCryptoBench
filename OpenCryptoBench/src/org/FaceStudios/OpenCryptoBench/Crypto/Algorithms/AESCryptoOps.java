@@ -12,6 +12,7 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 
+import org.FaceStudios.OpenCryptoBench.OpenCryptoBench;
 import org.FaceStudios.OpenCryptoBench.Crypto.CryptoObject;
 import org.apache.commons.codec.binary.Hex;
 
@@ -22,7 +23,7 @@ public class AESCryptoOps {
 	//This will allow data to be logged and processed
 	//All methods should be static
 	//Logger Implementaion
-	public static final Logger LOGGER = Logger.getLogger(AESCryptoOps.class.getName());
+	public static final Logger LOGGER =  OpenCryptoBench.GLOBALLOG.getLogger(AESCryptoOps.class.getName());
 	private static Stopwatch stopwatch;
 	private static Stopwatch s2;
 	private static long keygenTime;
@@ -37,7 +38,7 @@ public class AESCryptoOps {
 	private static SecretKey secret;
 	protected static KeyGenerator gen;
 	
-	public static void performAES(int bitlen,CryptoObject thing, String file){
+	public static void performAES(int bitlen,CryptoObject thing){
 		LOGGER.setUseParentHandlers(true);
 		encryptTime = 0;
 		encryptAgTime = 0;

@@ -1,31 +1,27 @@
 package org.FaceStudios.OpenCryptoBench;
 
-import java.util.logging.LogManager;
+import java.io.IOException;
+import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
-import org.FaceStudios.OpenCryptoBench.Crypto.CryptoOps;
-import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.AESCryptoOps;
-import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.BlowfishCryptoOps;
-import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.DESCryptoOps;
-import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.RCAlgorithmSetCryptoOps;
 import org.FaceStudios.OpenCryptoBench.Executable.NOGUI;
 
 public class OpenCryptoBench {
-	private static final LogManager LOGMAN = LogManager.getLogManager();
+	public static final Logger GLOBALLOG = Logger.getLogger("org.FaceStudios.OpenCryptoBench");
 	public static void main(String[] args) {
 
 		/*if(args.length<0){
 			if(args[0].equals("nogui")){
 				if(args[1].equals("")){
-				*/	
-					LOGMAN.addLogger(CryptoOps.LOGGER);
-					LOGMAN.addLogger(AESCryptoOps.LOGGER);
-					LOGMAN.addLogger(BlowfishCryptoOps.LOGGER);
-					LOGMAN.addLogger(DESCryptoOps.LOGGER);
-					LOGMAN.addLogger(RCAlgorithmSetCryptoOps.LOGGER);
-					LOGMAN.addLogger(NOGUI.LOGGER);
-					
-					NOGUI.doNOGUI("default");
+			*/
+				try {
+					GLOBALLOG.addHandler(new FileHandler("OpenCryptoBench.log"));
+				} catch (SecurityException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				NOGUI.doNOGUI("default",10);
+				
 				/*}
 				else{
 					NOGUI.doNOGUI(args[1]);

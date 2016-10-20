@@ -12,6 +12,7 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 
+import org.FaceStudios.OpenCryptoBench.OpenCryptoBench;
 import org.FaceStudios.OpenCryptoBench.Crypto.CryptoObject;
 import org.apache.commons.codec.binary.Hex;
 
@@ -23,7 +24,7 @@ public class RCAlgorithmSetCryptoOps {
 			//All methods should be static
 			
 			//Logger Implementaion
-			public static final Logger LOGGER = Logger.getLogger(RCAlgorithmSetCryptoOps.class.getName());
+			public static final Logger LOGGER =  OpenCryptoBench.GLOBALLOG.getLogger(RCAlgorithmSetCryptoOps.class.getName());
 			//Stopwatch Implementation
 			private static Stopwatch stopwatch;
 			private static Stopwatch s2;
@@ -39,7 +40,7 @@ public class RCAlgorithmSetCryptoOps {
 			private static SecretKey secret;
 			protected static KeyGenerator gen;
 			
-			public static void performRC2(int bitlen,CryptoObject thing, String file){
+			public static void performRC2(int bitlen,CryptoObject thing){
 				LOGGER.setUseParentHandlers(true);
 				encryptTime = 0;
 				encryptAgTime = 0;
@@ -165,7 +166,7 @@ public class RCAlgorithmSetCryptoOps {
 				LOGGER.info("END RC2 PROCEDURE");
 				LOGGER.info("#################################################################");
 			}
-			public static void performRC4(int bitlen,CryptoObject thing, String file){
+			public static void performRC4(int bitlen,CryptoObject thing){
 				LOGGER.setUseParentHandlers(true);
 				encryptTime = 0;
 				encryptAgTime = 0;
@@ -292,7 +293,7 @@ public class RCAlgorithmSetCryptoOps {
 				LOGGER.info("#################################################################");
 				
 			}
-			public static void performRC5(int bitlen,CryptoObject thing, String file){
+			public static void performRC5(int bitlen,CryptoObject thing){
 				LOGGER.setUseParentHandlers(true);
 				encryptTime = 0;
 				encryptAgTime = 0;

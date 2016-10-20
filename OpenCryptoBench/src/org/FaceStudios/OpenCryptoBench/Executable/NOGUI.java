@@ -16,7 +16,20 @@ public class NOGUI {
 		LOGGER.info("PERFORMING NOGUI OPERATION");
 		LOGGER.info("####################################################################");
 		//Create a CryptoObject
-		CryptoObject thing = new CryptoObject("Dank Memes");
+		LOGGER.info("####################################################################");
+		LOGGER.info("SYSTEM INFORMATION");
+		LOGGER.info("####################################################################");
+		LOGGER.info("OS Name: "+System.getProperty("os.name"));
+		LOGGER.info("OS Architecture: "+ System.getProperty("os.arch"));
+		LOGGER.info("OS Version: "+System.getProperty("os.version"));
+		LOGGER.info("Java Version: "+System.getProperty("java.version"));
+		LOGGER.info("Java Vendor: "+System.getProperty("java.vendor"));
+		LOGGER.info("Username: "+System.getProperty("user.name"));
+		LOGGER.info("Working Directory: "+System.getProperty("user.dir"));
+		LOGGER.info("####################################################################");
+		LOGGER.info("STARTING EXECUTION");
+		LOGGER.info("####################################################################");
+		CryptoObject thing = new CryptoObject("Hello World");
 		String file;
 		if(f.equals("default")){
 			file = "OpenCryptoBench.log";

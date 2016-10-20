@@ -10,7 +10,7 @@ import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.RCAlgorithmSetCryptoOps
 public class CryptoOps {
 	//This class is mainly intended for a invoker method
 	//This will be used to attach a logger to a encryption invoked by the program
-	private static final Logger LOGGER = Logger.getLogger(CryptoOps.class.getName());
+	public static final Logger LOGGER = Logger.getLogger(CryptoOps.class.getName());
 	//Enum representing the functions
 	public enum Algorithm{AES, DES, DES3, BLOWFISH, RC2, RC4, RC5};
 	

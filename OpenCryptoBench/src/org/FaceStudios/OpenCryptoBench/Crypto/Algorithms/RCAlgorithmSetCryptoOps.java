@@ -23,7 +23,7 @@ public class RCAlgorithmSetCryptoOps {
 			//All methods should be static
 			
 			//Logger Implementaion
-			private static final Logger LOGGER = Logger.getLogger(RCAlgorithmSetCryptoOps.class.getName());
+			public static final Logger LOGGER = Logger.getLogger(RCAlgorithmSetCryptoOps.class.getName());
 			//Stopwatch Implementation
 			private static Stopwatch stopwatch;
 			private static Stopwatch s2;

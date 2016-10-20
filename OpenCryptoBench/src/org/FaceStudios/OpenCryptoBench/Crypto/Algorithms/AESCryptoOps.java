@@ -22,7 +22,7 @@ public class AESCryptoOps {
 	//This will allow data to be logged and processed
 	//All methods should be static
 	//Logger Implementaion
-	private static final Logger LOGGER = Logger.getLogger(AESCryptoOps.class.getName());
+	public static final Logger LOGGER = Logger.getLogger(AESCryptoOps.class.getName());
 	private static Stopwatch stopwatch;
 	private static Stopwatch s2;
 	private static long keygenTime;

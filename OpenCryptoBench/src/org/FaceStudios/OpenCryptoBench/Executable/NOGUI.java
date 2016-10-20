@@ -9,7 +9,7 @@ import org.FaceStudios.OpenCryptoBench.Crypto.CryptoOps;
 import org.FaceStudios.OpenCryptoBench.Crypto.CryptoOps.Algorithm;
 
 public class NOGUI {
-	private static final Logger LOGGER = Logger.getLogger("NOGUI");
+	public static final Logger LOGGER = Logger.getLogger("NOGUI");
 	public static void doNOGUI(String f){
 		LOGGER.setUseParentHandlers(true); 
 		LOGGER.info("####################################################################");

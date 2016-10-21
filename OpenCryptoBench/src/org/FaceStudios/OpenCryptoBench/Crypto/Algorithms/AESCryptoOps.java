@@ -21,7 +21,6 @@ import com.google.common.base.Stopwatch;
 public class AESCryptoOps {
 	//This is the redirect implementation for AES
 	//This will allow data to be logged and processed
-	//All methods should be static
 	//Logger Implementaion
 	@SuppressWarnings("static-access")
 	public static final Logger LOGGER =  OpenCryptoBench.GLOBALLOG.getLogger(AESCryptoOps.class.getName());
@@ -76,7 +75,7 @@ public class AESCryptoOps {
 		s2.stop();
 		keygenTime = s2.elapsed(TimeUnit.NANOSECONDS);
 		cryptoTime = cryptoTime+keygenTime;
-		LOGGER.config("Key Generation took "+keygenTime+" ms");
+		LOGGER.config("Key Generation took "+keygenTime+" ns");
 		s2.reset();
 		LOGGER.config("CryptoObject's input string is "+thing.getInput());
 		LOGGER.config("CryptoObject's SecretKey Object is "+Hex.encodeHexString(secret.getEncoded()));
@@ -104,14 +103,14 @@ public class AESCryptoOps {
 		encryptTime = s2.elapsed(TimeUnit.NANOSECONDS);
 		cryptoTime = cryptoTime+encryptTime;
 		LOGGER.info("Success");
-		LOGGER.info("Encryption Operation took "+encryptTime+" ms");
+		LOGGER.info("Encryption Operation took "+encryptTime+" ns");
 		s2.reset();
 		LOGGER.info("Output string is " +Hex.encodeHexString(outBytes));
 		LOGGER.info("Stopping Stopwatch for Encryption");
 		stopwatch.stop();
 		encryptAgTime = stopwatch.elapsed(TimeUnit.NANOSECONDS);
 		totalTime = totalTime+encryptAgTime;
-		LOGGER.info("Time Elapsed for Encryption is "+encryptAgTime+" ms" );
+		LOGGER.info("Time Elapsed for Encryption is "+encryptAgTime+" ns" );
 		LOGGER.info("Resetting Stopwatch");
 		stopwatch.reset();
 		LOGGER.config("Success in resetting stopwatch");
@@ -147,17 +146,17 @@ public class AESCryptoOps {
 		stopwatch.stop();
 		decryptAgTime = stopwatch.elapsed(TimeUnit.NANOSECONDS);
 		totalTime = totalTime+decryptAgTime;
-		LOGGER.info("Time elapsed is "+ decryptAgTime+" ms");
+		LOGGER.info("Time elapsed is "+ decryptAgTime+" ns");
 		LOGGER.info("//////////////////////////////////////////");
 		LOGGER.info("RESULTS");
 		LOGGER.info("//////////////////////////////////////////");
-		LOGGER.info("Key Generation Time: "+keygenTime+" ms");
-		LOGGER.info("Encryption Time: "+encryptTime+" ms");
-		LOGGER.info("Encryption Aggregate Time: "+encryptAgTime+" ms");
-		LOGGER.info("Decryption Time: "+decryptTime+" ms");
-		LOGGER.info("Decryption Aggregate Time: "+decryptAgTime+" ms");
-		LOGGER.info("Cryptography Operation Time: "+cryptoTime+" ms");
-		LOGGER.info("Total Operation Time: "+totalTime+" ms");
+		LOGGER.info("Key Generation Time: "+keygenTime+" ns");
+		LOGGER.info("Encryption Time: "+encryptTime+" ns");
+		LOGGER.info("Encryption Aggregate Time: "+encryptAgTime+" ns");
+		LOGGER.info("Decryption Time: "+decryptTime+" ns");
+		LOGGER.info("Decryption Aggregate Time: "+decryptAgTime+" ns");
+		LOGGER.info("Cryptography Operation Time: "+cryptoTime+" ns");
+		LOGGER.info("Total Operation Time: "+totalTime+" ns");
 		LOGGER.info("Input String: "+thing.getInput());
 		LOGGER.info("Key: "+Hex.encodeHexString(secret.getEncoded()));
 		LOGGER.info("Encrypted Output: "+outBytes.toString());

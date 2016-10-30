@@ -7,6 +7,9 @@ import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.AESCryptoOps;
 import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.BlowfishCryptoOps;
 import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.DESCryptoOps;
 import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.RCAlgorithmSetCryptoOps;
+import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.Salsa20CryptoOps;
+import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.SerpentCryptoOps;
+import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.TwoFishCryptoOps;
 
 public class CryptoOps {
 	//This class is mainly intended for a invoker method
@@ -14,7 +17,7 @@ public class CryptoOps {
 	@SuppressWarnings("static-access")
 	public static final Logger LOGGER = OpenCryptoBench.GLOBALLOG.getLogger(CryptoOps.class.getName());
 	//Enum representing the functions
-	public enum Algorithm{AES, DES, DES3, BLOWFISH, RC2, RC4, RC5};
+	public enum Algorithm{AES, DES, DES3, BLOWFISH, RC2, RC4, RC5, TWOFISH, THREEFISH, SERPENT, SALSA20};
 	
 	public static void invokeCrypto(Algorithm method, int bitlen, CryptoObject thing) {
 		LOGGER.setUseParentHandlers(true);
@@ -52,9 +55,29 @@ public class CryptoOps {
 			RCAlgorithmSetCryptoOps.performARC4(bitlen, thing);
 			break;
 		case RC5:
-			LOGGER.info("Detected Algorithm ");
+			LOGGER.info("Detected Algorithm RC5");
 			LOGGER.config("Invoking RC5 Procedure");
 			RCAlgorithmSetCryptoOps.performRC5(bitlen, thing);
+			break;
+		case TWOFISH:
+			LOGGER.info("Detected Algorithm TwoFish");
+			LOGGER.config("Invoking TwoFish Procedure");
+			TwoFishCryptoOps.performTwoFish(bitlen, thing);
+			break;
+		case THREEFISH:
+			LOGGER.info("Detected Algorithm ThreeFish");
+			LOGGER.config("Invoking ThreeFish Procedure");
+			TwoFishCryptoOps.performThreeFish(bitlen, thing);
+			break;
+		case SERPENT:
+			LOGGER.info("Detected Algorithm Serpent");
+			LOGGER.config("Invoking Serpent Procedure");
+			SerpentCryptoOps.performSerpent(bitlen, thing);;
+			break;
+		case SALSA20:
+			LOGGER.info("Detected Algorithm Salsa20");
+			LOGGER.config("Invoking Salsa20 Procedure");
+			Salsa20CryptoOps.performSalsa20(bitlen, thing);;
 			break;
 		}
 		

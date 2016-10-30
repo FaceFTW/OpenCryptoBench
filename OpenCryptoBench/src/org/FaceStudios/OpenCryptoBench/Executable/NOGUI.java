@@ -117,6 +117,20 @@ public class NOGUI {
 		CryptoOps.invokeCrypto(Algorithm.RC5, 1796, thing);
 		CryptoOps.invokeCrypto(Algorithm.RC5, 1924, thing);
 		CryptoOps.invokeCrypto(Algorithm.RC5, 2040, thing);
+		//TwoFish
+		CryptoOps.invokeCrypto(Algorithm.TWOFISH, 128, thing);
+		CryptoOps.invokeCrypto(Algorithm.TWOFISH, 192, thing);
+		CryptoOps.invokeCrypto(Algorithm.TWOFISH, 256, thing);
+		//ThreeFish
+		CryptoOps.invokeCrypto(Algorithm.THREEFISH, 256, thing);
+		CryptoOps.invokeCrypto(Algorithm.THREEFISH, 512, thing);
+		CryptoOps.invokeCrypto(Algorithm.THREEFISH, 1024, thing);
+		//Serpent
+		CryptoOps.invokeCrypto(Algorithm.SERPENT, 128, thing);
+		CryptoOps.invokeCrypto(Algorithm.SERPENT, 192, thing);
+		CryptoOps.invokeCrypto(Algorithm.SERPENT, 256, thing);
+		//Salsa20
+		CryptoOps.invokeCrypto(Algorithm.SALSA20, 256, thing);
 		LOGGER.info("####################################################################");
 		LOGGER.info("TEST ITERATION "+(x+1)+" COMPLETE");
 		LOGGER.info("####################################################################");

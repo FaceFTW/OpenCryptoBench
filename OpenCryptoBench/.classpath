@@ -12,7 +12,7 @@
 			<attribute name="javadoc_location" value="jar:platform:/resource/OpenCryptoBench/libs/guava-20.0-rc1-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="libs/bcprov-ext-jdk15on-155.jar">
+	<classpathentry kind="lib" path="libs/bcprov-ext-jdk15on-155.jar" sourcepath="C:/Users/Face/Downloads/bcprov-jdk15on-155/bcprov-jdk15on-155/src.zip">
 		<attributes>
 			<attribute name="javadoc_location" value="file:/C:/Users/Face/Downloads/bcprov-jdk15on-155/bcprov-jdk15on-155/javadoc/"/>
 		</attributes>

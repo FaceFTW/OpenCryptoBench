@@ -139,6 +139,7 @@ public class NOGUI {
 		print.println("Username: "+System.getProperty("user.name"));
 		print.println("Working Directory: "+System.getProperty("user.dir"));
 		print.println("\n");
+		print.close();
 		
 		
 		LOGGER.info("####################################################################");

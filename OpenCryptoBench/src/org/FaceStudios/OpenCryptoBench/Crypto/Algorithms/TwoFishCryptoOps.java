@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
@@ -19,6 +18,7 @@ import javax.crypto.SecretKey;
 import org.FaceStudios.OpenCryptoBench.OpenCryptoBench;
 import org.FaceStudios.OpenCryptoBench.Crypto.CryptoObject;
 import org.apache.commons.codec.binary.Hex;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import com.google.common.base.Stopwatch;
 
@@ -26,6 +26,7 @@ public class TwoFishCryptoOps {
 	//This is the redirect implementation for TwoFish
 	//This will allow data to be logged and processed
 	//Logger Implementaion
+	public static final BouncyCastleProvider PROVIDER = new BouncyCastleProvider();
 	@SuppressWarnings("static-access")
 	public static final Logger LOGGER =  OpenCryptoBench.GLOBALLOG.getLogger(TwoFishCryptoOps.class.getName());
 	private static Stopwatch stopwatch;
@@ -64,8 +65,8 @@ public class TwoFishCryptoOps {
 		LOGGER.info("Starting Encryption procedures for TwoFish");
 		LOGGER.config("Creating a SecretKey Generator");
 		try {
-			gen = KeyGenerator.getInstance("TwoFish","BC");
-		} catch (NoSuchAlgorithmException | NoSuchProviderException e1) {
+			gen = KeyGenerator.getInstance("TwoFish",PROVIDER);
+		} catch (NoSuchAlgorithmException e1) {
 			LOGGER.severe("ERROR: Could not find Algorithm TwoFish");
 			e1.printStackTrace();
 		}
@@ -85,9 +86,9 @@ public class TwoFishCryptoOps {
 		LOGGER.config("CryptoObject's SecretKey Object is "+Hex.encodeHexString(secret.getEncoded()));
 		LOGGER.info("Initializing Cipher as TwoFish");
 		try {
-			c = Cipher.getInstance("TwoFish","BC");
+			c = Cipher.getInstance("TwoFish",PROVIDER);
 			c.init(Cipher.ENCRYPT_MODE, secret);
-		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | NoSuchProviderException e) {
+		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
 			LOGGER.severe("ERROR: Cipher object could not initialize with given algorithm and parameter");
 			e.printStackTrace();
 		}
@@ -124,9 +125,9 @@ public class TwoFishCryptoOps {
 		LOGGER.info("Using SecretKey "+Hex.encodeHexString(secret.getEncoded())+" as SecretKey for decryption");
 		LOGGER.info("Starting Decryption process for TwoFish");
 		try {
-			c1 = Cipher.getInstance("TwoFish","BC");
+			c1 = Cipher.getInstance("TwoFish",PROVIDER);
 			c1.init(Cipher.DECRYPT_MODE, secret);
-		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | NoSuchProviderException e) {
+		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
 			LOGGER.severe("ERROR: Could not initialize the cipher object with given parameters");
 			e.printStackTrace();
 		}
@@ -213,8 +214,8 @@ public class TwoFishCryptoOps {
 		LOGGER.info("Starting Encryption procedures for ThreeFish");
 		LOGGER.config("Creating a SecretKey Generator");
 		try {
-			gen = KeyGenerator.getInstance("ThreeFish","BC");
-		} catch (NoSuchAlgorithmException | NoSuchProviderException e1) {
+			gen = KeyGenerator.getInstance("ThreeFish",PROVIDER);
+		} catch (NoSuchAlgorithmException e1) {
 			LOGGER.severe("ERROR: Could not find Algorithm ThreeFish");
 			e1.printStackTrace();
 		}
@@ -234,9 +235,9 @@ public class TwoFishCryptoOps {
 		LOGGER.config("CryptoObject's SecretKey Object is "+Hex.encodeHexString(secret.getEncoded()));
 		LOGGER.info("Initializing Cipher as ThreeFish");
 		try {
-			c = Cipher.getInstance("ThreeFish","BC");
+			c = Cipher.getInstance("ThreeFish",PROVIDER);
 			c.init(Cipher.ENCRYPT_MODE, secret);
-		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | NoSuchProviderException e) {
+		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
 			LOGGER.severe("ERROR: Cipher object could not initialize with given algorithm and parameter");
 			e.printStackTrace();
 		}
@@ -273,9 +274,9 @@ public class TwoFishCryptoOps {
 		LOGGER.info("Using SecretKey "+Hex.encodeHexString(secret.getEncoded())+" as SecretKey for decryption");
 		LOGGER.info("Starting Decryption process for ThreeFish");
 		try {
-			c1 = Cipher.getInstance("ThreeFish","BC");
+			c1 = Cipher.getInstance("ThreeFish",PROVIDER);
 			c1.init(Cipher.DECRYPT_MODE, secret);
-		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | NoSuchProviderException e) {
+		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
 			LOGGER.severe("ERROR: Could not initialize the cipher object with given parameters");
 			e.printStackTrace();
 		}

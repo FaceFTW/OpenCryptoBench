@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
@@ -19,12 +18,14 @@ import javax.crypto.SecretKey;
 import org.FaceStudios.OpenCryptoBench.OpenCryptoBench;
 import org.FaceStudios.OpenCryptoBench.Crypto.CryptoObject;
 import org.apache.commons.codec.binary.Hex;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import com.google.common.base.Stopwatch;
 
 public class AESCryptoOps {
 	//This is the redirect implementation for AES
 	//This will allow data to be logged and processed
+	public static final BouncyCastleProvider PROVIDER = new BouncyCastleProvider();
 	//Logger Implementaion
 	@SuppressWarnings("static-access")
 	public static final Logger LOGGER =  OpenCryptoBench.GLOBALLOG.getLogger(AESCryptoOps.class.getName());
@@ -64,8 +65,8 @@ public class AESCryptoOps {
 		LOGGER.info("Starting Encryption procedures for AES");
 		LOGGER.config("Creating a SecretKey Generator");
 		try {
-			gen = KeyGenerator.getInstance("AES","BC");
-		} catch (NoSuchAlgorithmException | NoSuchProviderException e1) {
+			gen = KeyGenerator.getInstance("AES",PROVIDER);
+		} catch (NoSuchAlgorithmException e1) {
 			LOGGER.severe("ERROR: Could not find Algorithm AES");
 			e1.printStackTrace();
 		}
@@ -85,9 +86,9 @@ public class AESCryptoOps {
 		LOGGER.config("CryptoObject's SecretKey Object is "+Hex.encodeHexString(secret.getEncoded()));
 		LOGGER.info("Initializing Cipher as AES");
 		try {
-			c = Cipher.getInstance("AES","BC");
+			c = Cipher.getInstance("AES",PROVIDER);
 			c.init(Cipher.ENCRYPT_MODE, secret);
-		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | NoSuchProviderException e) {
+		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
 			LOGGER.severe("ERROR: Cipher object could not initialize with given algorithm and parameter");
 			e.printStackTrace();
 		}
@@ -124,9 +125,9 @@ public class AESCryptoOps {
 		LOGGER.info("Using SecretKey "+Hex.encodeHexString(secret.getEncoded())+" as SecretKey for decryption");
 		LOGGER.info("Starting Decryption process for AES");
 		try {
-			c1 = Cipher.getInstance("AES","BC");
+			c1 = Cipher.getInstance("AES",PROVIDER);
 			c1.init(Cipher.DECRYPT_MODE, secret);
-		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | NoSuchProviderException e) {
+		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
 			LOGGER.severe("ERROR: Could not initialize the cipher object with given parameters");
 			e.printStackTrace();
 		}

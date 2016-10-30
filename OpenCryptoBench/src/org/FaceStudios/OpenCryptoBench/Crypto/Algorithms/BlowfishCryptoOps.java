@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
@@ -19,6 +18,7 @@ import javax.crypto.SecretKey;
 import org.FaceStudios.OpenCryptoBench.OpenCryptoBench;
 import org.FaceStudios.OpenCryptoBench.Crypto.CryptoObject;
 import org.apache.commons.codec.binary.Hex;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import com.google.common.base.Stopwatch;
 
@@ -26,6 +26,7 @@ public class BlowfishCryptoOps {
 	//This is the redirect implementation for Blowfish
 	//This will allow data to be logged and processed
 	//Logger Implementaion
+	public static final BouncyCastleProvider PROVIDER = new BouncyCastleProvider();
 	@SuppressWarnings("static-access")
 	public static final Logger LOGGER =  OpenCryptoBench.GLOBALLOG.getLogger(AESCryptoOps.class.getName());
 	private static Stopwatch stopwatch;
@@ -64,8 +65,8 @@ public class BlowfishCryptoOps {
 		LOGGER.info("Starting Encryption procedures for Blowfish");
 		LOGGER.config("Creating a SecretKey Generator");
 		try {
-			gen = KeyGenerator.getInstance("Blowfish","BC");
-		} catch (NoSuchAlgorithmException | NoSuchProviderException e1) {
+			gen = KeyGenerator.getInstance("Blowfish",PROVIDER);
+		} catch (NoSuchAlgorithmException e1) {
 			LOGGER.severe("ERROR: Could not find Algorithm Blowfish");
 			e1.printStackTrace();
 		}
@@ -85,9 +86,9 @@ public class BlowfishCryptoOps {
 		LOGGER.config("CryptoObject's SecretKey Object is "+Hex.encodeHexString(secret.getEncoded()));
 		LOGGER.info("Initializing Cipher as Blowfish");
 		try {
-			c = Cipher.getInstance("Blowfish","BC");
+			c = Cipher.getInstance("Blowfish",PROVIDER);
 			c.init(Cipher.ENCRYPT_MODE, secret);
-		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | NoSuchProviderException e) {
+		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
 			LOGGER.severe("ERROR: Cipher object could not initialize with given algorithm and parameter");
 			e.printStackTrace();
 		}
@@ -124,9 +125,9 @@ public class BlowfishCryptoOps {
 		LOGGER.info("Using SecretKey "+Hex.encodeHexString(secret.getEncoded())+" as SecretKey for decryption");
 		LOGGER.info("Starting Decryption process for Blowfish");
 		try {
-			c1 = Cipher.getInstance("Blowfish","BC");
+			c1 = Cipher.getInstance("Blowfish",PROVIDER);
 			c1.init(Cipher.DECRYPT_MODE, secret);
-		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | NoSuchProviderException e) {
+		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
 			LOGGER.severe("ERROR: Could not initialize the cipher object with given parameters");
 			e.printStackTrace();
 		}

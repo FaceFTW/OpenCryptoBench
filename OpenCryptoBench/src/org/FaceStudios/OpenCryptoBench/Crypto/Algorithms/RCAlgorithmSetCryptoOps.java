@@ -1,5 +1,8 @@
 package org.FaceStudios.OpenCryptoBench.Crypto.Algorithms;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
@@ -167,6 +170,28 @@ public class RCAlgorithmSetCryptoOps {
 				LOGGER.info("#################################################################");
 				LOGGER.info("END RC2 PROCEDURE");
 				LOGGER.info("#################################################################");
+				
+				PrintStream print = null;
+				try {
+					print = new PrintStream(new File("OpenCryptoBench.txt"));
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
+				print.println("RC2 RESULTS");
+				print.println("#################################################################");
+				print.println("Key Generation Time: "+keygenTime+" ns");
+				print.println("Encryption Time: "+encryptTime+" ns");
+				print.println("Encryption Aggregate Time: "+encryptAgTime+" ns");
+				print.println("Decryption Time: "+decryptTime+" ns");
+				print.println("Decryption Aggregate Time: "+decryptAgTime+" ns");
+				print.println("Cryptography Operation Time: "+cryptoTime+" ns");
+				print.println("Total Operation Time: "+totalTime+" ns");
+				print.println("Input String: "+thing.getInput());
+				print.println("Key: "+Hex.encodeHexString(secret.getEncoded()));
+				print.println("Encrypted Output: "+outBytes.toString());
+				print.println("");
+				print.println("");
+				print.close();
 			}
 			public static void performARC4(int bitlen,CryptoObject thing){
 				LOGGER.setUseParentHandlers(true);
@@ -293,6 +318,28 @@ public class RCAlgorithmSetCryptoOps {
 				LOGGER.info("#################################################################");
 				LOGGER.info("END ARC4 PROCEDURE");
 				LOGGER.info("#################################################################");
+				
+				PrintStream print = null;
+				try {
+					print = new PrintStream(new File("OpenCryptoBench.txt"));
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
+				print.println("RC4 RESULTS");
+				print.println("#################################################################");
+				print.println("Key Generation Time: "+keygenTime+" ns");
+				print.println("Encryption Time: "+encryptTime+" ns");
+				print.println("Encryption Aggregate Time: "+encryptAgTime+" ns");
+				print.println("Decryption Time: "+decryptTime+" ns");
+				print.println("Decryption Aggregate Time: "+decryptAgTime+" ns");
+				print.println("Cryptography Operation Time: "+cryptoTime+" ns");
+				print.println("Total Operation Time: "+totalTime+" ns");
+				print.println("Input String: "+thing.getInput());
+				print.println("Key: "+Hex.encodeHexString(secret.getEncoded()));
+				print.println("Encrypted Output: "+outBytes.toString());
+				print.println("");
+				print.println("");
+				print.close();
 			}
 			public static void performRC5(int bitlen,CryptoObject thing){
 				LOGGER.setUseParentHandlers(true);
@@ -419,5 +466,27 @@ public class RCAlgorithmSetCryptoOps {
 				LOGGER.info("#################################################################");
 				LOGGER.info("END RC5 PROCEDURE");
 				LOGGER.info("#################################################################");
+				
+				PrintStream print = null;
+				try {
+					print = new PrintStream(new File("OpenCryptoBench.txt"));
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
+				print.println("RC5 RESULTS");
+				print.println("#################################################################");
+				print.println("Key Generation Time: "+keygenTime+" ns");
+				print.println("Encryption Time: "+encryptTime+" ns");
+				print.println("Encryption Aggregate Time: "+encryptAgTime+" ns");
+				print.println("Decryption Time: "+decryptTime+" ns");
+				print.println("Decryption Aggregate Time: "+decryptAgTime+" ns");
+				print.println("Cryptography Operation Time: "+cryptoTime+" ns");
+				print.println("Total Operation Time: "+totalTime+" ns");
+				print.println("Input String: "+thing.getInput());
+				print.println("Key: "+Hex.encodeHexString(secret.getEncoded()));
+				print.println("Encrypted Output: "+outBytes.toString());
+				print.println("");
+				print.println("");
+				print.close();
 			}
 }

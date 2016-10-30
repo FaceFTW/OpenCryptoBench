@@ -1,5 +1,8 @@
 package org.FaceStudios.OpenCryptoBench.Crypto.Algorithms;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
@@ -164,6 +167,28 @@ public class AESCryptoOps {
 		LOGGER.info("#################################################################");
 		LOGGER.info("END AES PROCEDURE");
 		LOGGER.info("#################################################################");
+		
+		PrintStream print = null;
+		try {
+			print = new PrintStream(new File("OpenCryptoBench.txt"));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		print.println("AES RESULTS");
+		print.println("#################################################################");
+		print.println("Key Generation Time: "+keygenTime+" ns");
+		print.println("Encryption Time: "+encryptTime+" ns");
+		print.println("Encryption Aggregate Time: "+encryptAgTime+" ns");
+		print.println("Decryption Time: "+decryptTime+" ns");
+		print.println("Decryption Aggregate Time: "+decryptAgTime+" ns");
+		print.println("Cryptography Operation Time: "+cryptoTime+" ns");
+		print.println("Total Operation Time: "+totalTime+" ns");
+		print.println("Input String: "+thing.getInput());
+		print.println("Key: "+Hex.encodeHexString(secret.getEncoded()));
+		print.println("Encrypted Output: "+outBytes.toString());
+		print.println("");
+		print.println("");
+		print.close();
 	}
 }
 	

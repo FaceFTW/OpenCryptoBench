@@ -2,6 +2,7 @@ package org.FaceStudios.OpenCryptoBench.Crypto.Algorithms;
 
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
@@ -63,8 +64,8 @@ public class DESCryptoOps {
 		LOGGER.info("Starting Encryption procedures for DES");
 		LOGGER.config("Creating a SecretKey Generator");
 		try {
-			gen = KeyGenerator.getInstance("DES");
-		} catch (NoSuchAlgorithmException e1) {
+			gen = KeyGenerator.getInstance("DES","BC");
+		} catch (NoSuchAlgorithmException | NoSuchProviderException e1) {
 			LOGGER.severe("ERROR: Could not find Algorithm DES");
 			e1.printStackTrace();
 		}
@@ -84,9 +85,9 @@ public class DESCryptoOps {
 		LOGGER.config("CryptoObject's SecretKey Object is "+Hex.encodeHexString(secret.getEncoded()));
 		LOGGER.info("Initializing Cipher as DES");
 		try {
-			c = Cipher.getInstance("DES");
+			c = Cipher.getInstance("DES","BC");
 			c.init(Cipher.ENCRYPT_MODE, secret);
-		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
+		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | NoSuchProviderException e) {
 			LOGGER.severe("ERROR: Cipher object could not initialize with given algorithm and parameter");
 			e.printStackTrace();
 		}
@@ -166,10 +167,9 @@ public class DESCryptoOps {
 		LOGGER.info("#################################################################");
 		LOGGER.info("END DES PROCEDURE");
 		LOGGER.info("#################################################################");
-		
 	}
 	
-	public static void perform3DES(int bitlen,CryptoObject thing){
+	public static void performDESede(int bitlen,CryptoObject thing){
 		LOGGER.setUseParentHandlers(true);
 		encryptTime = 0;
 		encryptAgTime = 0;
@@ -191,8 +191,8 @@ public class DESCryptoOps {
 		LOGGER.info("Starting Encryption procedures for DESede");
 		LOGGER.config("Creating a SecretKey Generator");
 		try {
-			gen = KeyGenerator.getInstance("DESede");
-		} catch (NoSuchAlgorithmException e1) {
+			gen = KeyGenerator.getInstance("DESede","BC");
+		} catch (NoSuchAlgorithmException | NoSuchProviderException e1) {
 			LOGGER.severe("ERROR: Could not find Algorithm DESede");
 			e1.printStackTrace();
 		}
@@ -212,9 +212,9 @@ public class DESCryptoOps {
 		LOGGER.config("CryptoObject's SecretKey Object is "+Hex.encodeHexString(secret.getEncoded()));
 		LOGGER.info("Initializing Cipher as DESede");
 		try {
-			c = Cipher.getInstance("DESede");
+			c = Cipher.getInstance("DESede","BC");
 			c.init(Cipher.ENCRYPT_MODE, secret);
-		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
+		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | NoSuchProviderException e) {
 			LOGGER.severe("ERROR: Cipher object could not initialize with given algorithm and parameter");
 			e.printStackTrace();
 		}
@@ -294,7 +294,6 @@ public class DESCryptoOps {
 		LOGGER.info("#################################################################");
 		LOGGER.info("END DESede PROCEDURE");
 		LOGGER.info("#################################################################");
-		
 	}
 
 }

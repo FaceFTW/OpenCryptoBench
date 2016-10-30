@@ -2,6 +2,7 @@ package org.FaceStudios.OpenCryptoBench.Crypto.Algorithms;
 
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
@@ -19,7 +20,7 @@ import org.apache.commons.codec.binary.Hex;
 import com.google.common.base.Stopwatch;
 
 public class RCAlgorithmSetCryptoOps {
-	//This is the redirect implementation for the RC Algorithms (RC2, RC4, RC5, and ARCFOUR)
+	//This is the redirect implementation for the RC Algorithms (RC2, ARC4, RC5, and ARCFOUR)
 			//This will allow data to be logged and processed
 			//All methods should be static
 			
@@ -63,8 +64,8 @@ public class RCAlgorithmSetCryptoOps {
 				LOGGER.info("Starting Encryption procedures for RC2");
 				LOGGER.config("Creating a SecretKey Generator");
 				try {
-					gen = KeyGenerator.getInstance("RC2");
-				} catch (NoSuchAlgorithmException e1) {
+					gen = KeyGenerator.getInstance("RC2","BC");
+				} catch (NoSuchAlgorithmException | NoSuchProviderException e1) {
 					LOGGER.severe("ERROR: Could not find Algorithm RC2");
 					e1.printStackTrace();
 				}
@@ -84,9 +85,9 @@ public class RCAlgorithmSetCryptoOps {
 				LOGGER.config("CryptoObject's SecretKey Object is "+Hex.encodeHexString(secret.getEncoded()));
 				LOGGER.info("Initializing Cipher as RC2");
 				try {
-					c = Cipher.getInstance("RC2");
+					c = Cipher.getInstance("RC2","BC");
 					c.init(Cipher.ENCRYPT_MODE, secret);
-				} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
+				} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | NoSuchProviderException e) {
 					LOGGER.severe("ERROR: Cipher object could not initialize with given algorithm and parameter");
 					e.printStackTrace();
 				}
@@ -123,9 +124,9 @@ public class RCAlgorithmSetCryptoOps {
 				LOGGER.info("Using SecretKey "+Hex.encodeHexString(secret.getEncoded())+" as SecretKey for decryption");
 				LOGGER.info("Starting Decryption process for RC2");
 				try {
-					c1 = Cipher.getInstance("RC2");
+					c1 = Cipher.getInstance("RC2","BC");
 					c1.init(Cipher.DECRYPT_MODE, secret);
-				} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
+				} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | NoSuchProviderException e) {
 					LOGGER.severe("ERROR: Could not initialize the cipher object with given parameters");
 					e.printStackTrace();
 				}
@@ -167,7 +168,7 @@ public class RCAlgorithmSetCryptoOps {
 				LOGGER.info("END RC2 PROCEDURE");
 				LOGGER.info("#################################################################");
 			}
-			public static void performRC4(int bitlen,CryptoObject thing){
+			public static void performARC4(int bitlen,CryptoObject thing){
 				LOGGER.setUseParentHandlers(true);
 				encryptTime = 0;
 				encryptAgTime = 0;
@@ -176,22 +177,22 @@ public class RCAlgorithmSetCryptoOps {
 				keygenTime = 0;
 				cryptoTime=  0;
 				totalTime=  0;
-			/*	try {
+				/*try {
 					LOGGER.addHandler(new FileHandler(file));
 				} catch (SecurityException | IOException e2) {
 					e2.printStackTrace();
 				}*/
 				LOGGER.info("##############################################################");
-				LOGGER.info("BEGIN RC4 PROCEDURE");
+				LOGGER.info("BEGIN ARC4 PROCEDURE");
 				LOGGER.info("##############################################################");
 				LOGGER.info("Starting Stopwatch");
 				stopwatch = Stopwatch.createStarted();
-				LOGGER.info("Starting Encryption procedures for RC4");
+				LOGGER.info("Starting Encryption procedures for ARC4");
 				LOGGER.config("Creating a SecretKey Generator");
 				try {
-					gen = KeyGenerator.getInstance("RC4");
-				} catch (NoSuchAlgorithmException e1) {
-					LOGGER.severe("ERROR: Could not find Algorithm RC4");
+					gen = KeyGenerator.getInstance("ARC4","BC");
+				} catch (NoSuchAlgorithmException | NoSuchProviderException e1) {
+					LOGGER.severe("ERROR: Could not find Algorithm ARC4");
 					e1.printStackTrace();
 				}
 				LOGGER.config("Initializing the generator for bitlength of "+bitlen+" bits");
@@ -208,11 +209,11 @@ public class RCAlgorithmSetCryptoOps {
 				s2.reset();
 				LOGGER.config("CryptoObject's input string is "+thing.getInput());
 				LOGGER.config("CryptoObject's SecretKey Object is "+Hex.encodeHexString(secret.getEncoded()));
-				LOGGER.info("Initializing Cipher as RC4");
+				LOGGER.info("Initializing Cipher as ARC4");
 				try {
-					c = Cipher.getInstance("RC4");
+					c = Cipher.getInstance("ARC4","BC");
 					c.init(Cipher.ENCRYPT_MODE, secret);
-				} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
+				} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | NoSuchProviderException e) {
 					LOGGER.severe("ERROR: Cipher object could not initialize with given algorithm and parameter");
 					e.printStackTrace();
 				}
@@ -247,11 +248,11 @@ public class RCAlgorithmSetCryptoOps {
 				stopwatch.start();		
 				LOGGER.info("Using Output string "+out+" for decryption");
 				LOGGER.info("Using SecretKey "+Hex.encodeHexString(secret.getEncoded())+" as SecretKey for decryption");
-				LOGGER.info("Starting Decryption process for RC4");
+				LOGGER.info("Starting Decryption process for ARC4");
 				try {
-					c1 = Cipher.getInstance("RC4");
+					c1 = Cipher.getInstance("ARC4","BC");
 					c1.init(Cipher.DECRYPT_MODE, secret);
-				} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
+				} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | NoSuchProviderException e) {
 					LOGGER.severe("ERROR: Could not initialize the cipher object with given parameters");
 					e.printStackTrace();
 				}
@@ -290,9 +291,8 @@ public class RCAlgorithmSetCryptoOps {
 				LOGGER.info("Key: "+Hex.encodeHexString(secret.getEncoded()));
 				LOGGER.info("Encrypted Output: "+outBytes.toString());
 				LOGGER.info("#################################################################");
-				LOGGER.info("END RC4 PROCEDURE");
+				LOGGER.info("END ARC4 PROCEDURE");
 				LOGGER.info("#################################################################");
-				
 			}
 			public static void performRC5(int bitlen,CryptoObject thing){
 				LOGGER.setUseParentHandlers(true);
@@ -316,8 +316,8 @@ public class RCAlgorithmSetCryptoOps {
 				LOGGER.info("Starting Encryption procedures for RC5");
 				LOGGER.config("Creating a SecretKey Generator");
 				try {
-					gen = KeyGenerator.getInstance("RC5");
-				} catch (NoSuchAlgorithmException e1) {
+					gen = KeyGenerator.getInstance("RC5","BC");
+				} catch (NoSuchAlgorithmException | NoSuchProviderException e1) {
 					LOGGER.severe("ERROR: Could not find Algorithm RC5");
 					e1.printStackTrace();
 				}
@@ -337,9 +337,9 @@ public class RCAlgorithmSetCryptoOps {
 				LOGGER.config("CryptoObject's SecretKey Object is "+Hex.encodeHexString(secret.getEncoded()));
 				LOGGER.info("Initializing Cipher as RC5");
 				try {
-					c = Cipher.getInstance("RC5");
+					c = Cipher.getInstance("RC5","BC");
 					c.init(Cipher.ENCRYPT_MODE, secret);
-				} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
+				} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | NoSuchProviderException e) {
 					LOGGER.severe("ERROR: Cipher object could not initialize with given algorithm and parameter");
 					e.printStackTrace();
 				}
@@ -376,9 +376,9 @@ public class RCAlgorithmSetCryptoOps {
 				LOGGER.info("Using SecretKey "+Hex.encodeHexString(secret.getEncoded())+" as SecretKey for decryption");
 				LOGGER.info("Starting Decryption process for RC5");
 				try {
-					c1 = Cipher.getInstance("RC5");
+					c1 = Cipher.getInstance("RC5","BC");
 					c1.init(Cipher.DECRYPT_MODE, secret);
-				} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
+				} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | NoSuchProviderException e) {
 					LOGGER.severe("ERROR: Could not initialize the cipher object with given parameters");
 					e.printStackTrace();
 				}

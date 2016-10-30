@@ -34,7 +34,7 @@ public class CryptoOps {
 		case DES3:
 			LOGGER.info("Detected Algorithm 3DES");
 			LOGGER.config("Invoking 3DES Procedure");
-			DESCryptoOps.perform3DES(bitlen, thing);
+			DESCryptoOps.performDESede(bitlen, thing);
 			break;
 		case BLOWFISH:
 			LOGGER.info("Detected Algorithm Blowfish");
@@ -49,7 +49,7 @@ public class CryptoOps {
 		case RC4:
 			LOGGER.info("Detected Algorithm RC4");
 			LOGGER.config("Invoking RC4 Procedure");
-			RCAlgorithmSetCryptoOps.performRC4(bitlen, thing);
+			RCAlgorithmSetCryptoOps.performARC4(bitlen, thing);
 			break;
 		case RC5:
 			LOGGER.info("Detected Algorithm ");

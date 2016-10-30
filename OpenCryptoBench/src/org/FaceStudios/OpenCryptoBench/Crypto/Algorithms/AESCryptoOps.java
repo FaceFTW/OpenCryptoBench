@@ -2,6 +2,7 @@ package org.FaceStudios.OpenCryptoBench.Crypto.Algorithms;
 
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
@@ -60,8 +61,8 @@ public class AESCryptoOps {
 		LOGGER.info("Starting Encryption procedures for AES");
 		LOGGER.config("Creating a SecretKey Generator");
 		try {
-			gen = KeyGenerator.getInstance("AES");
-		} catch (NoSuchAlgorithmException e1) {
+			gen = KeyGenerator.getInstance("AES","BC");
+		} catch (NoSuchAlgorithmException | NoSuchProviderException e1) {
 			LOGGER.severe("ERROR: Could not find Algorithm AES");
 			e1.printStackTrace();
 		}
@@ -81,9 +82,9 @@ public class AESCryptoOps {
 		LOGGER.config("CryptoObject's SecretKey Object is "+Hex.encodeHexString(secret.getEncoded()));
 		LOGGER.info("Initializing Cipher as AES");
 		try {
-			c = Cipher.getInstance("AES");
+			c = Cipher.getInstance("AES","BC");
 			c.init(Cipher.ENCRYPT_MODE, secret);
-		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
+		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | NoSuchProviderException e) {
 			LOGGER.severe("ERROR: Cipher object could not initialize with given algorithm and parameter");
 			e.printStackTrace();
 		}

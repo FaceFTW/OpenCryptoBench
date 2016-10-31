@@ -1,5 +1,7 @@
 package org.FaceStudios.OpenCryptoBench;
 
+import java.io.IOException;
+import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
 import org.FaceStudios.OpenCryptoBench.Executable.NOGUI;
@@ -15,13 +17,13 @@ public class OpenCryptoBench {
 				}
 				catch(NumberFormatException ex){
 					ex.printStackTrace();
-				}
+				}*/
 				try {
 					GLOBALLOG.addHandler(new FileHandler("OpenCryptoBench.log"));
 				} catch (SecurityException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}*/
+				}
 				NOGUI.doNOGUI("default",x);
 				
 			/*	}

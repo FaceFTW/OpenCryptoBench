@@ -27,7 +27,7 @@ public class SerpentCryptoOps {
 	//This is the redirect implementation for Serpent
 	//This will allow data to be logged and processed
 	//Logger Implementaion
-	public static final BouncyCastleProvider PROVIDER = new BouncyCastleProvider();
+	private static final BouncyCastleProvider PROVIDER = new BouncyCastleProvider();
 	@SuppressWarnings("static-access")
 	public static final Logger LOGGER =  OpenCryptoBench.GLOBALLOG.getLogger(SerpentCryptoOps.class.getName());
 	private static Stopwatch stopwatch;
@@ -44,7 +44,7 @@ public class SerpentCryptoOps {
 	private static SecretKey secret;
 	protected static KeyGenerator gen;
 
-	public static void performSerpent(int bitlen,CryptoObject thing){
+	public static void performSerpent(int bitlen,CryptoObject thing, int n){
 		LOGGER.setUseParentHandlers(true);
 		encryptTime = 0;
 		encryptAgTime = 0;
@@ -58,101 +58,101 @@ public class SerpentCryptoOps {
 		} catch (SecurityException | IOException e2) {
 			e2.printStackTrace();
 		}*/
-		//LOGGER.info("##############################################################");
-		//LOGGER.info("BEGIN Serpent PROCEDURE");
-		//LOGGER.info("##############################################################");
-		//LOGGER.info("Starting Stopwatch");
+		LOGGER.info("##############################################################");
+		LOGGER.info("BEGIN Serpent PROCEDURE");
+		LOGGER.info("##############################################################");
+		LOGGER.info("Starting Stopwatch");
 		stopwatch = Stopwatch.createStarted();
-		//LOGGER.info("Starting Encryption procedures for Serpent");
-		//LOGGER.config("Creating a SecretKey Generator");
+		LOGGER.info("Starting Encryption procedures for Serpent");
+		LOGGER.config("Creating a SecretKey Generator");
 		try {
 			gen = KeyGenerator.getInstance("Serpent",PROVIDER);
 		} catch (NoSuchAlgorithmException e1) {
-			//LOGGER.severe("ERROR: Could not find Algorithm Serpent");
-			e1.printStackTrace();
+			LOGGER.severe("ERROR: Could not find Algorithm Serpent");
 		}
-		//LOGGER.config("Initializing the generator for bitlength of "+bitlen+" bits");
 
 		gen.init(bitlen);
 
-		//LOGGER.config("Generating Key");
+		LOGGER.config("Generating Key");
 		s2 = Stopwatch.createStarted();
 		secret = gen.generateKey();
 		s2.stop();
 		keygenTime = s2.elapsed(TimeUnit.NANOSECONDS);
 		cryptoTime = cryptoTime+keygenTime;
-		//LOGGER.config("Key Generation took "+keygenTime+" ns");
+		LOGGER.config("Key Generation took "+keygenTime+" ns");
 		s2.reset();
-		//LOGGER.config("CryptoObject's input string is "+thing.getInput());
-		//LOGGER.config("CryptoObject's SecretKey Object is "+Hex.encodeHexString(secret.getEncoded()));
-		//LOGGER.info("Initializing Cipher as Serpent");
+		LOGGER.config("CryptoObject's input string is "+thing.getInput());
+		LOGGER.config("CryptoObject's SecretKey Object is "+Hex.encodeHexString(secret.getEncoded()));
+		LOGGER.info("Initializing Cipher as Serpent");
 		try {
 			c = Cipher.getInstance("Serpent",PROVIDER);
 			c.init(Cipher.ENCRYPT_MODE, secret);
+
 		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
-			//LOGGER.severe("ERROR: Cipher object could not initialize with given algorithm and parameter");
-			e.printStackTrace();
+			LOGGER.severe("ERROR: Cipher object could not initialize with given algorithm and parameter");
+
 		}
-		//LOGGER.config("Success in initializing Cipher with given params");
-		//LOGGER.info("Creating an output String");
+		LOGGER.config("Success in initializing Cipher with given params");
+		LOGGER.info("Creating an output String");
 		byte[] outBytes = null;
 		String out = "";
-		//LOGGER.config("Starting Encryption");
+		LOGGER.config("Starting Encryption");
 		s2.start();
 		try {
 			outBytes = c.doFinal(thing.getInput().getBytes());
 		} catch (IllegalBlockSizeException | BadPaddingException e) {
-			//LOGGER.severe("ERROR: Cipher could not execute encryption");
+			LOGGER.severe("ERROR: Cipher could not execute encryption");
 			e.printStackTrace();
 		}
 		s2.stop();
 		encryptTime = s2.elapsed(TimeUnit.NANOSECONDS);
 		cryptoTime = cryptoTime+encryptTime;
-		//LOGGER.info("Success");
-		//LOGGER.info("Encryption Operation took "+encryptTime+" ns");
+		LOGGER.info("Success");
+		LOGGER.info("Encryption Operation took "+encryptTime+" ns");
 		s2.reset();
-		//LOGGER.info("Output string is " +Hex.encodeHexString(outBytes));
-		//LOGGER.info("Stopping Stopwatch for Encryption");
+		LOGGER.info("Output string is " +Hex.encodeHexString(outBytes));
+		LOGGER.info("Stopping Stopwatch for Encryption");
 		stopwatch.stop();
 		encryptAgTime = stopwatch.elapsed(TimeUnit.NANOSECONDS);
 		totalTime = totalTime+encryptAgTime;
-		//LOGGER.info("Time Elapsed for Encryption is "+encryptAgTime+" ns" );
-		//LOGGER.info("Resetting Stopwatch");
+		LOGGER.info("Time Elapsed for Encryption is "+encryptAgTime+" ns" );
+		LOGGER.info("Resetting Stopwatch");
 		stopwatch.reset();
-		//LOGGER.config("Success in resetting stopwatch");
-		//LOGGER.info("Restarting Stopwatch");
+		LOGGER.config("Success in resetting stopwatch");
+		LOGGER.info("Restarting Stopwatch");
 		stopwatch.start();
-		//LOGGER.info("Using Output string "+out+" for decryption");
-		//LOGGER.info("Using SecretKey "+Hex.encodeHexString(secret.getEncoded())+" as SecretKey for decryption");
-		//LOGGER.info("Starting Decryption process for Serpent");
+		LOGGER.info("Using Output string "+out+" for decryption");
+		LOGGER.info("Using SecretKey "+Hex.encodeHexString(secret.getEncoded())+" as SecretKey for decryption");
+		LOGGER.info("Starting Decryption process for Serpent");
 		try {
 			c1 = Cipher.getInstance("Serpent",PROVIDER);
 			c1.init(Cipher.DECRYPT_MODE, secret);
+
 		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
-			//LOGGER.severe("ERROR: Could not initialize the cipher object with given parameters");
-			e.printStackTrace();
+			LOGGER.severe("ERROR: Could not initialize the cipher object with given parameters");
+
 		}
-		//LOGGER.config("Success in initializing a Cipher");
-		//LOGGER.config("Creating an output String");
+		LOGGER.config("Success in initializing a Cipher");
+		LOGGER.config("Creating an output String");
 		byte[] out1Bytes = null;
-		//LOGGER.info("Starting Decryption");
+		LOGGER.info("Starting Decryption");
 		s2.start();
 		try {
 			out1Bytes = c1.doFinal(outBytes);
 		} catch (IllegalBlockSizeException | BadPaddingException e) {
-			//LOGGER.severe("ERROR: Could Not Decrypt Data");
+			LOGGER.severe("ERROR: Could Not Decrypt Data");
 			e.printStackTrace();
 		}
 		s2.stop();
 		decryptTime = s2.elapsed(TimeUnit.NANOSECONDS);
 		cryptoTime = cryptoTime+decryptTime;
-		//LOGGER.info("Success");
-		//LOGGER.info("Output string is"+out1Bytes.toString());
-		//LOGGER.info("Stopping Stopwatch");
+		LOGGER.info("Success");
+		LOGGER.info("Output string is"+out1Bytes.toString());
+		LOGGER.info("Stopping Stopwatch");
 		stopwatch.stop();
 		decryptAgTime = stopwatch.elapsed(TimeUnit.NANOSECONDS);
 		totalTime = totalTime+decryptAgTime;
-		//LOGGER.info("Time elapsed is "+ decryptAgTime+" ns");
+		LOGGER.info("Time elapsed is "+ decryptAgTime+" ns");
 		LOGGER.info("//////////////////////////////////////////");
 		LOGGER.info("RESULTS");
 		LOGGER.info("//////////////////////////////////////////");
@@ -172,26 +172,12 @@ public class SerpentCryptoOps {
 
 		BufferedWriter print = null;
 		try {
-			print = new BufferedWriter(new FileWriter(new File("OpenCryptoBench.txt"),true));
+			print = new BufferedWriter(new FileWriter(new File("OpenCryptoBench.csv"),true));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		try {
-			print.write("ThreeFish RESULTS");
-			print.write("#################################################################");
-			print.write("Key Generation Time: "+keygenTime+" ns");
-			print.write("Encryption Time: "+encryptTime+" ns");
-			print.write("Encryption Aggregate Time: "+encryptAgTime+" ns");
-			print.write("Decryption Time: "+decryptTime+" ns");
-			print.write("Decryption Aggregate Time: "+decryptAgTime+" ns");
-			print.write("Cryptography Operation Time: "+cryptoTime+" ns");
-			print.write("Total Operation Time: "+totalTime+" ns");
-			print.write("Input String: "+thing.getInput());
-			print.write("Key: "+Hex.encodeHexString(secret.getEncoded()));
-			print.write("Encrypted Output: "+outBytes.toString());
-			print.write("");
-			print.write("");
-			print.close();
+			print.write(n+","+keygenTime+","+encryptTime+","+decryptTime+","+totalTime+","+bitlen+","+"Serpent");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

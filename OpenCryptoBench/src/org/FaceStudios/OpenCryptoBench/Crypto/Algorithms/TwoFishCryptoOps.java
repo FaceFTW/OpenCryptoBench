@@ -2,7 +2,6 @@ package org.FaceStudios.OpenCryptoBench.Crypto.Algorithms;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.security.InvalidKeyException;
@@ -28,7 +27,7 @@ public class TwoFishCryptoOps {
 	//This is the redirect implementation for TwoFish
 	//This will allow data to be logged and processed
 	//Logger Implementaion
-	public static final BouncyCastleProvider PROVIDER = new BouncyCastleProvider();
+	private static final BouncyCastleProvider PROVIDER = new BouncyCastleProvider();
 	@SuppressWarnings("static-access")
 	public static final Logger LOGGER =  OpenCryptoBench.GLOBALLOG.getLogger(TwoFishCryptoOps.class.getName());
 	private static Stopwatch stopwatch;
@@ -45,162 +44,7 @@ public class TwoFishCryptoOps {
 	private static SecretKey secret;
 	protected static KeyGenerator gen;
 	
-	public static void performTwoFish(int bitlen,CryptoObject thing){
-		LOGGER.setUseParentHandlers(true);
-		encryptTime = 0;
-		encryptAgTime = 0;
-		decryptTime = 0;
-		decryptAgTime = 0;
-		keygenTime = 0;
-		cryptoTime=  0;
-		totalTime=  0;
-		/*try {
-			LOGGER.addHandler(new FileHandler(file));
-		} catch (SecurityException | IOException e2) {
-			e2.printStackTrace();
-		}*/
-		//LOGGER.info("##############################################################");
-		//LOGGER.info("BEGIN TwoFish PROCEDURE");
-		//LOGGER.info("##############################################################");
-		//LOGGER.info("Starting Stopwatch");
-		stopwatch = Stopwatch.createStarted();
-		//LOGGER.info("Starting Encryption procedures for TwoFish");
-		//LOGGER.config("Creating a SecretKey Generator");
-		try {
-			gen = KeyGenerator.getInstance("TwoFish",PROVIDER);
-		} catch (NoSuchAlgorithmException e1) {
-			//LOGGER.severe("ERROR: Could not find Algorithm TwoFish");
-			e1.printStackTrace();
-		}
-		//LOGGER.config("Initializing the generator for bitlength of "+bitlen+" bits");
-	
-		gen.init(bitlen);
-		
-		//LOGGER.config("Generating Key");
-		s2 = Stopwatch.createStarted();
-		secret = gen.generateKey();
-		s2.stop();
-		keygenTime = s2.elapsed(TimeUnit.NANOSECONDS);
-		cryptoTime = cryptoTime+keygenTime;
-		//LOGGER.config("Key Generation took "+keygenTime+" ns");
-		s2.reset();
-		//LOGGER.config("CryptoObject's input string is "+thing.getInput());
-		//LOGGER.config("CryptoObject's SecretKey Object is "+Hex.encodeHexString(secret.getEncoded()));
-		//LOGGER.info("Initializing Cipher as TwoFish");
-		try {
-			c = Cipher.getInstance("TwoFish",PROVIDER);
-			c.init(Cipher.ENCRYPT_MODE, secret);
-		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
-			//LOGGER.severe("ERROR: Cipher object could not initialize with given algorithm and parameter");
-			e.printStackTrace();
-		}
-		//LOGGER.config("Success in initializing Cipher with given params");
-		//LOGGER.info("Creating an output String");
-		byte[] outBytes = null;
-		String out = "";
-		//LOGGER.config("Starting Encryption");
-		s2.start();
-		try {
-			outBytes = c.doFinal(thing.getInput().getBytes());
-		} catch (IllegalBlockSizeException | BadPaddingException e) {
-			//LOGGER.severe("ERROR: Cipher could not execute encryption");
-			e.printStackTrace();
-		}
-		s2.stop();
-		encryptTime = s2.elapsed(TimeUnit.NANOSECONDS);
-		cryptoTime = cryptoTime+encryptTime;
-		//LOGGER.info("Success");
-		//LOGGER.info("Encryption Operation took "+encryptTime+" ns");
-		s2.reset();
-		//LOGGER.info("Output string is " +Hex.encodeHexString(outBytes));
-		//LOGGER.info("Stopping Stopwatch for Encryption");
-		stopwatch.stop();
-		encryptAgTime = stopwatch.elapsed(TimeUnit.NANOSECONDS);
-		totalTime = totalTime+encryptAgTime;
-		//LOGGER.info("Time Elapsed for Encryption is "+encryptAgTime+" ns" );
-		//LOGGER.info("Resetting Stopwatch");
-		stopwatch.reset();
-		//LOGGER.config("Success in resetting stopwatch");
-		//LOGGER.info("Restarting Stopwatch");
-		stopwatch.start();		
-		//LOGGER.info("Using Output string "+out+" for decryption");
-		//LOGGER.info("Using SecretKey "+Hex.encodeHexString(secret.getEncoded())+" as SecretKey for decryption");
-		//LOGGER.info("Starting Decryption process for TwoFish");
-		try {
-			c1 = Cipher.getInstance("TwoFish",PROVIDER);
-			c1.init(Cipher.DECRYPT_MODE, secret);
-		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
-			//LOGGER.severe("ERROR: Could not initialize the cipher object with given parameters");
-			e.printStackTrace();
-		}
-		//LOGGER.config("Success in initializing a Cipher");
-		//LOGGER.config("Creating an output String");
-		byte[] out1Bytes = null;
-		//LOGGER.info("Starting Decryption");
-		s2.start();
-		try {
-			out1Bytes = c1.doFinal(outBytes);
-		} catch (IllegalBlockSizeException | BadPaddingException e) {
-			//LOGGER.severe("ERROR: Could Not Decrypt Data");
-			e.printStackTrace();
-		}
-		s2.stop();
-		decryptTime = s2.elapsed(TimeUnit.NANOSECONDS);
-		cryptoTime = cryptoTime+decryptTime;
-		//LOGGER.info("Success");
-		//LOGGER.info("Output string is"+out1Bytes.toString());
-		//LOGGER.info("Stopping Stopwatch");
-		stopwatch.stop();
-		decryptAgTime = stopwatch.elapsed(TimeUnit.NANOSECONDS);
-		totalTime = totalTime+decryptAgTime;
-		//LOGGER.info("Time elapsed is "+ decryptAgTime+" ns");
-		LOGGER.info("//////////////////////////////////////////");
-		LOGGER.info("RESULTS");
-		LOGGER.info("//////////////////////////////////////////");
-		LOGGER.info("Key Generation Time: "+keygenTime+" ns");
-		LOGGER.info("Encryption Time: "+encryptTime+" ns");
-		LOGGER.info("Encryption Aggregate Time: "+encryptAgTime+" ns");
-		LOGGER.info("Decryption Time: "+decryptTime+" ns");
-		LOGGER.info("Decryption Aggregate Time: "+decryptAgTime+" ns");
-		LOGGER.info("Cryptography Operation Time: "+cryptoTime+" ns");
-		LOGGER.info("Total Operation Time: "+totalTime+" ns");
-		LOGGER.info("Input String: "+thing.getInput());
-		LOGGER.info("Key: "+Hex.encodeHexString(secret.getEncoded()));
-		LOGGER.info("Encrypted Output: "+outBytes.toString());
-		LOGGER.info("#################################################################");
-		LOGGER.info("END TwoFish PROCEDURE");
-		LOGGER.info("#################################################################");
-		
-		BufferedWriter print = null;
-		try {
-			print = new BufferedWriter(new FileWriter(new File("OpenCryptoBench.txt"),true));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		try {
-			print.write("TwoFish RESULTS");
-			print.write("#################################################################");
-			print.write("Key Generation Time: "+keygenTime+" ns");
-		print.write("Encryption Time: "+encryptTime+" ns");
-		print.write("Encryption Aggregate Time: "+encryptAgTime+" ns");
-		print.write("Decryption Time: "+decryptTime+" ns");
-		print.write("Decryption Aggregate Time: "+decryptAgTime+" ns");
-		print.write("Cryptography Operation Time: "+cryptoTime+" ns");
-		print.write("Total Operation Time: "+totalTime+" ns");
-		print.write("Input String: "+thing.getInput());
-		print.write("Key: "+Hex.encodeHexString(secret.getEncoded()));
-		print.write("Encrypted Output: "+outBytes.toString());
-		print.write("");
-		print.write("");
-		print.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
-	
-	public static void performThreeFish(int bitlen,CryptoObject thing){
+	public static void performTwoFish(int bitlen,CryptoObject thing, int n){
 		LOGGER.setUseParentHandlers(true);
 		encryptTime = 0;
 		encryptAgTime = 0;
@@ -215,22 +59,20 @@ public class TwoFishCryptoOps {
 			e2.printStackTrace();
 		}*/
 		LOGGER.info("##############################################################");
-		LOGGER.info("BEGIN ThreeFish PROCEDURE");
+		LOGGER.info("BEGIN TwoFish PROCEDURE");
 		LOGGER.info("##############################################################");
 		LOGGER.info("Starting Stopwatch");
 		stopwatch = Stopwatch.createStarted();
-		LOGGER.info("Starting Encryption procedures for ThreeFish");
+		LOGGER.info("Starting Encryption procedures for TwoFish");
 		LOGGER.config("Creating a SecretKey Generator");
 		try {
-			gen = KeyGenerator.getInstance("ThreeFish",PROVIDER);
+			gen = KeyGenerator.getInstance("TwoFish",PROVIDER);
 		} catch (NoSuchAlgorithmException e1) {
-			LOGGER.severe("ERROR: Could not find Algorithm ThreeFish");
-			e1.printStackTrace();
+			LOGGER.severe("ERROR: Could not find Algorithm TwoFish");
 		}
-		LOGGER.config("Initializing the generator for bitlength of "+bitlen+" bits");
-	
+
 		gen.init(bitlen);
-		
+
 		LOGGER.config("Generating Key");
 		s2 = Stopwatch.createStarted();
 		secret = gen.generateKey();
@@ -241,13 +83,14 @@ public class TwoFishCryptoOps {
 		s2.reset();
 		LOGGER.config("CryptoObject's input string is "+thing.getInput());
 		LOGGER.config("CryptoObject's SecretKey Object is "+Hex.encodeHexString(secret.getEncoded()));
-		LOGGER.info("Initializing Cipher as ThreeFish");
+		LOGGER.info("Initializing Cipher as TwoFish");
 		try {
-			c = Cipher.getInstance("ThreeFish",PROVIDER);
+			c = Cipher.getInstance("TwoFish",PROVIDER);
 			c.init(Cipher.ENCRYPT_MODE, secret);
+
 		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
 			LOGGER.severe("ERROR: Cipher object could not initialize with given algorithm and parameter");
-			e.printStackTrace();
+
 		}
 		LOGGER.config("Success in initializing Cipher with given params");
 		LOGGER.info("Creating an output String");
@@ -277,16 +120,158 @@ public class TwoFishCryptoOps {
 		stopwatch.reset();
 		LOGGER.config("Success in resetting stopwatch");
 		LOGGER.info("Restarting Stopwatch");
-		stopwatch.start();		
+		stopwatch.start();
+		LOGGER.info("Using Output string "+out+" for decryption");
+		LOGGER.info("Using SecretKey "+Hex.encodeHexString(secret.getEncoded())+" as SecretKey for decryption");
+		LOGGER.info("Starting Decryption process for TwoFish");
+		try {
+			c1 = Cipher.getInstance("TwoFish",PROVIDER);
+			c1.init(Cipher.DECRYPT_MODE, secret);
+
+		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
+			LOGGER.severe("ERROR: Could not initialize the cipher object with given parameters");
+
+		}
+		LOGGER.config("Success in initializing a Cipher");
+		LOGGER.config("Creating an output String");
+		byte[] out1Bytes = null;
+		LOGGER.info("Starting Decryption");
+		s2.start();
+		try {
+			out1Bytes = c1.doFinal(outBytes);
+		} catch (IllegalBlockSizeException | BadPaddingException e) {
+			LOGGER.severe("ERROR: Could Not Decrypt Data");
+			e.printStackTrace();
+		}
+		s2.stop();
+		decryptTime = s2.elapsed(TimeUnit.NANOSECONDS);
+		cryptoTime = cryptoTime+decryptTime;
+		LOGGER.info("Success");
+		LOGGER.info("Output string is"+out1Bytes.toString());
+		LOGGER.info("Stopping Stopwatch");
+		stopwatch.stop();
+		decryptAgTime = stopwatch.elapsed(TimeUnit.NANOSECONDS);
+		totalTime = totalTime+decryptAgTime;
+		LOGGER.info("Time elapsed is "+ decryptAgTime+" ns");
+		LOGGER.info("//////////////////////////////////////////");
+		LOGGER.info("RESULTS");
+		LOGGER.info("//////////////////////////////////////////");
+		LOGGER.info("Key Generation Time: "+keygenTime+" ns");
+		LOGGER.info("Encryption Time: "+encryptTime+" ns");
+		LOGGER.info("Encryption Aggregate Time: "+encryptAgTime+" ns");
+		LOGGER.info("Decryption Time: "+decryptTime+" ns");
+		LOGGER.info("Decryption Aggregate Time: "+decryptAgTime+" ns");
+		LOGGER.info("Cryptography Operation Time: "+cryptoTime+" ns");
+		LOGGER.info("Total Operation Time: "+totalTime+" ns");
+		LOGGER.info("Input String: "+thing.getInput());
+		LOGGER.info("Key: "+Hex.encodeHexString(secret.getEncoded()));
+		LOGGER.info("Encrypted Output: "+outBytes.toString());
+		LOGGER.info("#################################################################");
+		LOGGER.info("END TwoFish PROCEDURE");
+		LOGGER.info("#################################################################");
+
+		BufferedWriter print = null;
+		try {
+			print = new BufferedWriter(new FileWriter(new File("OpenCryptoBench.csv"),true));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			print.write(n+","+keygenTime+","+encryptTime+","+decryptTime+","+totalTime+","+bitlen+","+"TwoFish");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
+	public static void performThreeFish(int bitlen,CryptoObject thing, int n){
+		LOGGER.setUseParentHandlers(true);
+		encryptTime = 0;
+		encryptAgTime = 0;
+		decryptTime = 0;
+		decryptAgTime = 0;
+		keygenTime = 0;
+		cryptoTime=  0;
+		totalTime=  0;
+		/*try {
+			LOGGER.addHandler(new FileHandler(file));
+		} catch (SecurityException | IOException e2) {
+			e2.printStackTrace();
+		}*/
+		LOGGER.info("##############################################################");
+		LOGGER.info("BEGIN ThreeFish PROCEDURE");
+		LOGGER.info("##############################################################");
+		LOGGER.info("Starting Stopwatch");
+		stopwatch = Stopwatch.createStarted();
+		LOGGER.info("Starting Encryption procedures for ThreeFish");
+		LOGGER.config("Creating a SecretKey Generator");
+		try {
+			gen = KeyGenerator.getInstance("ThreeFish",PROVIDER);
+		} catch (NoSuchAlgorithmException e1) {
+			LOGGER.severe("ERROR: Could not find Algorithm ThreeFish");
+		}
+
+		gen.init(bitlen);
+
+		LOGGER.config("Generating Key");
+		s2 = Stopwatch.createStarted();
+		secret = gen.generateKey();
+		s2.stop();
+		keygenTime = s2.elapsed(TimeUnit.NANOSECONDS);
+		cryptoTime = cryptoTime+keygenTime;
+		LOGGER.config("Key Generation took "+keygenTime+" ns");
+		s2.reset();
+		LOGGER.config("CryptoObject's input string is "+thing.getInput());
+		LOGGER.config("CryptoObject's SecretKey Object is "+Hex.encodeHexString(secret.getEncoded()));
+		LOGGER.info("Initializing Cipher as ThreeFish");
+		try {
+			c = Cipher.getInstance("ThreeFish",PROVIDER);
+			c.init(Cipher.ENCRYPT_MODE, secret);
+
+		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
+			LOGGER.severe("ERROR: Cipher object could not initialize with given algorithm and parameter");
+
+		}
+		LOGGER.config("Success in initializing Cipher with given params");
+		LOGGER.info("Creating an output String");
+		byte[] outBytes = null;
+		String out = "";
+		LOGGER.config("Starting Encryption");
+		s2.start();
+		try {
+			outBytes = c.doFinal(thing.getInput().getBytes());
+		} catch (IllegalBlockSizeException | BadPaddingException e) {
+			LOGGER.severe("ERROR: Cipher could not execute encryption");
+			e.printStackTrace();
+		}
+		s2.stop();
+		encryptTime = s2.elapsed(TimeUnit.NANOSECONDS);
+		cryptoTime = cryptoTime+encryptTime;
+		LOGGER.info("Success");
+		LOGGER.info("Encryption Operation took "+encryptTime+" ns");
+		s2.reset();
+		LOGGER.info("Output string is " +Hex.encodeHexString(outBytes));
+		LOGGER.info("Stopping Stopwatch for Encryption");
+		stopwatch.stop();
+		encryptAgTime = stopwatch.elapsed(TimeUnit.NANOSECONDS);
+		totalTime = totalTime+encryptAgTime;
+		LOGGER.info("Time Elapsed for Encryption is "+encryptAgTime+" ns" );
+		LOGGER.info("Resetting Stopwatch");
+		stopwatch.reset();
+		LOGGER.config("Success in resetting stopwatch");
+		LOGGER.info("Restarting Stopwatch");
+		stopwatch.start();
 		LOGGER.info("Using Output string "+out+" for decryption");
 		LOGGER.info("Using SecretKey "+Hex.encodeHexString(secret.getEncoded())+" as SecretKey for decryption");
 		LOGGER.info("Starting Decryption process for ThreeFish");
 		try {
 			c1 = Cipher.getInstance("ThreeFish",PROVIDER);
 			c1.init(Cipher.DECRYPT_MODE, secret);
+
 		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
 			LOGGER.severe("ERROR: Could not initialize the cipher object with given parameters");
-			e.printStackTrace();
+
 		}
 		LOGGER.config("Success in initializing a Cipher");
 		LOGGER.config("Creating an output String");
@@ -325,34 +310,20 @@ public class TwoFishCryptoOps {
 		LOGGER.info("#################################################################");
 		LOGGER.info("END ThreeFish PROCEDURE");
 		LOGGER.info("#################################################################");
-		
+
 		BufferedWriter print = null;
 		try {
-			print = new BufferedWriter(new FileWriter(new File("OpenCryptoBench.txt"),true));
+			print = new BufferedWriter(new FileWriter(new File("OpenCryptoBench.csv"),true));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		try {
-			print.write("ThreeFish RESULTS");
-			print.write("#################################################################");
-			print.write("Key Generation Time: "+keygenTime+" ns");
-		print.write("Encryption Time: "+encryptTime+" ns");
-		print.write("Encryption Aggregate Time: "+encryptAgTime+" ns");
-		print.write("Decryption Time: "+decryptTime+" ns");
-		print.write("Decryption Aggregate Time: "+decryptAgTime+" ns");
-		print.write("Cryptography Operation Time: "+cryptoTime+" ns");
-		print.write("Total Operation Time: "+totalTime+" ns");
-		print.write("Input String: "+thing.getInput());
-		print.write("Key: "+Hex.encodeHexString(secret.getEncoded()));
-		print.write("Encrypted Output: "+outBytes.toString());
-		print.write("");
-		print.write("");
-		print.close();
+			print.write(n+","+keygenTime+","+encryptTime+","+decryptTime+","+totalTime+","+bitlen+","+"ThreeFish");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 }
 	

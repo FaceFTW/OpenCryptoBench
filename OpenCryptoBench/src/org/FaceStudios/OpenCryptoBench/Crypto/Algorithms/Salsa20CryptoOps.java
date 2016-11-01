@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
@@ -18,7 +19,6 @@ import javax.crypto.SecretKey;
 import org.FaceStudios.OpenCryptoBench.OpenCryptoBench;
 import org.FaceStudios.OpenCryptoBench.Crypto.CryptoObject;
 import org.apache.commons.codec.binary.Hex;
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import com.google.common.base.Stopwatch;
 
@@ -26,7 +26,6 @@ public class Salsa20CryptoOps {
 	//This is the redirect implementation for Salsa20
 	//This will allow data to be logged and processed
 	//Logger Implementaion
-	public static final BouncyCastleProvider PROVIDER = new BouncyCastleProvider();
 	@SuppressWarnings("static-access")
 	public static final Logger LOGGER =  OpenCryptoBench.GLOBALLOG.getLogger(Salsa20CryptoOps.class.getName());
 	private static Stopwatch stopwatch;
@@ -65,8 +64,8 @@ public class Salsa20CryptoOps {
 		LOGGER.info("Starting Encryption procedures for Salsa20");
 		LOGGER.config("Creating a SecretKey Generator");
 		try {
-			gen = KeyGenerator.getInstance("Salsa20",PROVIDER);
-		} catch (NoSuchAlgorithmException e1) {
+			gen = KeyGenerator.getInstance("Salsa20","BC");
+		} catch (NoSuchAlgorithmException | NoSuchProviderException e1) {
 			LOGGER.severe("ERROR: Could not find Algorithm Salsa20");
 			e1.printStackTrace();
 		}
@@ -86,9 +85,9 @@ public class Salsa20CryptoOps {
 		LOGGER.config("CryptoObject's SecretKey Object is "+Hex.encodeHexString(secret.getEncoded()));
 		LOGGER.info("Initializing Cipher as Salsa20");
 		try {
-			c = Cipher.getInstance("Salsa20",PROVIDER);
+			c = Cipher.getInstance("Salsa20","BC");
 			c.init(Cipher.ENCRYPT_MODE, secret);
-		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
+		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | NoSuchProviderException e) {
 			LOGGER.severe("ERROR: Cipher object could not initialize with given algorithm and parameter");
 			e.printStackTrace();
 		}
@@ -125,9 +124,9 @@ public class Salsa20CryptoOps {
 		LOGGER.info("Using SecretKey "+Hex.encodeHexString(secret.getEncoded())+" as SecretKey for decryption");
 		LOGGER.info("Starting Decryption process for Salsa20");
 		try {
-			c1 = Cipher.getInstance("Salsa20",PROVIDER);
+			c1 = Cipher.getInstance("Salsa20","BC");
 			c1.init(Cipher.DECRYPT_MODE, secret);
-		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
+		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | NoSuchProviderException e) {
 			LOGGER.severe("ERROR: Could not initialize the cipher object with given parameters");
 			e.printStackTrace();
 		}

@@ -3,22 +3,33 @@ A cryptography benchmark program written in java
 
 ## Supported Algorithms
 OpenCrpytoBench supports these algorithms:
-
+  
   *AES (128-bit)
+  
   *DES (56-bit)
+  
   *Blowfish (32/64/128-bit)
+  
   *RC2/ARCFOUR/RC5
+  
   *3DES
+  
   *Serpent
+  
   *Twofish
 
 OpenCryptoBench will have support in the future for
 
   *ThreeFish
+  
   *Salsa20
+  
   *Diffie-Hellman Key Exchange
+  
   *RSA Key Exchange
+  
   *ECIES
+  
   *and more
 
 ## Legal Stuff

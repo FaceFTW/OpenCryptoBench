@@ -49,12 +49,13 @@ public class NOGUI {
 		
 		BufferedWriter print = null;
 		try {
-			print = new BufferedWriter(new FileWriter(new File("OpenCryptoBench.txt"),true));
+			print = new BufferedWriter(new FileWriter(new File("OpenCryptoBench.csv"),true));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		try {
 			print.write("Run, KeyGeneration, Encryption, Decryption, Total, BitLength, Method");
+			print.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

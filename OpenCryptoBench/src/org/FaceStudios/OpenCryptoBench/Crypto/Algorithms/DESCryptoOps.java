@@ -179,7 +179,9 @@ public class DESCryptoOps {
 			e.printStackTrace();
 		}
 		try {
+			print.newLine();
 			print.write(n+","+keygenTime+","+encryptTime+","+decryptTime+","+totalTime+","+bitlen+","+"DES");
+			print.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -320,7 +322,9 @@ public class DESCryptoOps {
 			e.printStackTrace();
 		}
 		try {
+			print.newLine();
 			print.write(n+","+keygenTime+","+encryptTime+","+decryptTime+","+totalTime+","+bitlen+","+"DESede");
+			print.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

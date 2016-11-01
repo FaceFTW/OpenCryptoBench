@@ -177,7 +177,9 @@ public class SerpentCryptoOps {
 			e.printStackTrace();
 		}
 		try {
+			print.newLine();
 			print.write(n+","+keygenTime+","+encryptTime+","+decryptTime+","+totalTime+","+bitlen+","+"Serpent");
+			print.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

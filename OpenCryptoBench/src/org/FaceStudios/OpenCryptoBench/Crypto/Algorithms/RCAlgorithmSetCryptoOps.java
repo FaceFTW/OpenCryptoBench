@@ -181,9 +181,10 @@ public class RCAlgorithmSetCryptoOps {
 			e.printStackTrace();
 		}
 		try {
+			print.newLine();
 			print.write(n+","+keygenTime+","+encryptTime+","+decryptTime+","+totalTime+","+bitlen+","+"RC2");
+			print.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -322,7 +323,9 @@ public class RCAlgorithmSetCryptoOps {
 			e.printStackTrace();
 		}
 		try {
+			print.newLine();
 			print.write(n+","+keygenTime+","+encryptTime+","+decryptTime+","+totalTime+","+bitlen+","+"RC4");
+			print.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -459,11 +462,14 @@ public class RCAlgorithmSetCryptoOps {
 		BufferedWriter print = null;
 		try {
 			print = new BufferedWriter(new FileWriter(new File("OpenCryptoBench.csv"),true));
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		try {
+			print.newLine();
 			print.write(n+","+keygenTime+","+encryptTime+","+decryptTime+","+totalTime+","+bitlen+","+"RC5");
+			print.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

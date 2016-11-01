@@ -177,7 +177,9 @@ public class TwoFishCryptoOps {
 			e.printStackTrace();
 		}
 		try {
+			print.newLine();
 			print.write(n+","+keygenTime+","+encryptTime+","+decryptTime+","+totalTime+","+bitlen+","+"TwoFish");
+			print.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -318,7 +320,9 @@ public class TwoFishCryptoOps {
 			e.printStackTrace();
 		}
 		try {
+			print.newLine();
 			print.write(n+","+keygenTime+","+encryptTime+","+decryptTime+","+totalTime+","+bitlen+","+"ThreeFish");
+			print.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

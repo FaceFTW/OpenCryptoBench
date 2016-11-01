@@ -42,7 +42,7 @@ public class Salsa20CryptoOps {
 	private static SecretKey secret;
 	protected static KeyGenerator gen;
 	
-	public static void performSalsa20(int bitlen,CryptoObject thing){
+	public static void performSalsa20(int bitlen,CryptoObject thing, int n){
 		LOGGER.setUseParentHandlers(true);
 		encryptTime = 0;
 		encryptAgTime = 0;

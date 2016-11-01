@@ -49,6 +49,22 @@ public class NOGUI {
 		} catch (SecurityException | IOException e) {
 			e.printStackTrace();
 		}*/
+		
+		BufferedWriter print = null;
+		try {
+			print = new BufferedWriter(new FileWriter(new File("OpenCryptoBench.txt"),true));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			print.write("Run, KeyGeneration, Encryption, Decryption, Total, BitLength, Method");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
 		for(int x = 0; x<10; x++){
 		//Execute all different benchmarks
 		//AES

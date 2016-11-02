@@ -1,5 +1,7 @@
 # OpenCryptoBench
-A cryptography benchmark program written in java
+A cryptography benchmark program written in Java
+
+[![codebeat badge](https://codebeat.co/badges/5676f716-312c-4159-8012-67f94ead1ab1)](https://codebeat.co/projects/github-com-facestudios-opencryptobench)
 
 ## Supported Algorithms
 OpenCrpytoBench supports these algorithms:

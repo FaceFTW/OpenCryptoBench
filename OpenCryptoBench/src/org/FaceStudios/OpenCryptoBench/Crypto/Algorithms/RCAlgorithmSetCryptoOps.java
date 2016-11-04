@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -16,9 +15,7 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 
-import org.FaceStudios.OpenCryptoBench.OpenCryptoBench;
 import org.FaceStudios.OpenCryptoBench.Crypto.CryptoObject;
-import org.apache.commons.codec.binary.Hex;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import com.google.common.base.Stopwatch;
@@ -31,8 +28,6 @@ public class RCAlgorithmSetCryptoOps {
 
 	//Logger Implementaion
 	public static final BouncyCastleProvider PROVIDER = new BouncyCastleProvider();
-	@SuppressWarnings("static-access")
-	public static final Logger LOGGER =  OpenCryptoBench.GLOBALLOG.getLogger(RCAlgorithmSetCryptoOps.class.getName());
 	//Stopwatch Implementation
 	private static Stopwatch stopwatch;
 	private static Stopwatch s2;
@@ -49,7 +44,6 @@ public class RCAlgorithmSetCryptoOps {
 	protected static KeyGenerator gen;
 
 	public static void performRC4(int bitlen,CryptoObject thing, int n){
-		LOGGER.setUseParentHandlers(true);
 		encryptTime = 0;
 		encryptAgTime = 0;
 		decryptTime = 0;
@@ -102,6 +96,7 @@ public class RCAlgorithmSetCryptoOps {
 		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
 			e.printStackTrace();
 		}
+		@SuppressWarnings("unused")
 		byte[] out1Bytes = null;
 		s2.start();
 		try {
@@ -127,7 +122,6 @@ public class RCAlgorithmSetCryptoOps {
 			print.write(n+","+keygenTime+","+encryptTime+","+decryptTime+","+totalTime+","+bitlen+","+"RC4");
 			print.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

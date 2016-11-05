@@ -21,8 +21,7 @@ import org.FaceStudios.OpenCryptoBench.Crypto.CryptoObject;
 import com.google.common.base.Stopwatch;
 
 public class Salsa20CryptoOps {
-	//This is the redirect implementation for Salsa20
-	//This will allow data to be logged and processed
+
 	//Logger Implementaion
 	private static Stopwatch stopwatch;
 	private static Stopwatch s2;

@@ -2,8 +2,8 @@ package org.FaceStudios.OpenCryptoBench.Crypto;
 
 import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.BlockCipherBenchmark;
 import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.BlockCipherBenchmark.BlockCipher;
-import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.RCAlgorithmSetCryptoOps;
-import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.Salsa20CryptoOps;
+import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.StreamCipherBenchmark;
+import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.StreamCipherBenchmark.StreamCipher;
 
 public class CryptoOps {
 	//This class is mainly intended for a invoker method
@@ -31,7 +31,7 @@ public class CryptoOps {
 			BlockCipherBenchmark.performBlockCipherBench(BlockCipher.RC2, bitlen, thing, n);
 			break;
 		case RC4:
-			RCAlgorithmSetCryptoOps.performRC4(bitlen, thing, n);
+			StreamCipherBenchmark.performStreamCipherBenchmark(StreamCipher.RC4, bitlen, thing, n);
 			break;
 		case RC5:
 			BlockCipherBenchmark.performBlockCipherBench(BlockCipher.RC5, bitlen, thing, n);
@@ -46,7 +46,7 @@ public class CryptoOps {
 			BlockCipherBenchmark.performBlockCipherBench(BlockCipher.SERPENT, bitlen, thing, n);
 			break;
 		case SALSA20:
-			Salsa20CryptoOps.performSalsa20(bitlen, thing, n);
+			StreamCipherBenchmark.performStreamCipherBenchmark(StreamCipher.SALSA20, bitlen, thing, n);
 			break;
 		}
 		

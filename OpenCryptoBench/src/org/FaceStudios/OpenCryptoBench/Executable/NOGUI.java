@@ -31,73 +31,35 @@ public class NOGUI {
 		//Execute all different benchmarks
 		//AES
 		for(int x = 0; x<10; x++){
-		CryptoOps.invokeCrypto(Algorithm.AES, 128, thing, x);
+			CryptoOps.invokeCrypto(Algorithm.AES, 128, thing, x);
 		}
 		//DES
 		for(int x = 0; x<10; x++){
-		CryptoOps.invokeCrypto(Algorithm.DES, 56, thing, x);
+			CryptoOps.invokeCrypto(Algorithm.DES, 56, thing, x);
 		}
 		//3DES
-		for(int x = 0; x<10; x++){	
-		CryptoOps.invokeCrypto(Algorithm.DES3, 112, thing, x);
-	}
 		for(int x = 0; x<10; x++){
-		CryptoOps.invokeCrypto(Algorithm.DES3, 168, thing, x);
+			CryptoOps.invokeCrypto(Algorithm.DES3, 168, thing, x);
 		}
 		//Blowfish
 		for(int x = 0; x<10; x++){
-		CryptoOps.invokeCrypto(Algorithm.BLOWFISH, 32, thing, x);
-		}
-		for(int x = 0; x<10; x++){
-		CryptoOps.invokeCrypto(Algorithm.BLOWFISH, 64, thing, x);
-		}
-		for(int x = 0; x<10; x++){
-		CryptoOps.invokeCrypto(Algorithm.BLOWFISH, 128, thing, x);
-		}
-		//RC2
-		for(int x = 0; x<10; x++){
-		CryptoOps.invokeCrypto(Algorithm.RC2, 40, thing, x);
-		}
-		for(int x = 0; x<10; x++){
-		CryptoOps.invokeCrypto(Algorithm.RC2, 64, thing, x);
-		}
-		for(int x = 0; x<10; x++){
-		CryptoOps.invokeCrypto(Algorithm.RC2, 128, thing, x);
-		}
-		//RC4
-		for(int x = 0; x<10; x++){
-		CryptoOps.invokeCrypto(Algorithm.RC4, 40, thing, x);
-		}
-		for(int x = 0; x<10; x++){
-		CryptoOps.invokeCrypto(Algorithm.RC4, 64, thing, x);
-		}
-		for(int x = 0; x<10; x++){
-		CryptoOps.invokeCrypto(Algorithm.RC4, 128, thing,x);
+			CryptoOps.invokeCrypto(Algorithm.BLOWFISH, 128, thing, x);
 		}
 		//RC5
 		for(int x = 0; x<10; x++){
-		CryptoOps.invokeCrypto(Algorithm.RC5, 8, thing,x);
-		}
-		for(int x = 0; x<10; x++){
-		CryptoOps.invokeCrypto(Algorithm.RC5, 16, thing, x);
-		}
-		for(int x = 0; x<10; x++){
-		CryptoOps.invokeCrypto(Algorithm.RC5, 32, thing,x);
-		}
-		for(int x = 0; x<10; x++){
-		CryptoOps.invokeCrypto(Algorithm.RC5, 64, thing, x);
-		}
-		for(int x = 0; x<10; x++){
-		CryptoOps.invokeCrypto(Algorithm.RC5, 128, thing, x);
+			CryptoOps.invokeCrypto(Algorithm.RC5, 128, thing, x);
 		}
 		//TwoFish
 		for(int x = 0; x<10; x++){
-		CryptoOps.invokeCrypto(Algorithm.TWOFISH, 128, thing, x);
+			CryptoOps.invokeCrypto(Algorithm.TWOFISH, 128, thing, x);
 		}
 		//ThreeFish
+		for(int x = 0; x<10; x++){
+			CryptoOps.invokeCrypto(Algorithm.THREEFISH, 128, thing, x);
+		}
 		//Serpent
 		for(int x = 0; x<10; x++){
-		CryptoOps.invokeCrypto(Algorithm.SERPENT, 128, thing, x);
+			CryptoOps.invokeCrypto(Algorithm.SERPENT, 128, thing, x);
 		}
 		//Salsa20;
 	}

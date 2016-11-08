@@ -16,9 +16,9 @@ OpenCrpytoBench supports these algorithms:
 
 OpenCryptoBench will have support in the future for
 
-*  ThreeFish
-*  Salsa20
-*  Diffie-Hellman Key Exchange
+*  ThreeFish (Implemented, but Buggy)
+*  Salsa20 (In Progress)
+*  Diffie-Hellman Key Exchange (In Progress)
 *  RSA Key Exchange
 *  ECIES
 *  and more

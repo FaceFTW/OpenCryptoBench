@@ -131,7 +131,7 @@ public class StreamCipherBenchmark {
 	}
 	try {
 		print.newLine();
-		print.write(n+","+keygenTime+","+encryptTime+","+decryptTime+","+totalTime+","+bitlen+","+algorithm);
+		print.write((n+1)+","+keygenTime+","+encryptTime+","+decryptTime+","+totalTime+","+bitlen+","+algorithm);
 		print.close();
 	} catch (IOException e) {
 		e.printStackTrace();

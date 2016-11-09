@@ -30,7 +30,7 @@ public class NOGUI {
 		
 		//Execute all different benchmarks
 		//AES
-		for(int x = 0; x<10; x++){
+		for(int x = 0; x<11; x++){
 			CryptoOps.invokeCrypto(Algorithm.AES, 128, thing, x);
 		}
 		//DES

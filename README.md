@@ -8,16 +8,19 @@ OpenCrpytoBench supports these algorithms:
 
 *  AES (128-bit)
 *  DES (56-bit)
-*  Blowfish (32/64/128-bit)
+*  Blowfish
 *  RC2/ARCFOUR/RC5
 *  3DES
 *  Serpent
 *  Twofish
+*  Salsa20
+*  HC256
+*  ISSAC
+*  Grain128a
+*  ThreeFish
 
 OpenCryptoBench will have support in the future for
 
-*  ThreeFish (Implemented, but Buggy)
-*  Salsa20 (In Progress)
 *  Diffie-Hellman Key Exchange (In Progress)
 *  RSA Key Exchange
 *  ECIES

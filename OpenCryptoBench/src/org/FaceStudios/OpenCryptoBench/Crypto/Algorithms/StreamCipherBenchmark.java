@@ -37,7 +37,7 @@ public class StreamCipherBenchmark {
 	private static String algorithm;
 	protected static KeyGenerator gen;
 	
-	public enum StreamCipher{RC4, SALSA20}
+	public enum StreamCipher{RC4, SALSA20, GRAIN128, ISSAC, HC256}
 	
 	@SuppressWarnings("unused")
 	public static void performStreamCipherBenchmark(StreamCipher cipher, int bitlen, CryptoObject thing, int n){
@@ -47,6 +47,15 @@ public class StreamCipherBenchmark {
 			break;
 		case SALSA20:
 			algorithm = "Salsa20";
+			break;
+		case GRAIN128:
+			algorithm = "Grain128";
+			break;
+		case ISSAC:
+			algorithm = "ISSAC";
+			break;
+		case HC256:
+			algorithm = "HC256";
 			break;
 		default:
 			throw new IllegalArgumentException("ERROR: The Algorithm could not be identified as a stream cipher");

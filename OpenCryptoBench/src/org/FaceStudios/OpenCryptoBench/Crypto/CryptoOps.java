@@ -9,7 +9,7 @@ public class CryptoOps {
 	//This class is mainly intended for a invoker method
 	//This will be used to attach a logger to a encryption invoked by the program
 	//Enum representing the functions
-	public enum Algorithm{AES, DES, DES3, BLOWFISH, RC2, RC4, RC5, TWOFISH, THREEFISH, SERPENT, SALSA20};
+	public enum Algorithm{AES, DES, DES3, BLOWFISH, RC2, RC4, RC5, TWOFISH, THREEFISH, SERPENT, SALSA20, GRAIN128, ISSAC, HC256};
 	
 	public static void invokeCrypto(Algorithm method, int bitlen, CryptoObject thing, int n) {
 
@@ -47,6 +47,15 @@ public class CryptoOps {
 			break;
 		case SALSA20:
 			StreamCipherBenchmark.performStreamCipherBenchmark(StreamCipher.SALSA20, bitlen, thing, n);
+			break;
+		case GRAIN128:
+			StreamCipherBenchmark.performStreamCipherBenchmark(StreamCipher.GRAIN128, bitlen, thing, n);
+			break;
+		case ISSAC:
+			StreamCipherBenchmark.performStreamCipherBenchmark(StreamCipher.ISSAC, bitlen, thing, n);
+			break;
+		case HC256:
+			StreamCipherBenchmark.performStreamCipherBenchmark(StreamCipher.HC256, bitlen, thing, n);
 			break;
 		}
 		

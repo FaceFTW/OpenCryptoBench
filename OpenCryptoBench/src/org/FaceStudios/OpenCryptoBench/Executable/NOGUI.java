@@ -61,6 +61,22 @@ public class NOGUI {
 		for(int x = 0; x<10; x++){
 			CryptoOps.invokeCrypto(Algorithm.SERPENT, 128, thing, x);
 		}
-		//Salsa20;
+		//Salsa20
+		for(int x = 0; x<10; x++){
+			CryptoOps.invokeCrypto(Algorithm.SALSA20, 128, thing, x);
+		}
+		//Grain128
+		for(int x = 0; x<10; x++){
+			CryptoOps.invokeCrypto(Algorithm.GRAIN128, 128, thing, x);
+		}
+		//HC256
+		for(int x = 0; x<10; x++){
+			CryptoOps.invokeCrypto(Algorithm.HC256, 256, thing, x);
+		}
+		//ISSAC
+		for(int x = 0; x<10; x++){
+			CryptoOps.invokeCrypto(Algorithm.ISSAC, 256, thing, x);
+		}
+				
 	}
 }

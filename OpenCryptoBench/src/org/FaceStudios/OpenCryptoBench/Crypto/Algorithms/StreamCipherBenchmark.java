@@ -26,10 +26,7 @@ public class StreamCipherBenchmark {
 	private static Stopwatch s2;
 	private static long keygenTime;
 	private static long encryptTime;
-	private static long encryptAgTime;
-	private static long decryptAgTime;
 	private static long decryptTime;
-	private static long cryptoTime;
 	private static long totalTime;
 	private static Cipher c;
 	private static Cipher c1;
@@ -64,9 +61,10 @@ public class StreamCipherBenchmark {
 	encryptTime = 0;
 	decryptTime = 0;
 	keygenTime = 0;
-	cryptoTime=  0;
 	totalTime=  0;
+	//Total Time Stopwatch
 	stopwatch = Stopwatch.createStarted();
+	
 	try {
 		gen = KeyGenerator.getInstance(algorithm,PROVIDER);
 		gen.init(bitlen);
@@ -79,7 +77,6 @@ public class StreamCipherBenchmark {
 	secret = gen.generateKey();
 	s2.stop();
 	keygenTime = s2.elapsed(TimeUnit.NANOSECONDS);
-	cryptoTime = cryptoTime+keygenTime;
 	s2.reset();
 	try {
 		c = Cipher.getInstance(algorithm,PROVIDER);
@@ -97,13 +94,7 @@ public class StreamCipherBenchmark {
 	}
 	s2.stop();
 	encryptTime = s2.elapsed(TimeUnit.NANOSECONDS);
-	cryptoTime = cryptoTime+encryptTime;
 	s2.reset();
-	stopwatch.stop();
-	encryptAgTime = stopwatch.elapsed(TimeUnit.NANOSECONDS);
-	totalTime = totalTime+encryptAgTime;
-	stopwatch.reset();
-	stopwatch.start();
 	try {
 		c1 = Cipher.getInstance(algorithm,PROVIDER);
 		c1.init(Cipher.DECRYPT_MODE, secret);
@@ -119,10 +110,9 @@ public class StreamCipherBenchmark {
 	}
 	s2.stop();
 	decryptTime = s2.elapsed(TimeUnit.NANOSECONDS);
-	cryptoTime = cryptoTime+decryptTime;
+	
 	stopwatch.stop();
-	decryptAgTime = stopwatch.elapsed(TimeUnit.NANOSECONDS);
-	totalTime = totalTime+decryptAgTime;
+	totalTime = stopwatch.elapsed(TimeUnit.NANOSECONDS);
 	BufferedWriter print = null;
 	try {
 		print = new BufferedWriter(new FileWriter(new File("OpenCryptoBench.csv"),true));

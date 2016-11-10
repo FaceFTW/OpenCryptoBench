@@ -77,6 +77,27 @@ public class NOGUI {
 		for(int x = 0; x<10; x++){
 			CryptoOps.invokeCrypto(Algorithm.ISSAC, 256, thing, x);
 		}
+		
+		//Key Exchange Setup
+		BufferedWriter print2 = null;
+		try {
+			print2 = new BufferedWriter(new FileWriter(new File("OpenCryptoBench.csv"),true));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			print2.newLine();
+			print2.write("Run, KeyGeneration, KeyExchange, CommonSecret, MessageSnR, Total, Method");
+			print2.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		for(int x = 0; x<10; x++){
+			CryptoOps.invokeCrypto(Algorithm.DHSIM, 0, thing, x);
+		}
+		
+		
 				
 	}
 }

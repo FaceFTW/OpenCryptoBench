@@ -73,7 +73,7 @@ public class DHKeyExchangeCryptoOps {
 	}
 	try {
 		print.newLine();
-		print.write((n+1)+","+keygenTime+","+keySnRTime+","+commonsecretTime+","+messageSnRTime+","+totalTime+","+",Diffie-Hellman");
+		print.write((n+1)+","+keygenTime+","+keySnRTime+","+commonsecretTime+","+messageSnRTime+","+totalTime+",Diffie-Hellman");
 		print.close();
 	} catch (IOException e) {
 		e.printStackTrace();

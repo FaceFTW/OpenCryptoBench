@@ -2,6 +2,7 @@ package org.FaceStudios.OpenCryptoBench.Crypto;
 
 import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.BlockCipherBenchmark;
 import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.BlockCipherBenchmark.BlockCipher;
+import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.DiffieHellman.DHKeyExchangeCryptoOps;
 import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.StreamCipherBenchmark;
 import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.StreamCipherBenchmark.StreamCipher;
 
@@ -9,10 +10,9 @@ public class CryptoOps {
 	//This class is mainly intended for a invoker method
 	//This will be used to attach a logger to a encryption invoked by the program
 	//Enum representing the functions
-	public enum Algorithm{AES, DES, DES3, BLOWFISH, RC2, RC4, RC5, TWOFISH, THREEFISH, SERPENT, SALSA20, GRAIN128, ISSAC, HC256};
+	public enum Algorithm{AES, DES, DES3, BLOWFISH, RC2, RC4, RC5, TWOFISH, THREEFISH, SERPENT, SALSA20, GRAIN128, ISSAC, HC256, DHSIM};
 	
 	public static void invokeCrypto(Algorithm method, int bitlen, CryptoObject thing, int n) {
-
 		switch(method){
 		//This will invoke different methods depending on the parameters given.
 		case AES:
@@ -56,6 +56,9 @@ public class CryptoOps {
 			break;
 		case HC256:
 			StreamCipherBenchmark.performStreamCipherBenchmark(StreamCipher.HC256, bitlen, thing, n);
+			break;
+		case DHSIM:
+			DHKeyExchangeCryptoOps.performDHBench(n);
 			break;
 		}
 		

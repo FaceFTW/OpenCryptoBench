@@ -1,5 +1,8 @@
 package org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.DiffieHellman;
-//This code belongs to 
+//This code belongs to firatkucuk, which I am so happy that he made
+// The Diffie-Hellman Benchmark is based off of this entity
+// Code is under Apache 2.0 Clauses
+// https://github.com/codvio/diffie-hellman-helloworld
 
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
@@ -11,17 +14,12 @@ import javax.crypto.KeyAgreement;
 import javax.crypto.spec.SecretKeySpec;
 
 public class EndUser {
-	  //~ --- [INSTANCE FIELDS] ------------------------------------------------------------------------------------------
 
     private PrivateKey privateKey;
     private PublicKey  publicKey;
     private PublicKey  receivedPublicKey;
     private byte[]     secretKey;
     private String     secretMessage;
-
-
-
-    //~ --- [METHODS] --------------------------------------------------------------------------------------------------
 
     public void encryptAndSendMessage(final String message, final EndUser person) {
 
@@ -41,10 +39,6 @@ public class EndUser {
         }
     }
 
-
-
-    //~ ----------------------------------------------------------------------------------------------------------------
-
     public void generateCommonSecretKey() {
 
         try {
@@ -57,10 +51,6 @@ public class EndUser {
             e.printStackTrace();
         }
     }
-
-
-
-    //~ ----------------------------------------------------------------------------------------------------------------
 
     public void generateKeys() {
 
@@ -77,18 +67,10 @@ public class EndUser {
         }
     }
 
-
-
-    //~ ----------------------------------------------------------------------------------------------------------------
-
     public PublicKey getPublicKey() {
 
         return publicKey;
     }
-
-
-
-    //~ ----------------------------------------------------------------------------------------------------------------
 
     public void receiveAndDecryptMessage(final byte[] message) {
 
@@ -106,41 +88,16 @@ public class EndUser {
         }
     }
 
-
-
-    //~ ----------------------------------------------------------------------------------------------------------------
-
-    /**
-     * In a real life example you must serialize the public key for transferring.
-     *
-     * @param  person
-     */
     public void receivePublicKeyFrom(final EndUser person) {
 
         receivedPublicKey = person.getPublicKey();
     }
-
-
-
-    //~ ----------------------------------------------------------------------------------------------------------------
 
     public void whisperTheSecretMessage() {
 
         System.out.println(secretMessage);
     }
 
-
-
-    //~ ----------------------------------------------------------------------------------------------------------------
-
-    /**
-     * 1024 bit symmetric key size is so big for DES so we must shorten the key size. You can get first 8 longKey of the
-     * byte array or can use a key factory
-     *
-     * @param   longKey
-     *
-     * @return
-     */
     private byte[] shortenSecretKey(final byte[] longKey) {
 
         try {

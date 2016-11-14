@@ -12,50 +12,50 @@ public class CryptoOps {
 	//Enum representing the functions
 	public enum Algorithm{AES, DES, DES3, BLOWFISH, RC2, RC4, RC5, TWOFISH, THREEFISH, SERPENT, SALSA20, GRAIN128, ISSAC, HC256, DHSIM};
 	
-	public static void invokeCrypto(Algorithm method, int bitlen, CryptoObject thing, int n) {
+	public static void invokeCrypto(Algorithm method, CryptoObject thing, int n) {
 		switch(method){
 		//This will invoke different methods depending on the parameters given.
 		case AES:
-			BlockCipherBenchmark.performBlockCipherBench(BlockCipher.AES, bitlen, thing, n);
+			BlockCipherBenchmark.performBlockCipherBench(BlockCipher.AES,  thing, n);
 			break;
 		case DES:
-			BlockCipherBenchmark.performBlockCipherBench(BlockCipher.DES, bitlen, thing, n);
+			BlockCipherBenchmark.performBlockCipherBench(BlockCipher.DES,  thing, n);
 			break;
 		case DES3:
-			BlockCipherBenchmark.performBlockCipherBench(BlockCipher.DESEDE, bitlen, thing, n);
+			BlockCipherBenchmark.performBlockCipherBench(BlockCipher.DESEDE,  thing, n);
 			break;
 		case BLOWFISH:
-			BlockCipherBenchmark.performBlockCipherBench(BlockCipher.BLOWFISH, bitlen, thing, n);
+			BlockCipherBenchmark.performBlockCipherBench(BlockCipher.BLOWFISH,  thing, n);
 			break;
 		case RC2:
-			BlockCipherBenchmark.performBlockCipherBench(BlockCipher.RC2, bitlen, thing, n);
+			BlockCipherBenchmark.performBlockCipherBench(BlockCipher.RC2,  thing, n);
 			break;
 		case RC4:
-			StreamCipherBenchmark.performStreamCipherBenchmark(StreamCipher.RC4, bitlen, thing, n);
+			StreamCipherBenchmark.performStreamCipherBenchmark(StreamCipher.RC4,  thing, n);
 			break;
 		case RC5:
-			BlockCipherBenchmark.performBlockCipherBench(BlockCipher.RC5, bitlen, thing, n);
+			BlockCipherBenchmark.performBlockCipherBench(BlockCipher.RC5,  thing, n);
 			break;
 		case TWOFISH:
-			BlockCipherBenchmark.performBlockCipherBench(BlockCipher.TWOFISH, bitlen, thing, n);
+			BlockCipherBenchmark.performBlockCipherBench(BlockCipher.TWOFISH,  thing, n);
 			break;
 		case THREEFISH:
-			BlockCipherBenchmark.performBlockCipherBench(BlockCipher.THREEFISH, bitlen, thing, n);
+			BlockCipherBenchmark.performBlockCipherBench(BlockCipher.THREEFISH,  thing, n);
 			break;
 		case SERPENT:
-			BlockCipherBenchmark.performBlockCipherBench(BlockCipher.SERPENT, bitlen, thing, n);
+			BlockCipherBenchmark.performBlockCipherBench(BlockCipher.SERPENT,  thing, n);
 			break;
 		case SALSA20:
-			StreamCipherBenchmark.performStreamCipherBenchmark(StreamCipher.SALSA20, bitlen, thing, n);
+			StreamCipherBenchmark.performStreamCipherBenchmark(StreamCipher.SALSA20,  thing, n);
 			break;
 		case GRAIN128:
-			StreamCipherBenchmark.performStreamCipherBenchmark(StreamCipher.GRAIN128, bitlen, thing, n);
+			StreamCipherBenchmark.performStreamCipherBenchmark(StreamCipher.GRAIN128,  thing, n);
 			break;
 		case ISSAC:
-			StreamCipherBenchmark.performStreamCipherBenchmark(StreamCipher.ISSAC, bitlen, thing, n);
+			StreamCipherBenchmark.performStreamCipherBenchmark(StreamCipher.ISSAC,  thing, n);
 			break;
 		case HC256:
-			StreamCipherBenchmark.performStreamCipherBenchmark(StreamCipher.HC256, bitlen, thing, n);
+			StreamCipherBenchmark.performStreamCipherBenchmark(StreamCipher.HC256,  thing, n);
 			break;
 		case DHSIM:
 			DHKeyExchangeCryptoOps.performDHBench(n);

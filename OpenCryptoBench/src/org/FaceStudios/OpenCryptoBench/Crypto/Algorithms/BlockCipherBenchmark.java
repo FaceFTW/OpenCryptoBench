@@ -1,9 +1,5 @@
 package org.FaceStudios.OpenCryptoBench.Crypto.Algorithms;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.TimeUnit;
@@ -16,6 +12,7 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 
 import org.FaceStudios.OpenCryptoBench.Crypto.CryptoObject;
+import org.FaceStudios.OpenCryptoBench.Data.SymmetricCipherDataSet;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import com.google.common.base.Stopwatch;
@@ -33,40 +30,52 @@ public class BlockCipherBenchmark {
 	private static SecretKey secret;
 	private static String algorithm;
 	protected static KeyGenerator gen;
+	private static int bitlen;
 	
 	public static enum BlockCipher {AES, DES, DESEDE, TWOFISH, SERPENT, RC2, RC5, RC6, BLOWFISH, THREEFISH};
 
 	@SuppressWarnings("unused")
-	public static void performBlockCipherBench(BlockCipher cipher, int bitlen, CryptoObject thing, int n){
+	public static SymmetricCipherDataSet performBlockCipherBench(BlockCipher cipher, CryptoObject thing, int n){
 		switch(cipher){
 			case AES:
 				algorithm = "AES";
+				bitlen = 256;
 				break;
 			case DES:
 				algorithm = "DES";
+				bitlen = 56;
 				break;
 			case DESEDE:
 				algorithm = "DESede";
+				bitlen = 168;
 				break;
 			case TWOFISH:
 				algorithm = "TwoFish";
+				bitlen = 128;
 				break;
 			case SERPENT:
 				algorithm = "Serpent";
+				bitlen = 128;
 				break;
 			case RC2:
 				algorithm = "RC2";
+				bitlen = 128;
 				break;
 			case RC5:
 				algorithm = "RC5";
+				bitlen = 128;
+				break;
 			case RC6:
 				algorithm = "RC6";
+				bitlen = 128;
 				break;
 			case BLOWFISH:
 				algorithm = "Blowfish";
+				bitlen = 128;
 				break;
 			case THREEFISH:
 				algorithm = "ThreeFish";
+				bitlen = 256;
 				break;
 			default:
 				throw new IllegalArgumentException("ERROR: The Algorithm could not be identified as a block cipher");
@@ -128,19 +137,6 @@ public class BlockCipherBenchmark {
 		stopwatch.stop();
 		totalTime = stopwatch.elapsed(TimeUnit.NANOSECONDS);
 		
-		BufferedWriter print = null;
-		try {
-			print = new BufferedWriter(new FileWriter(new File("OpenCryptoBench.csv"),true));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		try {
-			print.newLine();
-			print.write((n+1)+","+keygenTime+","+encryptTime+","+decryptTime+","+totalTime+","+bitlen+","+algorithm);
-			print.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
+		return new SymmetricCipherDataSet(Integer.toString(n),keygenTime,encryptTime,decryptTime,totalTime,bitlen,algorithm); 
 	}
 }

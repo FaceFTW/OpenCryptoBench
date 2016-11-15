@@ -108,17 +108,28 @@ public class NOGUI {
 			issacdata.addDataSet(StreamCipherBenchmark.performStreamCipherBenchmark(StreamCipher.ISSAC, thing, x));
 		}
 		
-		ArrayList<SymmetricKeyDataGroup> data = new ArrayList<SymmetricKeyDataGroup>();
+		ArrayList<SymmetricKeyDataGroup> blockcipherdata = new ArrayList<SymmetricKeyDataGroup>();
+		ArrayList<SymmetricKeyDataGroup> streamcipherdata = new ArrayList<SymmetricKeyDataGroup>();
+
+		blockcipherdata.add(aesdata);
+		blockcipherdata.add(desdata);
+		blockcipherdata.add(desededata);
+		blockcipherdata.add(blowfishdata);
+		blockcipherdata.add(twofishdata);
+		blockcipherdata.add(threefishdata);
+		blockcipherdata.add(rc2data);
+		blockcipherdata.add(rc5data);
+		blockcipherdata.add(serpentdata);
 		
-		data.add(aesdata);
-		data.add(desdata);
-		data.add(desededata);
-		data.add(blowfishdata);
-		data.add(twofishdata);
-		data.add(threefishdata);
-		data.add(rc2data);
-		data.add(rc5data);
-		data.add(serpentdata);
+		streamcipherdata.add(rc4data);
+		streamcipherdata.add(salsa20data);
+		streamcipherdata.add(grain128data);
+		streamcipherdata.add(hc256data);
+		streamcipherdata.add(issacdata);
+		
+		for(int a = 0; a<blockcipherdata.size();a++){
+			blockcipherdata.get(a).calcAggregate();
+		}
 		
 		BufferedWriter print = null;
 		try {
@@ -133,10 +144,12 @@ public class NOGUI {
 			e.printStackTrace();
 		}
 		
-		for(int x = 0; x<10; x++){
+		/*
+		 * for(int x = 0; x<10; x++){
+		 
 			CryptoOps.invokeCrypto(Algorithm.DHSIM, thing, x);
 		}
-		
+		*/
 		
 				
 	}

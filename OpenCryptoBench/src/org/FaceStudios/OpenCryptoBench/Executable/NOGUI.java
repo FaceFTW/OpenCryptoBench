@@ -27,6 +27,7 @@ public class NOGUI {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 		//Execute all different benchmarks
 		//AES
 		for(int x = 0; x<11; x++){
@@ -64,6 +65,7 @@ public class NOGUI {
 		for(int x = 0; x<10; x++){
 			CryptoOps.invokeCrypto(Algorithm.SERPENT, thing, x);
 		}
+		
 		//RC4
 		for(int x = 0; x<10; x++){
 			CryptoOps.invokeCrypto(Algorithm.RC4, thing, x);

@@ -129,7 +129,7 @@ public class NOGUI {
 		
 		//Calcualte Aggregates for the data
 		for(int a = 0; a<blockcipherdata.size();a++){
-			blockcipherdata.get(a).calcAggregate();
+			blockcipherdata.get(a).addDataSet(blockcipherdata.get(a).calcAggregate());
 		}
 		
 		//Start formatting the data

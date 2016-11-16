@@ -25,5 +25,9 @@ public class SymmetricKeyDataGroup {
 		data.add(new SymmetricCipherDataSet("Aggregate", temp2, temp3, temp4, temp5,data.get(0).getBitLength(),data.get(0).getAlgorithm()));
 	}
 	
+	public SymmetricCipherDataSet getDataSet(int x){
+		return data.get(x);
+	}
+	
 	
 }

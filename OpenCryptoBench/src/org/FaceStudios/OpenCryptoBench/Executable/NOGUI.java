@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import org.FaceStudios.OpenCryptoBench.Crypto.CryptoObject;
-import org.FaceStudios.OpenCryptoBench.Crypto.CryptoOps;
-import org.FaceStudios.OpenCryptoBench.Crypto.CryptoOps.Algorithm;
 import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.BlockCipherBenchmark;
 import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.BlockCipherBenchmark.BlockCipher;
 import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.StreamCipherBenchmark;
@@ -51,8 +49,10 @@ public class NOGUI {
 		CryptoObject thing = new CryptoObject("Hello World");
 		
 		//Execute all different benchmarks
+		//Initializer (Not Recorded)
+		BlockCipherBenchmark.performBlockCipherBench(BlockCipher.AES, thing, 0);
 		//AES
-		for(int x = 0; x<11; x++){
+		for(int x = 0; x<10; x++){
 			aesdata.addDataSet(BlockCipherBenchmark.performBlockCipherBench(BlockCipher.AES, thing, x));
 		}
 		//DES
@@ -127,9 +127,12 @@ public class NOGUI {
 		streamcipherdata.add(hc256data);
 		streamcipherdata.add(issacdata);
 		
+		//Calcualte Aggregates for the data
 		for(int a = 0; a<blockcipherdata.size();a++){
 			blockcipherdata.get(a).calcAggregate();
 		}
+		
+		//Start formatting the data
 		
 		BufferedWriter print = null;
 		try {
@@ -143,6 +146,55 @@ public class NOGUI {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		/* Procedure:
+		 * 1: Print out all of the data (Inner Loop)
+		 * 2: Add two newline sequences
+		 * 3: Repeat until all data is printed (Outer Loop)
+		 */
+		
+		//BLOCK CIPHER DATA
+		try{
+			for(int x = 0; x < blockcipherdata.size(); x++){
+				//OUTER BLOCK
+			
+				for(int y = 0; y < 11; x++){
+					//INNER BLOCK
+				
+					print.write(blockcipherdata.get(x).getDataSet(y).toString());				
+					print.newLine();
+				
+					//END INNER BLOCK
+				}
+				print.newLine();
+				print.newLine();
+				
+				//END OUTER BLOCK
+			}
+			
+			//STREAM CIPHER DATA
+			for(int x = 0; x < streamcipherdata.size(); x++){
+				//OUTER BLOCK
+			
+				for(int y = 0; y < 11; x++){
+					//INNER BLOCK
+			
+					print.write(streamcipherdata.get(x).getDataSet(y).toString());				
+					print.newLine();
+				
+					//END INNER BLOCK
+				}
+				print.newLine();
+				print.newLine();
+				
+				//END OUTER BLOCK
+			}
+			
+			} catch (IOException | NullPointerException e) {
+			e.printStackTrace();
+		}
+		
+		
 		
 		/*
 		 * for(int x = 0; x<10; x++){

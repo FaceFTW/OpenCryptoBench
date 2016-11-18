@@ -1,38 +1,45 @@
 package org.FaceStudios.OpenCryptoBench.Data;
 
+import java.util.AbstractList;
 import java.util.ArrayList;
 
-public class SymmetricKeyDataGroup {
-	private static ArrayList <SymmetricCipherDataSet> data;
+public class SymmetricKeyDataGroup extends AbstractList<IDataSet>{
+	private static SymmetricKeyDataSet[] data;
 	
-	public SymmetricKeyDataGroup(){
-		data = new ArrayList<SymmetricCipherDataSet>();
+	public SymmetricKeyDataGroup(int x){
+		data = new SymmetricKeyDataSet[x];
 	}
 	
-	public void addDataSet(SymmetricCipherDataSet s){
-		data.add(s);
+	public void addDataSet(SymmetricKeyDataSet s, int x){
+		data[x] = s;
 	}
 	
-	public SymmetricCipherDataSet calcAggregate(){
+	public SymmetricKeyDataSet calcAggregate(){
 		long temp2 = 0, temp3 = 0, temp4 = 0, temp5 = 0;
 		
-		for(int x = 0; x<data.size();x++){
-			temp2 = temp2+data.get(x).getKeyGenTime();
-			temp3 = temp3+data.get(x).getEncryptTime();
-			temp4 = temp4+data.get(x).getDecryptTime();
-			temp5 = temp5+data.get(x).getTotalTime();
+		for(int x = 0; x<data.length;x++){
+			temp2 = temp2+data[x].getKeyGenTime();
+			temp3 = temp3+data[x].getEncryptTime();
+			temp4 = temp4+data[x].getDecryptTime();
+			temp5 = temp5+data[x].getTotalTime();
 		}
 		
-		temp2 = temp2/data.size();
-		temp3 = temp3/data.size();
-		temp4 = temp4/data.size();
-		temp5 = temp5/data.size();
+		temp2 = temp2/data.length;
+		temp3 = temp3/data.length;
+		temp4 = temp4/data.length;
+		temp5 = temp5/data.length;
 		
-		return new SymmetricCipherDataSet("Aggregate", temp2, temp3, temp4, temp5,data.get(0).getBitLength(),data.get(0).getAlgorithm());
+		return new SymmetricKeyDataSet("Aggregate", temp2, temp3, temp4, temp5,data[0].getBitLength(),data[0].getAlgorithm());
 	}
-	
-	public SymmetricCipherDataSet getDataSet(int x){
-		return data.get(x);
+
+	@Override
+	public IDataSet get(int arg0) {
+		return data[arg0];
+	}
+
+	@Override
+	public int size() {
+		return data.length;
 	}
 	
 	

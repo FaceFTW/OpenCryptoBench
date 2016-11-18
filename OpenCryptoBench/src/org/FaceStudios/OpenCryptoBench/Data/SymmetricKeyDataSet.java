@@ -1,6 +1,6 @@
 package org.FaceStudios.OpenCryptoBench.Data;
 
-public class SymmetricCipherDataSet {
+public class SymmetricKeyDataSet implements IDataSet{
 	private static String run;
 	private static long keygenTime;
 	private static long encryptTime;
@@ -9,7 +9,7 @@ public class SymmetricCipherDataSet {
 	private static int bitlen;
 	private static String algorithm;
 	
-	public SymmetricCipherDataSet(String d1, long d2, long d3, long d4, long d5, int d6, String d7){
+	public SymmetricKeyDataSet(String d1, long d2, long d3, long d4, long d5, int d6, String d7){
 		run = d1;
 		keygenTime = d2;
 		encryptTime = d3;

@@ -12,7 +12,7 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 
 import org.FaceStudios.OpenCryptoBench.Crypto.CryptoObject;
-import org.FaceStudios.OpenCryptoBench.Data.SymmetricCipherDataSet;
+import org.FaceStudios.OpenCryptoBench.Data.SymmetricKeyDataSet;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import com.google.common.base.Stopwatch;
@@ -35,7 +35,7 @@ public class StreamCipherBenchmark {
 	public enum StreamCipher{RC4, SALSA20, GRAIN128, ISSAC, HC256}
 	
 	@SuppressWarnings("unused")
-	public static SymmetricCipherDataSet performStreamCipherBenchmark(StreamCipher cipher,CryptoObject thing, int n){
+	public static SymmetricKeyDataSet performStreamCipherBenchmark(StreamCipher cipher,CryptoObject thing, int n){
 		switch(cipher){
 		case RC4:
 			algorithm = "RC4";
@@ -115,7 +115,7 @@ public class StreamCipherBenchmark {
 	
 	stopwatch.stop();
 	totalTime = stopwatch.elapsed(TimeUnit.NANOSECONDS);
-	return new SymmetricCipherDataSet(Integer.toString(n),keygenTime,encryptTime, decryptTime, totalTime, bitlen, algorithm);
+	return new SymmetricKeyDataSet(Integer.toString(n),keygenTime,encryptTime, decryptTime, totalTime, bitlen, algorithm);
 	
 
 }

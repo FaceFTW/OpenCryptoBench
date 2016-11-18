@@ -12,7 +12,7 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 
 import org.FaceStudios.OpenCryptoBench.Crypto.CryptoObject;
-import org.FaceStudios.OpenCryptoBench.Data.SymmetricCipherDataSet;
+import org.FaceStudios.OpenCryptoBench.Data.SymmetricKeyDataSet;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import com.google.common.base.Stopwatch;
@@ -35,7 +35,7 @@ public class BlockCipherBenchmark {
 	public static enum BlockCipher {AES, DES, DESEDE, TWOFISH, SERPENT, RC2, RC5, RC6, BLOWFISH, THREEFISH};
 
 	@SuppressWarnings("unused")
-	public static SymmetricCipherDataSet performBlockCipherBench(BlockCipher cipher, CryptoObject thing, int n){
+	public static SymmetricKeyDataSet performBlockCipherBench(BlockCipher cipher, CryptoObject thing, int n){
 		switch(cipher){
 			case AES:
 				algorithm = "AES";
@@ -137,6 +137,6 @@ public class BlockCipherBenchmark {
 		stopwatch.stop();
 		totalTime = stopwatch.elapsed(TimeUnit.NANOSECONDS);
 		
-		return new SymmetricCipherDataSet(Integer.toString(n),keygenTime,encryptTime,decryptTime,totalTime,bitlen,algorithm); 
+		return new SymmetricKeyDataSet(Integer.toString(n),keygenTime,encryptTime,decryptTime,totalTime,bitlen,algorithm); 
 	}
 }

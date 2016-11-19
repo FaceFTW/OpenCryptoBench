@@ -1,7 +1,6 @@
 package org.FaceStudios.OpenCryptoBench.Data;
 
 import java.util.AbstractList;
-import java.util.ArrayList;
 
 public class SymmetricKeyDataGroup extends AbstractList<IDataSet>{
 	private static SymmetricKeyDataSet[] data;

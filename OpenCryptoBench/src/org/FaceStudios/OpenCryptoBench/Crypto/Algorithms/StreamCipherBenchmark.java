@@ -12,6 +12,7 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 
 import org.FaceStudios.OpenCryptoBench.Crypto.CryptoObject;
+import org.FaceStudios.OpenCryptoBench.Data.SymmetricKeyDataGroup;
 import org.FaceStudios.OpenCryptoBench.Data.SymmetricKeyDataSet;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
@@ -35,89 +36,101 @@ public class StreamCipherBenchmark {
 	public enum StreamCipher{RC4, SALSA20, GRAIN128, ISSAC, HC256}
 	
 	@SuppressWarnings("unused")
-	public static SymmetricKeyDataSet performStreamCipherBenchmark(StreamCipher cipher,CryptoObject thing, int n){
-		switch(cipher){
-		case RC4:
-			algorithm = "RC4";
-			bitlen = 256;
-			break;
-		case SALSA20:
-			algorithm = "Salsa20";
-			bitlen = 128;
-			break;
-		case GRAIN128:
-			algorithm = "Grain128";
-			bitlen = 128;
-			break;
-		case ISSAC:
-			algorithm = "ISSAC";
-			bitlen = 256;
-			break;
-		case HC256:
-			algorithm = "HC256";
-			bitlen = 256;
-			break;
-		default:
-			throw new IllegalArgumentException("ERROR: The Algorithm could not be identified as a stream cipher");
-		}
-	encryptTime = 0;
-	decryptTime = 0;
-	keygenTime = 0;
-	totalTime=  0;
-	//Total Time Stopwatch
-	stopwatch = Stopwatch.createStarted();
-	
-	try {
-		gen = KeyGenerator.getInstance(algorithm,PROVIDER);
-		gen.init(bitlen);
+	public static SymmetricKeyDataGroup performStreamCipherBenchmark(StreamCipher cipher,CryptoObject thing){
+		SymmetricKeyDataGroup data = new SymmetricKeyDataGroup(11);
+		
+		Thread t = new Thread(){
+			public void run(){
+				switch(cipher){
+				case RC4:
+					algorithm = "RC4";
+					bitlen = 256;
+					break;
+				case SALSA20:
+					algorithm = "Salsa20";
+					bitlen = 128;
+					break;
+				case GRAIN128:
+					algorithm = "Grain128";
+					bitlen = 128;
+					break;
+				case ISSAC:
+					algorithm = "ISSAC";
+					bitlen = 256;
+					break;
+				case HC256:
+					algorithm = "HC256";
+					bitlen = 256;
+					break;
+				default:
+					throw new IllegalArgumentException("ERROR: The Algorithm could not be identified as a stream cipher");
+				}
+			for(int x = 0; x< 10;x++){
+			encryptTime = 0;
+			decryptTime = 0;
+			keygenTime = 0;
+			totalTime=  0;
+			//Total Time Stopwatch
+			stopwatch = Stopwatch.createStarted();
+			
+			try {
+				gen = KeyGenerator.getInstance(algorithm,PROVIDER);
+				gen.init(bitlen);
 
-	} catch (NoSuchAlgorithmException e1) {
-		e1.printStackTrace();
-	}
-	
-	s2 = Stopwatch.createStarted();
-	secret = gen.generateKey();
-	s2.stop();
-	keygenTime = s2.elapsed(TimeUnit.NANOSECONDS);
-	s2.reset();
-	try {
-		c = Cipher.getInstance(algorithm,PROVIDER);
-		c.init(Cipher.ENCRYPT_MODE, secret);
+			} catch (NoSuchAlgorithmException e1) {
+				e1.printStackTrace();
+			}
+			
+			s2 = Stopwatch.createStarted();
+			secret = gen.generateKey();
+			s2.stop();
+			keygenTime = s2.elapsed(TimeUnit.NANOSECONDS);
+			s2.reset();
+			try {
+				c = Cipher.getInstance(algorithm,PROVIDER);
+				c.init(Cipher.ENCRYPT_MODE, secret);
 
-	} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
-		e.printStackTrace();
-	}
-	byte[] outBytes = null;
-	s2.start();
-	try {
-		outBytes = c.doFinal(thing.getInput().getBytes());
-	} catch (IllegalBlockSizeException | BadPaddingException e) {
-		e.printStackTrace();
-	}
-	s2.stop();
-	encryptTime = s2.elapsed(TimeUnit.NANOSECONDS);
-	s2.reset();
-	try {
-		c1 = Cipher.getInstance(algorithm,PROVIDER);
-		c1.init(Cipher.DECRYPT_MODE, secret);
+			} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
+				e.printStackTrace();
+			}
+			byte[] outBytes = null;
+			s2.start();
+			try {
+				outBytes = c.doFinal(thing.getInput().getBytes());
+			} catch (IllegalBlockSizeException | BadPaddingException e) {
+				e.printStackTrace();
+			}
+			s2.stop();
+			encryptTime = s2.elapsed(TimeUnit.NANOSECONDS);
+			s2.reset();
+			try {
+				c1 = Cipher.getInstance(algorithm,PROVIDER);
+				c1.init(Cipher.DECRYPT_MODE, secret);
 
-	} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
-	e.printStackTrace();
+			} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
+			e.printStackTrace();
+			}
+			s2.start();
+			try {
+			byte[] out1Bytes = c1.doFinal(outBytes);
+			} catch (IllegalBlockSizeException | BadPaddingException e) {
+				e.printStackTrace();
+			}
+			s2.stop();
+			decryptTime = s2.elapsed(TimeUnit.NANOSECONDS);
+			
+			stopwatch.stop();
+			totalTime = stopwatch.elapsed(TimeUnit.NANOSECONDS);
+			
+			data.add(new SymmetricKeyDataSet(Integer.toString(x),keygenTime,encryptTime,decryptTime,totalTime,bitlen,algorithm)); 
+			
+			}
+			}
+		};
+		
+		t.run();
+		data.calcAggregate();
+		return data;
 	}
-	s2.start();
-	try {
-	byte[] out1Bytes = c1.doFinal(outBytes);
-	} catch (IllegalBlockSizeException | BadPaddingException e) {
-		e.printStackTrace();
-	}
-	s2.stop();
-	decryptTime = s2.elapsed(TimeUnit.NANOSECONDS);
-	
-	stopwatch.stop();
-	totalTime = stopwatch.elapsed(TimeUnit.NANOSECONDS);
-	return new SymmetricKeyDataSet(Integer.toString(n),keygenTime,encryptTime, decryptTime, totalTime, bitlen, algorithm);
-	
-
-}
 
 }

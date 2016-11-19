@@ -31,82 +31,40 @@ public class NOGUI {
 	
 
 	public static void doNOGUI(){
-		aesdata = new SymmetricKeyDataGroup(11);
-		desdata = new SymmetricKeyDataGroup(11);
-		desededata = new SymmetricKeyDataGroup(11);
-		blowfishdata = new SymmetricKeyDataGroup(11);
-		twofishdata = new SymmetricKeyDataGroup(11);
-		threefishdata = new SymmetricKeyDataGroup(11);
-		rc2data = new SymmetricKeyDataGroup(11);
-		rc5data = new SymmetricKeyDataGroup(11);
-		serpentdata = new SymmetricKeyDataGroup(11);
-		rc4data = new SymmetricKeyDataGroup(11);
-		salsa20data = new SymmetricKeyDataGroup(11);
-		issacdata = new SymmetricKeyDataGroup(11);
-		grain128data = new SymmetricKeyDataGroup(11);
-		hc256data = new SymmetricKeyDataGroup(11);
+		
 		
 		CryptoObject thing = new CryptoObject("Hello World");
 		
 		//Execute all different benchmarks
 		//Initializer (Not Recorded)
-		BlockCipherBenchmark.performBlockCipherBench(BlockCipher.AES, thing, 0);
 		//AES
-		for(int x = 0; x<10; x++){
-			aesdata.add(BlockCipherBenchmark.performBlockCipherBench(BlockCipher.AES, thing, x));
-		}
+		aesdata = BlockCipherBenchmark.performBlockCipherBench(BlockCipher.AES, thing);
 		//DES
-		for(int x = 0; x<10; x++){
-			desdata.add(BlockCipherBenchmark.performBlockCipherBench(BlockCipher.DES, thing, x));
-		}
+		desdata = BlockCipherBenchmark.performBlockCipherBench(BlockCipher.DES, thing);
 		//3DES
-		for(int x = 0; x<10; x++){
-			desededata.add(BlockCipherBenchmark.performBlockCipherBench(BlockCipher.DESEDE, thing, x));
-		}
+		desededata = BlockCipherBenchmark.performBlockCipherBench(BlockCipher.DESEDE, thing);
 		//Blowfish
-		for(int x = 0; x<10; x++){
-			blowfishdata.add(BlockCipherBenchmark.performBlockCipherBench(BlockCipher.BLOWFISH, thing, x));
-		}
+		blowfishdata = BlockCipherBenchmark.performBlockCipherBench(BlockCipher.BLOWFISH, thing);
 		//RC2
-		for(int x = 0; x<10; x++){
-			rc2data.add(BlockCipherBenchmark.performBlockCipherBench(BlockCipher.RC2, thing, x));
-		}
+		rc2data = BlockCipherBenchmark.performBlockCipherBench(BlockCipher.RC2, thing);
 		//RC5
-		for(int x = 0; x<10; x++){
-			rc5data.add(BlockCipherBenchmark.performBlockCipherBench(BlockCipher.RC5, thing, x));
-		}
+		rc5data = BlockCipherBenchmark.performBlockCipherBench(BlockCipher.RC5, thing);
 		//TwoFish
-		for(int x = 0; x<10; x++){
-			twofishdata.add(BlockCipherBenchmark.performBlockCipherBench(BlockCipher.TWOFISH, thing, x));
-		}
+		twofishdata = BlockCipherBenchmark.performBlockCipherBench(BlockCipher.TWOFISH, thing);
 		//ThreeFish
-		for(int x = 0; x<10; x++){
-			threefishdata.add(BlockCipherBenchmark.performBlockCipherBench(BlockCipher.THREEFISH, thing, x));
-		}
+		threefishdata = BlockCipherBenchmark.performBlockCipherBench(BlockCipher.THREEFISH, thing);
 		//Serpent
-		for(int x = 0; x<10; x++){
-			serpentdata.add(BlockCipherBenchmark.performBlockCipherBench(BlockCipher.SERPENT, thing, x));
-		}
+		serpentdata = BlockCipherBenchmark.performBlockCipherBench(BlockCipher.SERPENT, thing);
 		//RC4
-		for(int x = 0; x<10; x++){
-			rc4data.add(StreamCipherBenchmark.performStreamCipherBenchmark(StreamCipher.RC4, thing, x));
-		}
+		rc4data = StreamCipherBenchmark.performStreamCipherBenchmark(StreamCipher.RC4, thing);
 		//Salsa20
-		for(int x = 0; x<10; x++){
-			salsa20data.add(StreamCipherBenchmark.performStreamCipherBenchmark(StreamCipher.SALSA20, thing, x));
-		}
+		salsa20data = StreamCipherBenchmark.performStreamCipherBenchmark(StreamCipher.SALSA20, thing);
 		//Grain128
-		for(int x = 0; x<10; x++){
-			grain128data.add(StreamCipherBenchmark.performStreamCipherBenchmark(StreamCipher.GRAIN128, thing, x));
-		}
+		grain128data = StreamCipherBenchmark.performStreamCipherBenchmark(StreamCipher.GRAIN128, thing);
 		//HC256
-		for(int x = 0; x<10; x++){
-			hc256data.add(StreamCipherBenchmark.performStreamCipherBenchmark(StreamCipher.HC256, thing, x));
-		}
+		hc256data = StreamCipherBenchmark.performStreamCipherBenchmark(StreamCipher.HC256, thing);
 		//ISSAC
-		for(int x = 0; x<10; x++){
-			issacdata.add(StreamCipherBenchmark.performStreamCipherBenchmark(StreamCipher.ISSAC, thing, x));
-		}
+		issacdata = StreamCipherBenchmark.performStreamCipherBenchmark(StreamCipher.ISSAC, thing);
 		
 		ArrayList<SymmetricKeyDataGroup> blockcipherdata = new ArrayList<SymmetricKeyDataGroup>();
 		ArrayList<SymmetricKeyDataGroup> streamcipherdata = new ArrayList<SymmetricKeyDataGroup>();
@@ -126,12 +84,6 @@ public class NOGUI {
 		streamcipherdata.add(grain128data);
 		streamcipherdata.add(hc256data);
 		streamcipherdata.add(issacdata);
-		
-		//Calcualte Aggregates for the data
-		for(int a = 0; a<blockcipherdata.size();a++){
-			blockcipherdata.get(a).add(blockcipherdata.get(a).calcAggregate());
-		}
-		
 		//Start formatting the data
 		
 		BufferedWriter print = null;

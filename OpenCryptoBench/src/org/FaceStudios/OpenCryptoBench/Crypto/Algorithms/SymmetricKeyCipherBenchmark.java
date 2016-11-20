@@ -18,7 +18,7 @@ import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import com.google.common.base.Stopwatch;
 
-public class StreamCipherBenchmark {
+public class SymmetricKeyCipherBenchmark {
 	private static final BouncyCastleProvider PROVIDER = new BouncyCastleProvider();
 	private static Stopwatch stopwatch;
 	private static Stopwatch s2;
@@ -33,15 +33,55 @@ public class StreamCipherBenchmark {
 	protected static KeyGenerator gen;
 	private static int bitlen;
 	
-	public enum StreamCipher{RC4, SALSA20, GRAIN128, ISSAC, HC256}
+	public static enum SymmetricKeyCipher {AES, DES, DESEDE, TWOFISH, SERPENT, RC2, RC5, RC6, BLOWFISH, THREEFISH, RC4, SALSA20, GRAIN128, ISSAC, HC256};
 	
 	@SuppressWarnings("unused")
-	public static SymmetricKeyDataGroup performStreamCipherBenchmark(StreamCipher cipher,CryptoObject thing){
+	public static SymmetricKeyDataGroup performSymmetricKeyCipherBench(SymmetricKeyCipher cipher, CryptoObject thing){
 		SymmetricKeyDataGroup data = new SymmetricKeyDataGroup(11);
 		
 		Thread t = new Thread(){
 			public void run(){
 				switch(cipher){
+				case AES:
+					algorithm = "AES";
+					bitlen = 256;
+					break;
+				case DES:
+					algorithm = "DES";
+					bitlen = 56;
+					break;
+				case DESEDE:
+					algorithm = "DESede";
+					bitlen = 168;
+					break;
+				case TWOFISH:
+					algorithm = "TwoFish";
+					bitlen = 128;
+					break;
+				case SERPENT:
+					algorithm = "Serpent";
+					bitlen = 128;
+					break;
+				case RC2:
+					algorithm = "RC2";
+					bitlen = 128;
+					break;
+				case RC5:
+					algorithm = "RC5";
+					bitlen = 128;
+					break;
+				case RC6:
+					algorithm = "RC6";
+					bitlen = 128;
+					break;
+				case BLOWFISH:
+					algorithm = "Blowfish";
+					bitlen = 128;
+					break;
+				case THREEFISH:
+					algorithm = "ThreeFish";
+					bitlen = 256;
+					break;
 				case RC4:
 					algorithm = "RC4";
 					bitlen = 256;
@@ -63,9 +103,9 @@ public class StreamCipherBenchmark {
 					bitlen = 256;
 					break;
 				default:
-					throw new IllegalArgumentException("ERROR: The Algorithm could not be identified as a stream cipher");
-				}
-			for(int x = 0; x< 10;x++){
+					throw new IllegalArgumentException("ERROR: The Algorithm could not be identified as a block cipher");
+			}
+			for(int x = 0;x< 10;x++){
 			encryptTime = 0;
 			decryptTime = 0;
 			keygenTime = 0;
@@ -122,7 +162,7 @@ public class StreamCipherBenchmark {
 			stopwatch.stop();
 			totalTime = stopwatch.elapsed(TimeUnit.NANOSECONDS);
 			
-			data.add(new SymmetricKeyDataSet(Integer.toString(x),keygenTime,encryptTime,decryptTime,totalTime,bitlen,algorithm)); 
+			data.addDataSet(new SymmetricKeyDataSet(Integer.toString(x),keygenTime,encryptTime,decryptTime,totalTime,bitlen,algorithm), x); 
 			
 			}
 			}
@@ -132,5 +172,4 @@ public class StreamCipherBenchmark {
 		data.calcAggregate();
 		return data;
 	}
-
 }

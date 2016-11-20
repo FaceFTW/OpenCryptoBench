@@ -7,10 +7,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import org.FaceStudios.OpenCryptoBench.Crypto.CryptoObject;
-import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.BlockCipherBenchmark;
-import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.BlockCipherBenchmark.BlockCipher;
-import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.StreamCipherBenchmark;
-import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.StreamCipherBenchmark.StreamCipher;
+import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.SymmetricKeyCipherBenchmark;
+import org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.SymmetricKeyCipherBenchmark.SymmetricKeyCipher;
 import org.FaceStudios.OpenCryptoBench.Data.SymmetricKeyDataGroup;
 
 public class NOGUI {
@@ -38,33 +36,32 @@ public class NOGUI {
 		//Execute all different benchmarks
 		//Initializer (Not Recorded)
 		//AES
-		aesdata = BlockCipherBenchmark.performBlockCipherBench(BlockCipher.AES, thing);
+		aesdata = SymmetricKeyCipherBenchmark.performSymmetricKeyCipherBench(SymmetricKeyCipher.AES, thing);
 		//DES
-		desdata = BlockCipherBenchmark.performBlockCipherBench(BlockCipher.DES, thing);
+		desdata = SymmetricKeyCipherBenchmark.performSymmetricKeyCipherBench(SymmetricKeyCipher.DES, thing);
 		//3DES
-		desededata = BlockCipherBenchmark.performBlockCipherBench(BlockCipher.DESEDE, thing);
+		desededata = SymmetricKeyCipherBenchmark.performSymmetricKeyCipherBench(SymmetricKeyCipher.DESEDE, thing);
 		//Blowfish
-		blowfishdata = BlockCipherBenchmark.performBlockCipherBench(BlockCipher.BLOWFISH, thing);
+		blowfishdata = SymmetricKeyCipherBenchmark.performSymmetricKeyCipherBench(SymmetricKeyCipher.BLOWFISH, thing);
 		//RC2
-		rc2data = BlockCipherBenchmark.performBlockCipherBench(BlockCipher.RC2, thing);
+		rc2data = SymmetricKeyCipherBenchmark.performSymmetricKeyCipherBench(SymmetricKeyCipher.RC2, thing);
 		//RC5
-		rc5data = BlockCipherBenchmark.performBlockCipherBench(BlockCipher.RC5, thing);
+		rc5data = SymmetricKeyCipherBenchmark.performSymmetricKeyCipherBench(SymmetricKeyCipher.RC5, thing);
 		//TwoFish
-		twofishdata = BlockCipherBenchmark.performBlockCipherBench(BlockCipher.TWOFISH, thing);
+		twofishdata = SymmetricKeyCipherBenchmark.performSymmetricKeyCipherBench(SymmetricKeyCipher.TWOFISH, thing);
 		//ThreeFish
-		threefishdata = BlockCipherBenchmark.performBlockCipherBench(BlockCipher.THREEFISH, thing);
+		threefishdata = SymmetricKeyCipherBenchmark.performSymmetricKeyCipherBench(SymmetricKeyCipher.THREEFISH, thing);
 		//Serpent
-		serpentdata = BlockCipherBenchmark.performBlockCipherBench(BlockCipher.SERPENT, thing);
+		serpentdata = SymmetricKeyCipherBenchmark.performSymmetricKeyCipherBench(SymmetricKeyCipher.SERPENT, thing);
 		//RC4
-		rc4data = StreamCipherBenchmark.performStreamCipherBenchmark(StreamCipher.RC4, thing);
+		rc4data = SymmetricKeyCipherBenchmark.performSymmetricKeyCipherBench(SymmetricKeyCipher.RC4, thing);
 		//Salsa20
-		salsa20data = StreamCipherBenchmark.performStreamCipherBenchmark(StreamCipher.SALSA20, thing);
+		salsa20data = SymmetricKeyCipherBenchmark.performSymmetricKeyCipherBench(SymmetricKeyCipher.SALSA20, thing);
 		//Grain128
-		grain128data = StreamCipherBenchmark.performStreamCipherBenchmark(StreamCipher.GRAIN128, thing);
+		grain128data = SymmetricKeyCipherBenchmark.performSymmetricKeyCipherBench(SymmetricKeyCipher.GRAIN128, thing);
 		//HC256
-		hc256data = StreamCipherBenchmark.performStreamCipherBenchmark(StreamCipher.HC256, thing);
+		hc256data = SymmetricKeyCipherBenchmark.performSymmetricKeyCipherBench(SymmetricKeyCipher.HC256, thing);
 		//ISSAC
-		issacdata = StreamCipherBenchmark.performStreamCipherBenchmark(StreamCipher.ISSAC, thing);
 		
 		ArrayList<SymmetricKeyDataGroup> blockcipherdata = new ArrayList<SymmetricKeyDataGroup>();
 		ArrayList<SymmetricKeyDataGroup> streamcipherdata = new ArrayList<SymmetricKeyDataGroup>();

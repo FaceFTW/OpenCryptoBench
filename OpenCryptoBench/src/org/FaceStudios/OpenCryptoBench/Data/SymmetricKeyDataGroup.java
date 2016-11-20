@@ -2,7 +2,7 @@ package org.FaceStudios.OpenCryptoBench.Data;
 
 import java.util.AbstractList;
 
-public class SymmetricKeyDataGroup extends AbstractList<IDataSet>{
+public class SymmetricKeyDataGroup extends AbstractList<SymmetricKeyDataSet>{
 	private static SymmetricKeyDataSet[] data;
 	
 	public SymmetricKeyDataGroup(int x){
@@ -32,13 +32,18 @@ public class SymmetricKeyDataGroup extends AbstractList<IDataSet>{
 	}
 
 	@Override
-	public IDataSet get(int arg0) {
+	public SymmetricKeyDataSet get(int arg0) {
 		return data[arg0];
 	}
 
 	@Override
 	public int size() {
 		return data.length;
+	}
+	
+	@Override
+	public void add(int x, SymmetricKeyDataSet inData){
+		data[x] = inData;
 	}
 	
 	

@@ -36,11 +36,9 @@ public class SymmetricKeyCipherBenchmark {
 	public static enum SymmetricKeyCipher {AES, DES, DESEDE, TWOFISH, SERPENT, RC2, RC5, RC6, BLOWFISH, THREEFISH, RC4, SALSA20, GRAIN128, ISSAC, HC256};
 	
 	@SuppressWarnings("unused")
-	public static SymmetricKeyDataGroup performSymmetricKeyCipherBench(SymmetricKeyCipher cipher, CryptoObject thing){
+	public static synchronized SymmetricKeyDataGroup performSymmetricKeyCipherBench(SymmetricKeyCipher cipher, CryptoObject thing){
 		SymmetricKeyDataGroup data = new SymmetricKeyDataGroup(11);
-		
-		Thread t = new Thread(){
-			public void run(){
+
 				switch(cipher){
 				case AES:
 					algorithm = "AES";
@@ -162,13 +160,9 @@ public class SymmetricKeyCipherBenchmark {
 			stopwatch.stop();
 			totalTime = stopwatch.elapsed(TimeUnit.NANOSECONDS);
 			
-			data.addDataSet(new SymmetricKeyDataSet(Integer.toString(x),keygenTime,encryptTime,decryptTime,totalTime,bitlen,algorithm), x); 
-			
+			data.add(x, new SymmetricKeyDataSet(Integer.toString(x),keygenTime,encryptTime,decryptTime,totalTime,bitlen,algorithm)); 
 			}
-			}
-		};
-		
-		t.run();
+
 		data.calcAggregate();
 		return data;
 	}

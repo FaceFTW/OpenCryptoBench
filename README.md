@@ -5,6 +5,9 @@ A cryptography benchmark program written in Java
 
 [![Code Climate](https://codeclimate.com/github/FaceStudios/OpenCryptoBench/badges/gpa.svg)](https://codeclimate.com/github/FaceStudios/OpenCryptoBench) [![Test Coverage](https://codeclimate.com/github/FaceStudios/OpenCryptoBench/badges/coverage.svg)](https://codeclimate.com/github/FaceStudios/OpenCryptoBench/coverage) [![Issue Count](https://codeclimate.com/github/FaceStudios/OpenCryptoBench/badges/issue_count.svg)](https://codeclimate.com/github/FaceStudios/OpenCryptoBench)
 
+[![codecov](https://codecov.io/gh/FaceStudios/OpenCryptoBench/branch/master/graph/badge.svg)](https://codecov.io/gh/FaceStudios/OpenCryptoBench)
+
+
 ## Supported Algorithms
 OpenCrpytoBench supports these algorithms:
 

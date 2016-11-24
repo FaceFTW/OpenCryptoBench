@@ -1,4 +1,4 @@
-package org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.DiffieHellman;
+package org.FaceStudios.OpenCryptoBench.Crypto.DiffieHellman;
 //This code belongs to firatkucuk, which I am so happy that he made
 // The Diffie-Hellman Benchmark is based off of this entity
 // Code is under Apache 2.0 Clauses

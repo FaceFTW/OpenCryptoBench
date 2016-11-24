@@ -1,4 +1,4 @@
-package org.FaceStudios.OpenCryptoBench.Crypto.Algorithms.DiffieHellman;
+package org.FaceStudios.OpenCryptoBench.Crypto.DiffieHellman;
 
 import java.io.BufferedWriter;
 import java.io.File;

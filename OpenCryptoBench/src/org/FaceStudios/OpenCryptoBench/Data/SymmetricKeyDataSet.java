@@ -1,6 +1,6 @@
 package org.FaceStudios.OpenCryptoBench.Data;
 
-public class SymmetricKeyDataSet implements IDataSet{
+public class SymmetricKeyDataSet{
 	private static String run;
 	private static long keygenTime;
 	private static long encryptTime;

@@ -1,6 +1,6 @@
 package org.FaceStudios.OpenCryptoBench.Data;
 
-public class DHExchangeDataSet implements IDataSet {
+public class DHExchangeDataSet {
 	private static String run;
 	private static long keygenTime;
 	private static long keySnRTime;

@@ -1,6 +1,7 @@
 language: java
 sudo: false
 addons: 
+srcclr: true
 apt:
 packages:
       - oracle-java8-installer

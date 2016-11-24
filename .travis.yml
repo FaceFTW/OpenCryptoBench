@@ -1,0 +1,17 @@
+language: java
+script:
+  - jdk_switcher use oraclejdk8
+ 
+sudo: false
+addons:
+  apt:
+    packages:
+      - oracle-java8-installer
+
+jdk:
+  - oraclejdk8
+  - oraclejdk7
+  - openjdk6
+  
+  script:
+  - jdk_switcher use oraclejdk8

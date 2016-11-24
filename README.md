@@ -2,9 +2,7 @@
 A cryptography benchmark program written in Java
 
 [![codebeat badge](https://codebeat.co/badges/5676f716-312c-4159-8012-67f94ead1ab1)](https://codebeat.co/projects/github-com-facestudios-opencryptobench)
-
-[![Code Climate](https://codeclimate.com/github/FaceStudios/OpenCryptoBench/badges/gpa.svg)](https://codeclimate.com/github/FaceStudios/OpenCryptoBench) [![Test Coverage](https://codeclimate.com/github/FaceStudios/OpenCryptoBench/badges/coverage.svg)](https://codeclimate.com/github/FaceStudios/OpenCryptoBench/coverage) [![Issue Count](https://codeclimate.com/github/FaceStudios/OpenCryptoBench/badges/issue_count.svg)](https://codeclimate.com/github/FaceStudios/OpenCryptoBench)
-
+[![Build Status](https://travis-ci.org/FaceStudios/OpenCryptoBench.svg?branch=master)](https://travis-ci.org/FaceStudios/OpenCryptoBench)
 [![codecov](https://codecov.io/gh/FaceStudios/OpenCryptoBench/branch/master/graph/badge.svg)](https://codecov.io/gh/FaceStudios/OpenCryptoBench)
 
 

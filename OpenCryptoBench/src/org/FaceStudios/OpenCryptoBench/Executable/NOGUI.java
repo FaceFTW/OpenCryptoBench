@@ -11,20 +11,20 @@ import org.FaceStudios.OpenCryptoBench.Data.SymmetricKeyDataGroup;
 import org.FaceStudios.OpenCryptoBench.Data.SymmetricKeyDataGroup.SymmetricKeyCipher;
 
 public class NOGUI {
-	private static SymmetricKeyDataGroup aesdata;
-	private static SymmetricKeyDataGroup desdata;
-	private static SymmetricKeyDataGroup desededata;
-	private static SymmetricKeyDataGroup blowfishdata;
-	private static SymmetricKeyDataGroup twofishdata;
-	private static SymmetricKeyDataGroup threefishdata;
-	private static SymmetricKeyDataGroup rc2data;
-	private static SymmetricKeyDataGroup rc5data;
-	private static SymmetricKeyDataGroup serpentdata;
-	private static SymmetricKeyDataGroup rc4data;
-	private static SymmetricKeyDataGroup salsa20data;
-	private static SymmetricKeyDataGroup issacdata;
-	private static SymmetricKeyDataGroup grain128data;
-	private static SymmetricKeyDataGroup hc256data;
+	private static volatile SymmetricKeyDataGroup aesdata;
+	private static volatile SymmetricKeyDataGroup desdata;
+	private static volatile SymmetricKeyDataGroup desededata;
+	private static volatile SymmetricKeyDataGroup blowfishdata;
+	private static volatile SymmetricKeyDataGroup twofishdata;
+	private static volatile SymmetricKeyDataGroup threefishdata;
+	private static volatile SymmetricKeyDataGroup rc2data;
+	private static volatile SymmetricKeyDataGroup rc5data;
+	private static volatile SymmetricKeyDataGroup serpentdata;
+	private static volatile SymmetricKeyDataGroup rc4data;
+	private static volatile SymmetricKeyDataGroup salsa20data;
+	private static volatile SymmetricKeyDataGroup issacdata;
+	private static volatile SymmetricKeyDataGroup grain128data;
+	private static volatile SymmetricKeyDataGroup hc256data;
 	
 
 	public static void doNOGUI(){
@@ -35,32 +35,239 @@ public class NOGUI {
 		//Execute all different benchmarks
 		//Initializer (Not Recorded)
 		//AES
-		aesdata.performSymmetricKeyCipherBench(SymmetricKeyCipher.AES, thing);
+		aesdata = new SymmetricKeyDataGroup(11);
+		Thread t = new Thread(new Runnable(){
+			public void run(){
+				aesdata.performSymmetricKeyCipherBench(SymmetricKeyCipher.AES, thing);
+				aesdata.calcAggregate();
+			}
+		});
+		t.start();
+		try {
+			t.join();
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		Runtime.getRuntime().gc();	
+		
+		
 		//DES
-		desdata.performSymmetricKeyCipherBench(SymmetricKeyCipher.DES, thing);
+		desdata = new SymmetricKeyDataGroup(11);
+		Thread t1 = new Thread(new Runnable(){
+			public void run(){
+				desdata.performSymmetricKeyCipherBench(SymmetricKeyCipher.DES, thing);
+				desdata.calcAggregate();
+			}
+		});
+		t1.start();
+		try {
+			t1.join();
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		Runtime.getRuntime().gc();	
+		
+		
 		//3DES
-		desededata.performSymmetricKeyCipherBench(SymmetricKeyCipher.DESEDE, thing);
+		desededata = new SymmetricKeyDataGroup(11);
+		Thread t2 = new Thread(new Runnable(){
+			public void run(){
+				desededata.performSymmetricKeyCipherBench(SymmetricKeyCipher.DESEDE, thing);
+				desededata.calcAggregate();
+			}
+		});
+		t2.start();
+		try {
+			t2.join();
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		Runtime.getRuntime().gc();
+		
+		
 		//Blowfish
-		blowfishdata.performSymmetricKeyCipherBench(SymmetricKeyCipher.BLOWFISH, thing);
+		blowfishdata = new SymmetricKeyDataGroup(11);
+		Thread t3 = new Thread(new Runnable(){
+			public void run(){
+				blowfishdata.performSymmetricKeyCipherBench(SymmetricKeyCipher.BLOWFISH, thing);
+				blowfishdata.calcAggregate();
+			}
+		});
+		t3.start();
+		try {
+			t3.join();
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		Runtime.getRuntime().gc();	
+		
+		
 		//RC2
-		rc2data.performSymmetricKeyCipherBench(SymmetricKeyCipher.RC2, thing);
+		rc2data = new SymmetricKeyDataGroup(11);
+		Thread t4 = new Thread(new Runnable(){
+			public void run(){
+				rc2data.performSymmetricKeyCipherBench(SymmetricKeyCipher.RC2, thing);
+				rc2data.calcAggregate();
+			}
+		});
+		t4.start();
+		try {
+			t4.join();
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		Runtime.getRuntime().gc();	
+		
+		
 		//RC5
-		rc5data.performSymmetricKeyCipherBench(SymmetricKeyCipher.RC5, thing);
+		rc5data = new SymmetricKeyDataGroup(11);
+		Thread t5 = new Thread(new Runnable(){
+			public void run(){
+				rc5data.performSymmetricKeyCipherBench(SymmetricKeyCipher.RC5, thing);
+				rc5data.calcAggregate();
+			}
+		});
+		t5.start();
+		try {
+			t5.join();
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		Runtime.getRuntime().gc();	
+		
+		
 		//TwoFish
-		twofishdata.performSymmetricKeyCipherBench(SymmetricKeyCipher.TWOFISH, thing);
+		twofishdata = new SymmetricKeyDataGroup(11);
+		Thread t6 = new Thread(new Runnable(){
+			public void run(){
+				twofishdata.performSymmetricKeyCipherBench(SymmetricKeyCipher.TWOFISH, thing);
+				twofishdata.calcAggregate();
+			}
+		});
+		t6.start();
+		try {
+			t6.join();
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		Runtime.getRuntime().gc();	
+		
+		
 		//ThreeFish
-		threefishdata.performSymmetricKeyCipherBench(SymmetricKeyCipher.THREEFISH, thing);
+		threefishdata = new SymmetricKeyDataGroup(11);
+		Thread t7 = new Thread(new Runnable(){
+			public void run(){
+				threefishdata.performSymmetricKeyCipherBench(SymmetricKeyCipher.THREEFISH, thing);
+				threefishdata.calcAggregate();
+			}
+		});
+		t7.start();
+		try {
+			t7.join();
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		Runtime.getRuntime().gc();	
+		
+		
 		//Serpent
-		serpentdata.performSymmetricKeyCipherBench(SymmetricKeyCipher.SERPENT, thing);
+		serpentdata = new SymmetricKeyDataGroup(11);
+		Thread t8 = new Thread(new Runnable(){
+			public void run(){
+				serpentdata.performSymmetricKeyCipherBench(SymmetricKeyCipher.SERPENT, thing);
+				serpentdata.calcAggregate();
+			}
+		});
+		t8.start();
+		try {
+			t8.join();
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		Runtime.getRuntime().gc();	
+		
+		
 		//RC4
-		rc4data.performSymmetricKeyCipherBench(SymmetricKeyCipher.RC4, thing);
+		rc4data = new SymmetricKeyDataGroup(11);
+		Thread t9 = new Thread(new Runnable(){
+			public void run(){
+				rc4data.performSymmetricKeyCipherBench(SymmetricKeyCipher.RC4, thing);
+				rc4data.calcAggregate();
+			}
+		});
+		t9.start();
+		try {
+			t9.join();
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		Runtime.getRuntime().gc();	
+		
+		
 		//Salsa20
-		salsa20data.performSymmetricKeyCipherBench(SymmetricKeyCipher.SALSA20, thing);
+		salsa20data = new SymmetricKeyDataGroup(11);
+		Thread t10 = new Thread(new Runnable(){
+			public void run(){
+				salsa20data.performSymmetricKeyCipherBench(SymmetricKeyCipher.SALSA20, thing);
+				salsa20data.calcAggregate();
+			}
+		});
+		t10.start();
+		try {
+			t10.join();
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		Runtime.getRuntime().gc();	
+		
+		
 		//Grain128
-		grain128data.performSymmetricKeyCipherBench(SymmetricKeyCipher.GRAIN128, thing);
+		grain128data = new SymmetricKeyDataGroup(11);
+		Thread t11 = new Thread(new Runnable(){
+			public void run(){
+				grain128data.performSymmetricKeyCipherBench(SymmetricKeyCipher.GRAIN128, thing);
+				grain128data.calcAggregate();
+			}
+		});
+		t11.start();
+		try {
+			t11.join();
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		Runtime.getRuntime().gc();
+		
+		
 		//HC256
-		hc256data.performSymmetricKeyCipherBench(SymmetricKeyCipher.HC256, thing);
+		hc256data = new SymmetricKeyDataGroup(11);
+		Thread t12 = new Thread(new Runnable(){
+			public void run(){
+				hc256data.performSymmetricKeyCipherBench(SymmetricKeyCipher.HC256, thing);
+				hc256data.calcAggregate();
+			}
+		});
+		t12.start();
+		try {
+			t12.join();
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		Runtime.getRuntime().gc();	
 		//ISSAC
+		issacdata = new SymmetricKeyDataGroup(11);
+		Thread t13 = new Thread(new Runnable(){
+			public void run(){
+				issacdata.performSymmetricKeyCipherBench(SymmetricKeyCipher.ISSAC, thing);
+				issacdata.calcAggregate();
+			}
+		});
+		t13.start();
+		try {
+			t13.join();
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		Runtime.getRuntime().gc();	
 		
 		ArrayList<SymmetricKeyDataGroup> blockcipherdata = new ArrayList<SymmetricKeyDataGroup>();
 		ArrayList<SymmetricKeyDataGroup> streamcipherdata = new ArrayList<SymmetricKeyDataGroup>();

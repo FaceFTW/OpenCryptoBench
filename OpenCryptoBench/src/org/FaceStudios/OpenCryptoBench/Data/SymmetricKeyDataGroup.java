@@ -41,15 +41,11 @@ public class SymmetricKeyDataGroup {
 		data = new SymmetricKeyDataSet[x];
 	}
 	
-	public void add(int x, SymmetricKeyDataSet inData){
-		data[x] = inData;
-	}
-	
 	public void addDataSet(SymmetricKeyDataSet s, int x){
 		data[x] = s;
 	}
 
-	public SymmetricKeyDataSet calcAggregate(){
+	public synchronized void calcAggregate(){
 		long temp2 = 0, temp3 = 0, temp4 = 0, temp5 = 0;
 		
 		for(int x = 0; x<data.length;x++){
@@ -64,7 +60,7 @@ public class SymmetricKeyDataGroup {
 		temp4 = temp4/data.length;
 		temp5 = temp5/data.length;
 		
-		return new SymmetricKeyDataSet("Aggregate", temp2, temp3, temp4, temp5,data[0].getBitLength(),data[0].getAlgorithm());
+		data[data.length-1] = new SymmetricKeyDataSet("Aggregate", temp2, temp3, temp4, temp5,data[0].getBitLength(),data[0].getAlgorithm());
 	}
 
 	public SymmetricKeyDataSet get(int arg0) {
@@ -137,7 +133,7 @@ public class SymmetricKeyDataGroup {
 				default:
 					throw new IllegalArgumentException("ERROR: The Algorithm could not be identified as a block cipher");
 			}
-			for(int x = 0;x< 10;x++){
+			for(int x = 0;x< data.length-2;x++){
 			encryptTime = 0;
 			decryptTime = 0;
 			keygenTime = 0;

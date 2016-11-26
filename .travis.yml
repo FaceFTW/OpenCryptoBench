@@ -9,4 +9,4 @@ jdk:
  - openjdk6
   
 script:
- ant -buildfile /OpenCrpytoBench/build.xml
+ ant -buildfile /OpenCryptoBench/build.xml

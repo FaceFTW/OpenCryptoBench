@@ -8,5 +8,8 @@ jdk:
  - oraclejdk7
  - openjdk6
   
+before-script:
+ ls
+
 script:
  ant -buildfile /OpenCryptoBench/build.xml

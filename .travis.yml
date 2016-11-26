@@ -8,3 +8,5 @@ jdk:
  - oraclejdk7
  - openjdk6
   
+script:
+ ant -buildfile /OpenCrpytoBench/build.xml

@@ -5,9 +5,6 @@ A cryptography benchmark program written in Java
 
 [![Build Status](https://travis-ci.org/FaceStudios/OpenCryptoBench.svg?branch=master)](https://travis-ci.org/FaceStudios/OpenCryptoBench)
 
-[![codecov](https://codecov.io/gh/FaceStudios/OpenCryptoBench/branch/master/graph/badge.svg)](https://codecov.io/gh/FaceStudios/OpenCryptoBench)
-
-
 ## Supported Algorithms
 OpenCrpytoBench supports these algorithms:
 

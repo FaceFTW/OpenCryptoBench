@@ -1,4 +1,4 @@
-language: java
+.language: java
 sudo: false
 addons: 
  srcclr: true
@@ -12,4 +12,4 @@ before-script:
  ls
 
 script:
- ant -buildfile /OpenCryptoBench/build.xml
+ ant -buildfile ./OpenCryptoBench/build.xml

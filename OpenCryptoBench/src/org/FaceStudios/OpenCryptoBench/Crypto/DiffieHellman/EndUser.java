@@ -2,8 +2,7 @@ package org.FaceStudios.OpenCryptoBench.Crypto.DiffieHellman;
 //This code belongs to firatkucuk, which I am so happy that he made
 // The Diffie-Hellman Benchmark is based off of this entity
 // Code is under Apache 2.0 Clauses
-// https://github.com/codvio/diffie-hellman-helloworld
-
+// https://github.com/firatkucuk/diffie-hellman-helloworld
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.PrivateKey;

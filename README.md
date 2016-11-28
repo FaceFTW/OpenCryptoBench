@@ -47,5 +47,10 @@ OpenCrpytoBench uses the following libraries:
 *  Google Guava (Apache 2.0)
 *  Apache Commons Codec (Apache 2.0)
 *  Bouncy Castle (MIT)
-  
+
+Also, a few shoutouts to some people whose code I borrowed:
+
+* ntoskrnl (StackOverflow) - 	http://stackoverflow.com/a/22492582/7127790
+* firatkucuk (Github) - https://github.com/firatkucuk/diffie-hellman-helloworld
+
 All licenses of these libraries apply with the use of this program. No additional clauses are included with the use of this program

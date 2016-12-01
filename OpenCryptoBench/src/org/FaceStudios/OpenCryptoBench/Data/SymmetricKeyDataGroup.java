@@ -2,6 +2,7 @@ package org.FaceStudios.OpenCryptoBench.Data;
 
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.security.Security;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
@@ -68,6 +69,7 @@ public class SymmetricKeyDataGroup {
 	@SuppressWarnings("unused")
 	public synchronized void performSymmetricKeyCipherBench(SymmetricKeyCipher cipher, CryptoObject thing){
 		PROVIDER = new BouncyCastleProvider();		
+		Security.addProvider(PROVIDER);
 		switch(cipher){
 				case AES:
 					algorithm = "AES";

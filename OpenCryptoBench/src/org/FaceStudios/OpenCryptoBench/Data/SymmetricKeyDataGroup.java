@@ -32,6 +32,7 @@ public class SymmetricKeyDataGroup {
 	private static String algorithm;
 	protected static KeyGenerator gen;
 	private static int bitlen;
+	private static int runs;
 	
 	public static enum SymmetricKeyCipher {AES, DES, DESEDE, TWOFISH, SERPENT, RC2, RC5, RC6, BLOWFISH, THREEFISH, RC4, SALSA20, GRAIN128, ISSAC, HC256};
 	
@@ -40,6 +41,7 @@ public class SymmetricKeyDataGroup {
 	
 	public SymmetricKeyDataGroup(int x){
 		data = new ArrayList<SymmetricKeyDataSet>();
+		runs = x;
 	}
 	
 	public SymmetricKeyDataSet get(int x){
@@ -48,7 +50,7 @@ public class SymmetricKeyDataGroup {
 	public synchronized void calcAggregate(){
 		long temp2 = 0, temp3 = 0, temp4 = 0, temp5 = 0;
 		
-		for(int x = 0; x<data.size();x++){
+		for(int x = 0; x<runs;x++){
 			temp2 = temp2+data.get(x).getKeyGenTime();
 			temp3 = temp3+data.get(x).getEncryptTime();
 			temp4 = temp4+data.get(x).getDecryptTime();
@@ -130,7 +132,7 @@ public class SymmetricKeyDataGroup {
 				default:
 					throw new IllegalArgumentException("ERROR: The Algorithm could not be identified as a block cipher");
 			}
-			for(int x = 0;x< data.size()-2;x++){
+			for(int x = 0;x< runs;x++){
 			encryptTime = 0;
 			decryptTime = 0;
 			keygenTime = 0;

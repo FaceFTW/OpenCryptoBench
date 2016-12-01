@@ -35,7 +35,7 @@ public class NOGUI {
 		//Execute all different benchmarks
 		//Initializer (Not Recorded)
 		//AES
-		aesdata = new SymmetricKeyDataGroup(11);
+		aesdata = new SymmetricKeyDataGroup(10);
 		Thread t = new Thread(new Runnable(){
 			public void run(){
 				aesdata.performSymmetricKeyCipherBench(SymmetricKeyCipher.AES, thing);
@@ -52,7 +52,7 @@ public class NOGUI {
 		
 		
 		//DES
-		desdata = new SymmetricKeyDataGroup(11);
+		desdata = new SymmetricKeyDataGroup(10);
 		Thread t1 = new Thread(new Runnable(){
 			public void run(){
 				desdata.performSymmetricKeyCipherBench(SymmetricKeyCipher.DES, thing);
@@ -69,7 +69,7 @@ public class NOGUI {
 		
 		
 		//3DES
-		desededata = new SymmetricKeyDataGroup(11);
+		desededata = new SymmetricKeyDataGroup(10);
 		Thread t2 = new Thread(new Runnable(){
 			public void run(){
 				desededata.performSymmetricKeyCipherBench(SymmetricKeyCipher.DESEDE, thing);
@@ -86,7 +86,7 @@ public class NOGUI {
 		
 		
 		//Blowfish
-		blowfishdata = new SymmetricKeyDataGroup(11);
+		blowfishdata = new SymmetricKeyDataGroup(10);
 		Thread t3 = new Thread(new Runnable(){
 			public void run(){
 				blowfishdata.performSymmetricKeyCipherBench(SymmetricKeyCipher.BLOWFISH, thing);
@@ -103,7 +103,7 @@ public class NOGUI {
 		
 		
 		//RC2
-		rc2data = new SymmetricKeyDataGroup(11);
+		rc2data = new SymmetricKeyDataGroup(10);
 		Thread t4 = new Thread(new Runnable(){
 			public void run(){
 				rc2data.performSymmetricKeyCipherBench(SymmetricKeyCipher.RC2, thing);
@@ -120,7 +120,7 @@ public class NOGUI {
 		
 		
 		//RC5
-		rc5data = new SymmetricKeyDataGroup(11);
+		rc5data = new SymmetricKeyDataGroup(10);
 		Thread t5 = new Thread(new Runnable(){
 			public void run(){
 				rc5data.performSymmetricKeyCipherBench(SymmetricKeyCipher.RC5, thing);
@@ -137,7 +137,7 @@ public class NOGUI {
 		
 		
 		//TwoFish
-		twofishdata = new SymmetricKeyDataGroup(11);
+		twofishdata = new SymmetricKeyDataGroup(10);
 		Thread t6 = new Thread(new Runnable(){
 			public void run(){
 				twofishdata.performSymmetricKeyCipherBench(SymmetricKeyCipher.TWOFISH, thing);
@@ -154,7 +154,7 @@ public class NOGUI {
 		
 		
 		//ThreeFish
-		threefishdata = new SymmetricKeyDataGroup(11);
+		threefishdata = new SymmetricKeyDataGroup(10);
 		Thread t7 = new Thread(new Runnable(){
 			public void run(){
 				threefishdata.performSymmetricKeyCipherBench(SymmetricKeyCipher.THREEFISH, thing);
@@ -171,7 +171,7 @@ public class NOGUI {
 		
 		
 		//Serpent
-		serpentdata = new SymmetricKeyDataGroup(11);
+		serpentdata = new SymmetricKeyDataGroup(10);
 		Thread t8 = new Thread(new Runnable(){
 			public void run(){
 				serpentdata.performSymmetricKeyCipherBench(SymmetricKeyCipher.SERPENT, thing);
@@ -188,7 +188,7 @@ public class NOGUI {
 		
 		
 		//RC4
-		rc4data = new SymmetricKeyDataGroup(11);
+		rc4data = new SymmetricKeyDataGroup(10);
 		Thread t9 = new Thread(new Runnable(){
 			public void run(){
 				rc4data.performSymmetricKeyCipherBench(SymmetricKeyCipher.RC4, thing);
@@ -205,7 +205,7 @@ public class NOGUI {
 		
 		
 		//Salsa20
-		salsa20data = new SymmetricKeyDataGroup(11);
+		salsa20data = new SymmetricKeyDataGroup(10);
 		Thread t10 = new Thread(new Runnable(){
 			public void run(){
 				salsa20data.performSymmetricKeyCipherBench(SymmetricKeyCipher.SALSA20, thing);
@@ -222,7 +222,7 @@ public class NOGUI {
 		
 		
 		//Grain128
-		grain128data = new SymmetricKeyDataGroup(11);
+		grain128data = new SymmetricKeyDataGroup(10);
 		Thread t11 = new Thread(new Runnable(){
 			public void run(){
 				grain128data.performSymmetricKeyCipherBench(SymmetricKeyCipher.GRAIN128, thing);
@@ -239,7 +239,7 @@ public class NOGUI {
 		
 		
 		//HC256
-		hc256data = new SymmetricKeyDataGroup(11);
+		hc256data = new SymmetricKeyDataGroup(10);
 		Thread t12 = new Thread(new Runnable(){
 			public void run(){
 				hc256data.performSymmetricKeyCipherBench(SymmetricKeyCipher.HC256, thing);
@@ -253,8 +253,9 @@ public class NOGUI {
 			e1.printStackTrace();
 		}
 		Runtime.getRuntime().gc();	
+		
 		//ISSAC
-		issacdata = new SymmetricKeyDataGroup(11);
+		issacdata = new SymmetricKeyDataGroup(10);
 		Thread t13 = new Thread(new Runnable(){
 			public void run(){
 				issacdata.performSymmetricKeyCipherBench(SymmetricKeyCipher.ISSAC, thing);

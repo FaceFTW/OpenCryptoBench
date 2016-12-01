@@ -2,6 +2,7 @@ package org.FaceStudios.OpenCryptoBench.Data;
 
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import javax.crypto.BadPaddingException;
@@ -18,7 +19,7 @@ import com.google.common.base.Stopwatch;
 
 public class SymmetricKeyDataGroup {
 	
-	private static final BouncyCastleProvider PROVIDER = new BouncyCastleProvider();
+	private static BouncyCastleProvider PROVIDER; //Initialize in later in the class
 	private static Stopwatch stopwatch;
 	private static Stopwatch s2;
 	private static long keygenTime;
@@ -35,41 +36,37 @@ public class SymmetricKeyDataGroup {
 	public static enum SymmetricKeyCipher {AES, DES, DESEDE, TWOFISH, SERPENT, RC2, RC5, RC6, BLOWFISH, THREEFISH, RC4, SALSA20, GRAIN128, ISSAC, HC256};
 	
 	
-	private static SymmetricKeyDataSet[] data;
+	private static ArrayList<SymmetricKeyDataSet> data;
 	
 	public SymmetricKeyDataGroup(int x){
-		data = new SymmetricKeyDataSet[x];
+		data = new ArrayList<SymmetricKeyDataSet>();
 	}
 	
-	public void addDataSet(SymmetricKeyDataSet s, int x){
-		data[x] = s;
+	public SymmetricKeyDataSet get(int x){
+		return data.get(x);
 	}
-
 	public synchronized void calcAggregate(){
 		long temp2 = 0, temp3 = 0, temp4 = 0, temp5 = 0;
 		
-		for(int x = 0; x<data.length;x++){
-			temp2 = temp2+data[x].getKeyGenTime();
-			temp3 = temp3+data[x].getEncryptTime();
-			temp4 = temp4+data[x].getDecryptTime();
-			temp5 = temp5+data[x].getTotalTime();
+		for(int x = 0; x<data.size();x++){
+			temp2 = temp2+data.get(x).getKeyGenTime();
+			temp3 = temp3+data.get(x).getEncryptTime();
+			temp4 = temp4+data.get(x).getDecryptTime();
+			temp5 = temp5+data.get(x).getTotalTime();
 		}
 		
-		temp2 = temp2/data.length;
-		temp3 = temp3/data.length;
-		temp4 = temp4/data.length;
-		temp5 = temp5/data.length;
+		temp2 = temp2/data.size();
+		temp3 = temp3/data.size();
+		temp4 = temp4/data.size();
+		temp5 = temp5/data.size();
 		
-		data[data.length-1] = new SymmetricKeyDataSet("Aggregate", temp2, temp3, temp4, temp5,data[0].getBitLength(),data[0].getAlgorithm());
-	}
-
-	public SymmetricKeyDataSet get(int arg0) {
-		return data[arg0];
+		data.add(new SymmetricKeyDataSet("Aggregate", temp2, temp3, temp4, temp5,data.get(0).getBitLength(),data.get(0).getAlgorithm()));
 	}
 	
 	@SuppressWarnings("unused")
 	public synchronized void performSymmetricKeyCipherBench(SymmetricKeyCipher cipher, CryptoObject thing){
-				switch(cipher){
+		PROVIDER = new BouncyCastleProvider();		
+		switch(cipher){
 				case AES:
 					algorithm = "AES";
 					bitlen = 256;
@@ -133,7 +130,7 @@ public class SymmetricKeyDataGroup {
 				default:
 					throw new IllegalArgumentException("ERROR: The Algorithm could not be identified as a block cipher");
 			}
-			for(int x = 0;x< data.length-2;x++){
+			for(int x = 0;x< data.size()-2;x++){
 			encryptTime = 0;
 			decryptTime = 0;
 			keygenTime = 0;
@@ -190,12 +187,12 @@ public class SymmetricKeyDataGroup {
 			stopwatch.stop();
 			totalTime = stopwatch.elapsed(TimeUnit.NANOSECONDS);
 			
-			data[x] = new SymmetricKeyDataSet(Integer.toString(x),keygenTime,encryptTime,decryptTime,totalTime,bitlen,algorithm); 
+			data.add(new SymmetricKeyDataSet(Integer.toString(x),keygenTime,encryptTime,decryptTime,totalTime,bitlen,algorithm)); 
 			}
 	}
 	
 	public int size() {
-		return data.length;
+		return data.size();
 	}
 	
 }

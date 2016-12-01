@@ -258,7 +258,7 @@ public class NOGUI {
 		issacdata = new SymmetricKeyDataGroup(10);
 		Thread t13 = new Thread(new Runnable(){
 			public void run(){
-				issacdata.performSymmetricKeyCipherBench(SymmetricKeyCipher.ISSAC, thing);
+				issacdata.performSymmetricKeyCipherBench(SymmetricKeyCipher.ISAAC, thing);
 				issacdata.calcAggregate();
 			}
 		});

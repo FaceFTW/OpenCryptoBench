@@ -34,7 +34,7 @@ public class SymmetricKeyDataGroup {
 	private static int bitlen;
 	private static int runs;
 	
-	public static enum SymmetricKeyCipher {AES, DES, DESEDE, TWOFISH, SERPENT, RC2, RC5, RC6, BLOWFISH, THREEFISH, RC4, SALSA20, GRAIN128, ISSAC, HC256};
+	public static enum SymmetricKeyCipher {AES, DES, DESEDE, TWOFISH, SERPENT, RC2, RC5, RC6, BLOWFISH, THREEFISH, RC4, SALSA20, GRAIN128, ISAAC, HC256};
 	
 	
 	private static ArrayList<SymmetricKeyDataSet> data;
@@ -121,8 +121,8 @@ public class SymmetricKeyDataGroup {
 					algorithm = "Grain128";
 					bitlen = 128;
 					break;
-				case ISSAC:
-					algorithm = "ISSAC";
+				case ISAAC:
+					algorithm = "ISAAC";
 					bitlen = 256;
 					break;
 				case HC256:

@@ -31,12 +31,12 @@ public class SymmetricKeyDataGroup {
 	private static Cipher c1;
 	private static SecretKey secret;
 	private static String algorithm;
-	protected static KeyGenerator gen;
+	private static KeyGenerator gen;
 	private static int bitlen;
 	private static int runs;
 	
 	public static enum SymmetricKeyCipher {AES, DES, DESEDE, TWOFISH, SERPENT, RC2, RC5, RC6, BLOWFISH, THREEFISH, RC4, SALSA20, GRAIN128, ISAAC, HC256};
-	
+	private static enum CipherType{BLOCKCIPHER, STREAMCIPHER};
 	
 	private static ArrayList<SymmetricKeyDataSet> data;
 	
@@ -70,128 +70,209 @@ public class SymmetricKeyDataGroup {
 	public synchronized void performSymmetricKeyCipherBench(SymmetricKeyCipher cipher, CryptoObject thing){
 		PROVIDER = new BouncyCastleProvider();		
 		Security.addProvider(PROVIDER);
+		CipherType type;
 		switch(cipher){
 				case AES:
 					algorithm = "AES";
+					type = CipherType.BLOCKCIPHER;
 					bitlen = 256;
 					break;
 				case DES:
 					algorithm = "DES";
+					type = CipherType.BLOCKCIPHER;
 					bitlen = 56;
 					break;
 				case DESEDE:
 					algorithm = "DESede";
+					type = CipherType.BLOCKCIPHER;
 					bitlen = 168;
 					break;
 				case TWOFISH:
 					algorithm = "TwoFish";
+					type = CipherType.BLOCKCIPHER;
 					bitlen = 128;
 					break;
 				case SERPENT:
 					algorithm = "Serpent";
+					type = CipherType.BLOCKCIPHER;
 					bitlen = 128;
 					break;
 				case RC2:
 					algorithm = "RC2";
+					type = CipherType.BLOCKCIPHER;
 					bitlen = 128;
 					break;
 				case RC5:
 					algorithm = "RC5";
+					type = CipherType.BLOCKCIPHER;
 					bitlen = 128;
 					break;
 				case RC6:
 					algorithm = "RC6";
+					type = CipherType.BLOCKCIPHER;
 					bitlen = 128;
 					break;
 				case BLOWFISH:
 					algorithm = "Blowfish";
+					type = CipherType.BLOCKCIPHER;
 					bitlen = 128;
 					break;
 				case THREEFISH:
 					algorithm = "ThreeFish";
+					type = CipherType.BLOCKCIPHER;
 					bitlen = 256;
 					break;
 				case RC4:
-					algorithm = "RC4";
+					algorithm = "ARC4";
+					type = CipherType.STREAMCIPHER;
 					bitlen = 256;
 					break;
 				case SALSA20:
 					algorithm = "Salsa20";
+					type = CipherType.STREAMCIPHER;
 					bitlen = 128;
 					break;
 				case GRAIN128:
 					algorithm = "Grain128";
+					type = CipherType.STREAMCIPHER;
 					bitlen = 128;
 					break;
 				case ISAAC:
 					algorithm = "ISAAC";
+					type = CipherType.STREAMCIPHER;
 					bitlen = 256;
 					break;
 				case HC256:
 					algorithm = "HC256";
+					type = CipherType.STREAMCIPHER;
 					bitlen = 256;
 					break;
 				default:
 					throw new IllegalArgumentException("ERROR: The Algorithm could not be identified as a block cipher");
 			}
-			for(int x = 0;x< runs;x++){
-			encryptTime = 0;
-			decryptTime = 0;
-			keygenTime = 0;
-			totalTime=  0;
-			//Total Time Stopwatch
-			stopwatch = Stopwatch.createStarted();
-			
-			try {
-				gen = KeyGenerator.getInstance(algorithm,PROVIDER);
-				gen.init(bitlen);
+			switch(type){
+			case BLOCKCIPHER:
+				for(int x = 0;x< runs;x++){
+					encryptTime = 0;
+					decryptTime = 0;
+					keygenTime = 0;
+					totalTime=  0;
+					//Total Time Stopwatch
+					stopwatch = Stopwatch.createStarted();
+					
+					try {
+						gen = KeyGenerator.getInstance(algorithm,PROVIDER);
+						gen.init(bitlen);
 
-			} catch (NoSuchAlgorithmException e1) {
-				e1.printStackTrace();
-			}
-			
-			s2 = Stopwatch.createStarted();
-			secret = gen.generateKey();
-			s2.stop();
-			keygenTime = s2.elapsed(TimeUnit.NANOSECONDS);
-			s2.reset();
-			try {
-				c = Cipher.getInstance(algorithm,PROVIDER);
-				c.init(Cipher.ENCRYPT_MODE, secret);
+					} catch (NoSuchAlgorithmException e1) {
+						e1.printStackTrace();
+					}
+					
+					s2 = Stopwatch.createStarted();
+					secret = gen.generateKey();
+					s2.stop();
+					keygenTime = s2.elapsed(TimeUnit.NANOSECONDS);
+					s2.reset();
+					try {
+						c = Cipher.getInstance(algorithm,PROVIDER);
+						c.init(Cipher.ENCRYPT_MODE, secret);
 
-			} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
-				e.printStackTrace();
-			}
-			byte[] outBytes = null;
-			s2.start();
-			try {
-				outBytes = c.doFinal(thing.getInput().getBytes());
-			} catch (IllegalBlockSizeException | BadPaddingException e) {
-				e.printStackTrace();
-			}
-			s2.stop();
-			encryptTime = s2.elapsed(TimeUnit.NANOSECONDS);
-			s2.reset();
-			try {
-				c1 = Cipher.getInstance(algorithm,PROVIDER);
-				c1.init(Cipher.DECRYPT_MODE, secret);
+					} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
+						e.printStackTrace();
+					}
+					byte[] outBytes = null;
+					s2.start();
+					try {
+						outBytes = c.doFinal(thing.getInput().getBytes());
+					} catch (IllegalBlockSizeException | BadPaddingException e) {
+						e.printStackTrace();
+					}
+					s2.stop();
+					encryptTime = s2.elapsed(TimeUnit.NANOSECONDS);
+					s2.reset();
+					try {
+						c1 = Cipher.getInstance(algorithm,PROVIDER);
+						c1.init(Cipher.DECRYPT_MODE, secret);
 
-			} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
-			e.printStackTrace();
-			}
-			s2.start();
-			try {
-			byte[] out1Bytes = c1.doFinal(outBytes);
-			} catch (IllegalBlockSizeException | BadPaddingException e) {
-				e.printStackTrace();
-			}
-			s2.stop();
-			decryptTime = s2.elapsed(TimeUnit.NANOSECONDS);
-			
-			stopwatch.stop();
-			totalTime = stopwatch.elapsed(TimeUnit.NANOSECONDS);
-			
-			data.add(new SymmetricKeyDataSet(Integer.toString(x),keygenTime,encryptTime,decryptTime,totalTime,bitlen,algorithm)); 
+					} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
+					e.printStackTrace();
+					}
+					s2.start();
+					try {
+					byte[] out1Bytes = c1.doFinal(outBytes);
+					} catch (IllegalBlockSizeException | BadPaddingException e) {
+						e.printStackTrace();
+					}
+					s2.stop();
+					decryptTime = s2.elapsed(TimeUnit.NANOSECONDS);
+					
+					stopwatch.stop();
+					totalTime = stopwatch.elapsed(TimeUnit.NANOSECONDS);
+					
+					data.add(new SymmetricKeyDataSet(Integer.toString(x),keygenTime,encryptTime,decryptTime,totalTime,bitlen,algorithm)); 
+					}
+				break;
+			case STREAMCIPHER:
+				for(int x = 0;x< runs;x++){
+					encryptTime = 0;
+					decryptTime = 0;
+					keygenTime = 0;
+					totalTime=  0;
+					//Total Time Stopwatch
+					stopwatch = Stopwatch.createStarted();
+					
+					try {
+						gen = KeyGenerator.getInstance(algorithm,PROVIDER);
+						gen.init(bitlen);
+
+					} catch (NoSuchAlgorithmException e1) {
+						e1.printStackTrace();
+					}
+					
+					s2 = Stopwatch.createStarted();
+					secret = gen.generateKey();
+					s2.stop();
+					keygenTime = s2.elapsed(TimeUnit.NANOSECONDS);
+					s2.reset();
+					try {
+						c = Cipher.getInstance(algorithm,PROVIDER);
+						c.init(Cipher.ENCRYPT_MODE, secret);
+
+					} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
+						e.printStackTrace();
+					}
+					byte[] outBytes = null;
+					s2.start();
+					try {
+						outBytes = c.doFinal(thing.getInput().getBytes());
+					} catch (IllegalBlockSizeException | BadPaddingException e) {
+						e.printStackTrace();
+					}
+					s2.stop();
+					encryptTime = s2.elapsed(TimeUnit.NANOSECONDS);
+					s2.reset();
+					try {
+						c1 = Cipher.getInstance(algorithm,PROVIDER);
+						c1.init(Cipher.DECRYPT_MODE, secret);
+
+					} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
+					e.printStackTrace();
+					}
+					s2.start();
+					try {
+					byte[] out1Bytes = c1.doFinal(outBytes);
+					} catch (IllegalBlockSizeException | BadPaddingException e) {
+						e.printStackTrace();
+					}
+					s2.stop();
+					decryptTime = s2.elapsed(TimeUnit.NANOSECONDS);
+					
+					stopwatch.stop();
+					totalTime = stopwatch.elapsed(TimeUnit.NANOSECONDS);
+					
+					data.add(new SymmetricKeyDataSet(Integer.toString(x),keygenTime,encryptTime,decryptTime,totalTime,bitlen,algorithm)); 
+					}
+				break;
 			}
 	}
 	

@@ -154,7 +154,8 @@ public class NOGUI {
 		
 		
 		//ThreeFish
-		threefishdata = new SymmetricKeyDataGroup(10);
+		//Does not seem to be Working right now...
+		/*threefishdata = new SymmetricKeyDataGroup(10);
 		Thread t7 = new Thread(new Runnable(){
 			public void run(){
 				threefishdata.performSymmetricKeyCipherBench(SymmetricKeyCipher.THREEFISH, thing);
@@ -168,7 +169,7 @@ public class NOGUI {
 			e1.printStackTrace();
 		}
 		Runtime.getRuntime().gc();	
-		
+		 */
 		
 		//Serpent
 		serpentdata = new SymmetricKeyDataGroup(10);

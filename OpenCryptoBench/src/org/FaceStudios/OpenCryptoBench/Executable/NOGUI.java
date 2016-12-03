@@ -7,24 +7,26 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import org.FaceStudios.OpenCryptoBench.Crypto.CryptoObject;
-import org.FaceStudios.OpenCryptoBench.Data.SymmetricKeyDataGroup;
-import org.FaceStudios.OpenCryptoBench.Data.SymmetricKeyDataGroup.SymmetricKeyCipher;
+import org.FaceStudios.OpenCryptoBench.Data.BlockCipherDataGroup;
+import org.FaceStudios.OpenCryptoBench.Data.BlockCipherDataGroup.BlockCipher;
+import org.FaceStudios.OpenCryptoBench.Data.StreamCipherDataGroup;
+
 
 public class NOGUI {
-	private static volatile SymmetricKeyDataGroup aesdata;
-	private static volatile SymmetricKeyDataGroup desdata;
-	private static volatile SymmetricKeyDataGroup desededata;
-	private static volatile SymmetricKeyDataGroup blowfishdata;
-	private static volatile SymmetricKeyDataGroup twofishdata;
-	private static volatile SymmetricKeyDataGroup threefishdata;
-	private static volatile SymmetricKeyDataGroup rc2data;
-	private static volatile SymmetricKeyDataGroup rc5data;
-	private static volatile SymmetricKeyDataGroup serpentdata;
-	private static volatile SymmetricKeyDataGroup rc4data;
-	private static volatile SymmetricKeyDataGroup salsa20data;
-	private static volatile SymmetricKeyDataGroup issacdata;
-	private static volatile SymmetricKeyDataGroup grain128data;
-	private static volatile SymmetricKeyDataGroup hc256data;
+	private static volatile BlockCipherDataGroup aesdata;
+	private static volatile BlockCipherDataGroup desdata;
+	private static volatile BlockCipherDataGroup desededata;
+	private static volatile BlockCipherDataGroup blowfishdata;
+	private static volatile BlockCipherDataGroup twofishdata;
+	private static volatile BlockCipherDataGroup threefishdata;
+	private static volatile BlockCipherDataGroup rc2data;
+	private static volatile BlockCipherDataGroup rc5data;
+	private static volatile BlockCipherDataGroup serpentdata;
+	private static volatile StreamCipherDataGroup rc4data;
+	private static volatile StreamCipherDataGroup salsa20data;
+	private static volatile StreamCipherDataGroup issacdata;
+	private static volatile StreamCipherDataGroup grain128data;
+	private static volatile StreamCipherDataGroup hc256data;
 	
 
 	public static void doNOGUI(){
@@ -35,10 +37,10 @@ public class NOGUI {
 		//Execute all different benchmarks
 		//Initializer (Not Recorded)
 		//AES
-		aesdata = new SymmetricKeyDataGroup(10);
+		aesdata = new BlockCipherDataGroup(10);
 		Thread t = new Thread(new Runnable(){
 			public void run(){
-				aesdata.performSymmetricKeyCipherBench(SymmetricKeyCipher.AES, thing);
+				aesdata.performSymmetricKeyCipherBench(BlockCipher.AES, thing);
 				aesdata.calcAggregate();
 			}
 		});
@@ -52,10 +54,10 @@ public class NOGUI {
 		
 		
 		//DES
-		desdata = new SymmetricKeyDataGroup(10);
+		desdata = new BlockCipherDataGroup(10);
 		Thread t1 = new Thread(new Runnable(){
 			public void run(){
-				desdata.performSymmetricKeyCipherBench(SymmetricKeyCipher.DES, thing);
+				desdata.performSymmetricKeyCipherBench(BlockCipher.DES, thing);
 				desdata.calcAggregate();
 			}
 		});
@@ -69,10 +71,10 @@ public class NOGUI {
 		
 		
 		//3DES
-		desededata = new SymmetricKeyDataGroup(10);
+		desededata = new BlockCipherDataGroup(10);
 		Thread t2 = new Thread(new Runnable(){
 			public void run(){
-				desededata.performSymmetricKeyCipherBench(SymmetricKeyCipher.DESEDE, thing);
+				desededata.performSymmetricKeyCipherBench(BlockCipher.DESEDE, thing);
 				desededata.calcAggregate();
 			}
 		});
@@ -86,10 +88,10 @@ public class NOGUI {
 		
 		
 		//Blowfish
-		blowfishdata = new SymmetricKeyDataGroup(10);
+		blowfishdata = new BlockCipherDataGroup(10);
 		Thread t3 = new Thread(new Runnable(){
 			public void run(){
-				blowfishdata.performSymmetricKeyCipherBench(SymmetricKeyCipher.BLOWFISH, thing);
+				blowfishdata.performSymmetricKeyCipherBench(BlockCipher.BLOWFISH, thing);
 				blowfishdata.calcAggregate();
 			}
 		});
@@ -103,10 +105,10 @@ public class NOGUI {
 		
 		
 		//RC2
-		rc2data = new SymmetricKeyDataGroup(10);
+		rc2data = new BlockCipherDataGroup(10);
 		Thread t4 = new Thread(new Runnable(){
 			public void run(){
-				rc2data.performSymmetricKeyCipherBench(SymmetricKeyCipher.RC2, thing);
+				rc2data.performSymmetricKeyCipherBench(BlockCipher.RC2, thing);
 				rc2data.calcAggregate();
 			}
 		});
@@ -120,10 +122,10 @@ public class NOGUI {
 		
 		
 		//RC5
-		rc5data = new SymmetricKeyDataGroup(10);
+		rc5data = new BlockCipherDataGroup(10);
 		Thread t5 = new Thread(new Runnable(){
 			public void run(){
-				rc5data.performSymmetricKeyCipherBench(SymmetricKeyCipher.RC5, thing);
+				rc5data.performSymmetricKeyCipherBench(BlockCipher.RC5, thing);
 				rc5data.calcAggregate();
 			}
 		});
@@ -137,10 +139,10 @@ public class NOGUI {
 		
 		
 		//TwoFish
-		twofishdata = new SymmetricKeyDataGroup(10);
+		twofishdata = new BlockCipherDataGroup(10);
 		Thread t6 = new Thread(new Runnable(){
 			public void run(){
-				twofishdata.performSymmetricKeyCipherBench(SymmetricKeyCipher.TWOFISH, thing);
+				twofishdata.performSymmetricKeyCipherBench(BlockCipher.TWOFISH, thing);
 				twofishdata.calcAggregate();
 			}
 		});
@@ -155,10 +157,10 @@ public class NOGUI {
 		
 		//ThreeFish
 		//Does not seem to be Working right now...
-		/*threefishdata = new SymmetricKeyDataGroup(10);
+		/*threefishdata = new BlockCipherDataGroup(10);
 		Thread t7 = new Thread(new Runnable(){
 			public void run(){
-				threefishdata.performSymmetricKeyCipherBench(SymmetricKeyCipher.THREEFISH, thing);
+				threefishdata.performSymmetricKeyCipherBench(BlockCipher.THREEFISH, thing);
 				threefishdata.calcAggregate();
 			}
 		});
@@ -172,10 +174,10 @@ public class NOGUI {
 		 */
 		
 		//Serpent
-		serpentdata = new SymmetricKeyDataGroup(10);
+		serpentdata = new BlockCipherDataGroup(10);
 		Thread t8 = new Thread(new Runnable(){
 			public void run(){
-				serpentdata.performSymmetricKeyCipherBench(SymmetricKeyCipher.SERPENT, thing);
+				serpentdata.performSymmetricKeyCipherBench(BlockCipher.SERPENT, thing);
 				serpentdata.calcAggregate();
 			}
 		});
@@ -189,7 +191,7 @@ public class NOGUI {
 		
 		/*
 		//RC4
-		rc4data = new SymmetricKeyDataGroup(10);
+		rc4data = new StreamCipherDataGroup(10);
 		Thread t9 = new Thread(new Runnable(){
 			public void run(){
 				rc4data.performSymmetricKeyCipherBench(SymmetricKeyCipher.RC4, thing);
@@ -206,10 +208,10 @@ public class NOGUI {
 		
 		
 		//Salsa20
-		salsa20data = new SymmetricKeyDataGroup(10);
+		salsa20data = new StreamCipherDataGroup(10);
 		Thread t10 = new Thread(new Runnable(){
 			public void run(){
-				salsa20data.performSymmetricKeyCipherBench(SymmetricKeyCipher.SALSA20, thing);
+				salsa20data.performSymmetricKeyCipherBench(StreamCipher.SALSA20, thing);
 				salsa20data.calcAggregate();
 			}
 		});
@@ -223,10 +225,10 @@ public class NOGUI {
 		
 		
 		//Grain128
-		grain128data = new SymmetricKeyDataGroup(10);
+		grain128data = new StreamCipherDataGroup(10);
 		Thread t11 = new Thread(new Runnable(){
 			public void run(){
-				grain128data.performSymmetricKeyCipherBench(SymmetricKeyCipher.GRAIN128, thing);
+				grain128data.performSymmetricKeyCipherBench(StreamCipher.GRAIN128, thing);
 				grain128data.calcAggregate();
 			}
 		});
@@ -240,10 +242,10 @@ public class NOGUI {
 		
 		
 		//HC256
-		hc256data = new SymmetricKeyDataGroup(10);
+		hc256data = new StreamCipherDataGroup(10);
 		Thread t12 = new Thread(new Runnable(){
 			public void run(){
-				hc256data.performSymmetricKeyCipherBench(SymmetricKeyCipher.HC256, thing);
+				hc256data.performSymmetricKeyCipherBench(StreamCipher.HC256, thing);
 				hc256data.calcAggregate();
 			}
 		});
@@ -256,10 +258,10 @@ public class NOGUI {
 		Runtime.getRuntime().gc();	
 		
 		//ISSAC
-		issacdata = new SymmetricKeyDataGroup(10);
+		issacdata = new StreamCipherDataGroup(10);
 		Thread t13 = new Thread(new Runnable(){
 			public void run(){
-				issacdata.performSymmetricKeyCipherBench(SymmetricKeyCipher.ISAAC, thing);
+				issacdata.performSymmetricKeyCipherBench(StreamCipher.ISAAC, thing);
 				issacdata.calcAggregate();
 			}
 		});
@@ -271,8 +273,8 @@ public class NOGUI {
 		}
 		Runtime.getRuntime().gc();	
 		*/
-		ArrayList<SymmetricKeyDataGroup> blockcipherdata = new ArrayList<SymmetricKeyDataGroup>();
-		ArrayList<SymmetricKeyDataGroup> streamcipherdata = new ArrayList<SymmetricKeyDataGroup>();
+		ArrayList<BlockCipherDataGroup> blockcipherdata = new ArrayList<BlockCipherDataGroup>();
+		ArrayList<StreamCipherDataGroup> streamcipherdata = new ArrayList<StreamCipherDataGroup>();
 
 		blockcipherdata.add(aesdata);
 		blockcipherdata.add(desdata);

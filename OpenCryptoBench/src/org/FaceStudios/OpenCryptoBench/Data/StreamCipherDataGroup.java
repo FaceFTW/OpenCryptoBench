@@ -68,6 +68,7 @@ private static ArrayList<SymmetricKeyDataSet> data;
 		data.add(new SymmetricKeyDataSet("Aggregate", temp2, temp3, temp4, temp5,data.get(0).getBitLength(),data.get(0).getAlgorithm()));
 	}
 	
+	@SuppressWarnings("unused")
 	public void doBenchmark(StreamCipher cipher, CryptoObject thing){
 		switch(cipher){
 			case RC4:
@@ -90,6 +91,10 @@ private static ArrayList<SymmetricKeyDataSet> data;
 				ivsize = 0;
 				bitlen = 256;
 				break;
+			case HC256:
+				algorithm = "HC256";
+				ivsize = 0;
+				bitlen = 256;
 		}
 		for(int x = 0;x< runs;x++){
 			encryptTime = 0;

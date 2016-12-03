@@ -2,7 +2,6 @@ package org.FaceStudios.OpenCryptoBench.Data;
 
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.security.Security;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -13,14 +12,13 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
-import javax.crypto.spec.IvParameterSpec;
 
 import org.FaceStudios.OpenCryptoBench.Crypto.CryptoObject;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import com.google.common.base.Stopwatch;
 
-public class SymmetricKeyDataGroup {
+public class BlockCipherDataGroup {
 	
 	private static BouncyCastleProvider PROVIDER; //Initialize in later in the class
 	private static Stopwatch stopwatch;
@@ -37,11 +35,11 @@ public class SymmetricKeyDataGroup {
 	private static int bitlen;
 	private static int runs;
 	
-	public static enum SymmetricKeyCipher {AES, DES, DESEDE, TWOFISH, SERPENT, RC2, RC5, RC6, BLOWFISH, THREEFISH};
+	public static enum BlockCipher {AES, DES, DESEDE, TWOFISH, SERPENT, RC2, RC5, RC6, BLOWFISH, THREEFISH};
 
 	private static ArrayList<SymmetricKeyDataSet> data;
 	
-	public SymmetricKeyDataGroup(int x){
+	public BlockCipherDataGroup(int x){
 		data = new ArrayList<SymmetricKeyDataSet>();
 		runs = x;
 	}
@@ -68,7 +66,7 @@ public class SymmetricKeyDataGroup {
 	}
 	
 	@SuppressWarnings("unused")
-	public synchronized void performSymmetricKeyCipherBench(SymmetricKeyCipher cipher, CryptoObject thing){
+	public synchronized void performSymmetricKeyCipherBench(BlockCipher cipher, CryptoObject thing){
 		PROVIDER = new BouncyCastleProvider();		
 		Security.addProvider(PROVIDER);
 		switch(cipher){
@@ -170,8 +168,9 @@ public class SymmetricKeyDataGroup {
 					stopwatch.stop();
 					totalTime = stopwatch.elapsed(TimeUnit.NANOSECONDS);
 					
-					data.add(new SymmetricKeyDataSet(Integer.toString(x),keygenTime,encryptTime,decryptTime,totalTime,bitlen,algorithm)); 
-					}
+					data.add(new SymmetricKeyDataSet(Integer.toString(x),keygenTime,encryptTime,decryptTime,totalTime,bitlen,algorithm));
+				}
+			}
 			
 	
 	public int size() {

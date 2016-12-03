@@ -187,7 +187,7 @@ public class NOGUI {
 		}
 		Runtime.getRuntime().gc();	
 		
-		
+		/*
 		//RC4
 		rc4data = new SymmetricKeyDataGroup(10);
 		Thread t9 = new Thread(new Runnable(){
@@ -270,7 +270,7 @@ public class NOGUI {
 			e1.printStackTrace();
 		}
 		Runtime.getRuntime().gc();	
-		
+		*/
 		ArrayList<SymmetricKeyDataGroup> blockcipherdata = new ArrayList<SymmetricKeyDataGroup>();
 		ArrayList<SymmetricKeyDataGroup> streamcipherdata = new ArrayList<SymmetricKeyDataGroup>();
 
@@ -328,6 +328,7 @@ public class NOGUI {
 				
 				//END OUTER BLOCK
 			}
+			
 			
 			//STREAM CIPHER DATA
 			for(int x = 0; x < streamcipherdata.size(); x++){

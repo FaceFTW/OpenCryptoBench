@@ -36,4 +36,6 @@ public abstract class ISymmetricKeyDataGroup {
 		return data.size();
 	}
 	
+	public abstract void doBenchmark();
+	
 }

@@ -7,9 +7,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import org.FaceStudios.OpenCryptoBench.Crypto.CryptoObject;
-import org.FaceStudios.OpenCryptoBench.Data.BlockCipherDataGroup;
-import org.FaceStudios.OpenCryptoBench.Data.BlockCipherDataGroup.BlockCipher;
-import org.FaceStudios.OpenCryptoBench.Data.StreamCipherDataGroup;
+import org.FaceStudios.OpenCryptoBench.Data.depreciated.BlockCipherDataGroup;
+import org.FaceStudios.OpenCryptoBench.Data.depreciated.StreamCipherDataGroup;
+import org.FaceStudios.OpenCryptoBench.Data.depreciated.BlockCipherDataGroup.BlockCipher;
 
 
 public class NOGUI {

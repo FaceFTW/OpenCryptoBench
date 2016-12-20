@@ -1,4 +1,4 @@
-package org.FaceStudios.OpenCryptoBench.Data;
+package org.FaceStudios.OpenCryptoBench.Data.depreciated;
 
 public class DHExchangeDataSet {
 	private static String run;

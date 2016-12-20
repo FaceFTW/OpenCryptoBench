@@ -1,4 +1,4 @@
-package org.FaceStudios.OpenCryptoBench.Data;
+package org.FaceStudios.OpenCryptoBench.Data.depreciated;
 
 import java.util.ArrayList;
 

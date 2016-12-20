@@ -1,4 +1,4 @@
-package org.FaceStudios.OpenCryptoBench.Data;
+package org.FaceStudios.OpenCryptoBench.Data.depreciated;
 
 public class SymmetricKeyDataSet{
 	private static String run;

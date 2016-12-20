@@ -23,5 +23,29 @@ public class BlockCipherDataSet extends DataSet {
 		
 		return run+","+algorithm+","+keyGenTime+","+encryptTime+","+decryptTime+","+totalTime;
 	}
+	
+	public String getRun(){
+		return run;
+	}
+	
+	public String getAlgorithm(){
+		return algorithm;
+	}
+	
+	public long getKeyGenTime(){
+		return keyGenTime;
+	}
+	
+	public long getEncryptTime(){
+		return encryptTime;
+	}
+	
+	public long getDecryptTime(){
+		return decryptTime;
+	}
+	
+	public long getTotalTime(){
+		return totalTime;
+	}
 
 }

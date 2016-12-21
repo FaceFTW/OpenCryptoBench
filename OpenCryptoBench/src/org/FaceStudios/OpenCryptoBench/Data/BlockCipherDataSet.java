@@ -3,15 +3,17 @@ package org.FaceStudios.OpenCryptoBench.Data;
 public class BlockCipherDataSet extends DataSet {
 	private String run;
 	private String algorithm;
+	private int bitlen;
 	private long keyGenTime;
 	private long encryptTime;
 	private long decryptTime;
 	private long totalTime;
 	
 	
-	public BlockCipherDataSet(String r, String a, long k, long e, long d, long t){
+	public BlockCipherDataSet(String r, String a, int b, long k, long e, long d, long t){
 		run = r;
 		algorithm = a;
+		bitlen = b;
 		keyGenTime = k;
 		encryptTime = e;
 		decryptTime = d;
@@ -30,6 +32,10 @@ public class BlockCipherDataSet extends DataSet {
 	
 	public String getAlgorithm(){
 		return algorithm;
+	}
+	
+	public int getBitLength(){
+		return bitlen;
 	}
 	
 	public long getKeyGenTime(){

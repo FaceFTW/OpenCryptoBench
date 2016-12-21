@@ -77,6 +77,7 @@ public class BlockCipherDataGroup extends DataGroup<BlockCipherDataSet>{
 	public void calcAggregate() {
 		String run = "Aggregate";
 		String algorithm = data.get(0).getAlgorithm();
+		int bitlen = data.get(0).getBitLength();
 		long keyGenTime = 0;
 		long encryptTime = 0;
 		long decryptTime = 0;
@@ -94,12 +95,12 @@ public class BlockCipherDataGroup extends DataGroup<BlockCipherDataSet>{
 		decryptTime = decryptTime/data.size();
 		totalTime = totalTime/data.size();
 		
-		data.add(new BlockCipherDataSet(run, algorithm, keyGenTime, encryptTime, decryptTime, totalTime));	
+		data.add(new BlockCipherDataSet(run, algorithm, bitlen, keyGenTime, encryptTime, decryptTime, totalTime));	
 	}
 
 	
 	public synchronized void doBenchmark(String param){
-		for(int x = 0 ; )
+		for(int x = 0 ; x < runs; x++){
 		Stopwatch total = Stopwatch.createStarted();
 		
 		//KEY GENERATION BENCHMARK
@@ -149,8 +150,8 @@ public class BlockCipherDataGroup extends DataGroup<BlockCipherDataSet>{
 		total.stop();
 		long totalTimeResult = total.elapsed(TimeUnit.NANOSECONDS);
 		
-		data.add(new BlockCipherDataSet());
-		
+		data.add(new BlockCipherDataSet(Integer.toString(x),algorithm,bitlen,keyGenTimeResult, encryptTimeResult, decryptTimeResult, totalTimeResult));
+		}
 	}
 	
 	@Override

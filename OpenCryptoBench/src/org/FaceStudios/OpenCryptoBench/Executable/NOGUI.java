@@ -6,10 +6,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import org.FaceStudios.OpenCryptoBench.Crypto.CryptoObject;
-import org.FaceStudios.OpenCryptoBench.Data.depreciated.BlockCipherDataGroup;
+import org.FaceStudios.OpenCryptoBench.Data.BlockCipherDataGroup;
 import org.FaceStudios.OpenCryptoBench.Data.depreciated.StreamCipherDataGroup;
-import org.FaceStudios.OpenCryptoBench.Data.depreciated.BlockCipherDataGroup.BlockCipher;
+import org.FaceStudios.OpenCryptoBench.Data.BlockCipherDataGroup.BlockCipher;
 
 
 public class NOGUI {
@@ -31,16 +30,13 @@ public class NOGUI {
 
 	public static void doNOGUI(){
 		
-		
-		CryptoObject thing = new CryptoObject("Hello World");
-		
 		//Execute all different benchmarks
 		//Initializer (Not Recorded)
 		//AES
-		aesdata = new BlockCipherDataGroup(10);
+		aesdata = new BlockCipherDataGroup(10, BlockCipher.AES);
 		Thread t = new Thread(new Runnable(){
 			public void run(){
-				aesdata.performSymmetricKeyCipherBench(BlockCipher.AES, thing);
+				aesdata.doBenchmark("Hello World");;
 				aesdata.calcAggregate();
 			}
 		});
@@ -54,10 +50,10 @@ public class NOGUI {
 		
 		
 		//DES
-		desdata = new BlockCipherDataGroup(10);
+		desdata = new BlockCipherDataGroup(10, BlockCipher.DES);
 		Thread t1 = new Thread(new Runnable(){
 			public void run(){
-				desdata.performSymmetricKeyCipherBench(BlockCipher.DES, thing);
+				desdata.doBenchmark("Hello World");
 				desdata.calcAggregate();
 			}
 		});
@@ -71,10 +67,10 @@ public class NOGUI {
 		
 		
 		//3DES
-		desededata = new BlockCipherDataGroup(10);
+		desededata = new BlockCipherDataGroup(10, BlockCipher.DESEDE);
 		Thread t2 = new Thread(new Runnable(){
 			public void run(){
-				desededata.performSymmetricKeyCipherBench(BlockCipher.DESEDE, thing);
+				desededata.doBenchmark("Hello World");
 				desededata.calcAggregate();
 			}
 		});
@@ -88,10 +84,10 @@ public class NOGUI {
 		
 		
 		//Blowfish
-		blowfishdata = new BlockCipherDataGroup(10);
+		blowfishdata = new BlockCipherDataGroup(10, BlockCipher.BLOWFISH);
 		Thread t3 = new Thread(new Runnable(){
 			public void run(){
-				blowfishdata.performSymmetricKeyCipherBench(BlockCipher.BLOWFISH, thing);
+				blowfishdata.doBenchmark("Hello World");
 				blowfishdata.calcAggregate();
 			}
 		});
@@ -105,10 +101,10 @@ public class NOGUI {
 		
 		
 		//RC2
-		rc2data = new BlockCipherDataGroup(10);
+		rc2data = new BlockCipherDataGroup(10, BlockCipher.RC2);
 		Thread t4 = new Thread(new Runnable(){
 			public void run(){
-				rc2data.performSymmetricKeyCipherBench(BlockCipher.RC2, thing);
+				rc2data.doBenchmark("Hello World");;
 				rc2data.calcAggregate();
 			}
 		});
@@ -122,10 +118,10 @@ public class NOGUI {
 		
 		
 		//RC5
-		rc5data = new BlockCipherDataGroup(10);
+		rc5data = new BlockCipherDataGroup(10, BlockCipher.RC5);
 		Thread t5 = new Thread(new Runnable(){
 			public void run(){
-				rc5data.performSymmetricKeyCipherBench(BlockCipher.RC5, thing);
+				rc5data.doBenchmark("Hello World");
 				rc5data.calcAggregate();
 			}
 		});
@@ -139,10 +135,10 @@ public class NOGUI {
 		
 		
 		//TwoFish
-		twofishdata = new BlockCipherDataGroup(10);
+		twofishdata = new BlockCipherDataGroup(10, BlockCipher.TWOFISH);
 		Thread t6 = new Thread(new Runnable(){
 			public void run(){
-				twofishdata.performSymmetricKeyCipherBench(BlockCipher.TWOFISH, thing);
+				twofishdata.doBenchmark("Hello World");;
 				twofishdata.calcAggregate();
 			}
 		});
@@ -174,10 +170,10 @@ public class NOGUI {
 		 */
 		
 		//Serpent
-		serpentdata = new BlockCipherDataGroup(10);
+		serpentdata = new BlockCipherDataGroup(10, BlockCipher.SERPENT);
 		Thread t8 = new Thread(new Runnable(){
 			public void run(){
-				serpentdata.performSymmetricKeyCipherBench(BlockCipher.SERPENT, thing);
+				serpentdata.doBenchmark("Hello World");;
 				serpentdata.calcAggregate();
 			}
 		});

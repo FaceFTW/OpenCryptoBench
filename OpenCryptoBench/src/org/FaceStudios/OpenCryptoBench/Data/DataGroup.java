@@ -1,31 +1,19 @@
 package org.FaceStudios.OpenCryptoBench.Data;
 
-import java.util.ArrayList;
-
 public abstract class DataGroup <T extends DataSet>{
 	//Abstraction of the Data Group Class, with some included methods
 	
-	private ArrayList<T> data;
-	private int runs;
-	
-	public DataGroup(int x){
-		data = new ArrayList<>();
-		runs = x;
+	public DataGroup(){
+		
 	}
 	
-	public T get(int x){
-		return data.get(x);
-	}
+	public abstract T get(int x);
 	
-	public int getRuns(){
-		return runs;
-	}
+	public abstract int getRuns();
 	
-	public void add(T t){
-		data.add(t);
-	}
+	public abstract void add(T t);
 	
 	public abstract void calcAggregate();
 	
-	public abstract void doBenchmark();
+	public abstract void doBenchmark(String param);
 }

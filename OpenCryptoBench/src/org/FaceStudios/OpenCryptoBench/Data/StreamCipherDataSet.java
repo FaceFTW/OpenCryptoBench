@@ -15,6 +15,7 @@ public class StreamCipherDataSet extends DataSet {
 		run = r;
 		algorithm = a;
 		bitlen = b;
+		ivlen = i;
 		keyGenTime = k;
 		ivGenTime = i2;
 		encryptTime = e;

@@ -7,8 +7,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import org.FaceStudios.OpenCryptoBench.Data.BlockCipherDataGroup;
-import org.FaceStudios.OpenCryptoBench.Data.depreciated.StreamCipherDataGroup;
+import org.FaceStudios.OpenCryptoBench.Data.StreamCipherDataGroup;
 import org.FaceStudios.OpenCryptoBench.Data.BlockCipherDataGroup.BlockCipher;
+import org.FaceStudios.OpenCryptoBench.Data.StreamCipherDataGroup.StreamCipher;
 
 
 public class NOGUI {
@@ -185,12 +186,12 @@ public class NOGUI {
 		}
 		Runtime.getRuntime().gc();	
 		
-		/*
+		
 		//RC4
-		rc4data = new StreamCipherDataGroup(10);
+		rc4data = new StreamCipherDataGroup(10, StreamCipher.RC4);
 		Thread t9 = new Thread(new Runnable(){
 			public void run(){
-				rc4data.performSymmetricKeyCipherBench(SymmetricKeyCipher.RC4, thing);
+				rc4data.doBenchmark("Hello World");
 				rc4data.calcAggregate();
 			}
 		});
@@ -204,10 +205,10 @@ public class NOGUI {
 		
 		
 		//Salsa20
-		salsa20data = new StreamCipherDataGroup(10);
+		salsa20data = new StreamCipherDataGroup(10, StreamCipher.SALSA20);
 		Thread t10 = new Thread(new Runnable(){
 			public void run(){
-				salsa20data.performSymmetricKeyCipherBench(StreamCipher.SALSA20, thing);
+				salsa20data.doBenchmark("Hello World");
 				salsa20data.calcAggregate();
 			}
 		});
@@ -221,10 +222,10 @@ public class NOGUI {
 		
 		
 		//Grain128
-		grain128data = new StreamCipherDataGroup(10);
+		grain128data = new StreamCipherDataGroup(10, StreamCipher.GRAIN128);
 		Thread t11 = new Thread(new Runnable(){
 			public void run(){
-				grain128data.performSymmetricKeyCipherBench(StreamCipher.GRAIN128, thing);
+				grain128data.doBenchmark("Hello World");
 				grain128data.calcAggregate();
 			}
 		});
@@ -238,10 +239,10 @@ public class NOGUI {
 		
 		
 		//HC256
-		hc256data = new StreamCipherDataGroup(10);
+		hc256data = new StreamCipherDataGroup(10, StreamCipher.HC256);
 		Thread t12 = new Thread(new Runnable(){
 			public void run(){
-				hc256data.performSymmetricKeyCipherBench(StreamCipher.HC256, thing);
+				hc256data.doBenchmark("Hello World");
 				hc256data.calcAggregate();
 			}
 		});
@@ -254,10 +255,10 @@ public class NOGUI {
 		Runtime.getRuntime().gc();	
 		
 		//ISSAC
-		issacdata = new StreamCipherDataGroup(10);
+		issacdata = new StreamCipherDataGroup(10, StreamCipher.ISAAC);
 		Thread t13 = new Thread(new Runnable(){
 			public void run(){
-				issacdata.performSymmetricKeyCipherBench(StreamCipher.ISAAC, thing);
+				issacdata.doBenchmark("Hello World");
 				issacdata.calcAggregate();
 			}
 		});
@@ -268,7 +269,7 @@ public class NOGUI {
 			e1.printStackTrace();
 		}
 		Runtime.getRuntime().gc();	
-		*/
+		
 		ArrayList<BlockCipherDataGroup> blockcipherdata = new ArrayList<BlockCipherDataGroup>();
 		ArrayList<StreamCipherDataGroup> streamcipherdata = new ArrayList<StreamCipherDataGroup>();
 

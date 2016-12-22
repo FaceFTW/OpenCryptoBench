@@ -1,11 +1,19 @@
 package org.FaceStudios.OpenCryptoBench.Data;
 
+import java.nio.charset.Charset;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.KeyGenerator;
+import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
+import javax.crypto.spec.IvParameterSpec;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
@@ -99,13 +107,13 @@ public class StreamCipherDataGroup extends DataGroup<StreamCipherDataSet> {
 	}
 
 	@Override
-	public void doBenchmark(String param) {
+	public synchronized void doBenchmark(String param) {
+		for(int x = 0; x < runs; x++){
 		Stopwatch total = Stopwatch.createStarted();
-		
 		
 		//KEY GENERATION
 		Stopwatch keyGenTimer = Stopwatch.createStarted();
-		SecretKey secret;
+		SecretKey secret = null;
 		KeyGenerator gen;
 		try {
 			gen = KeyGenerator.getInstance(algorithm, PROVIDER);
@@ -117,8 +125,53 @@ public class StreamCipherDataGroup extends DataGroup<StreamCipherDataSet> {
 		keyGenTimer.stop();
 		long keyGenTime = keyGenTimer.elapsed(TimeUnit.NANOSECONDS);
 		
+		/*This part of the code gets weird:
+		 * Essentially the Cipher will be initialized
+		 * an IV will be extracted
+		 * Then the encryption will be done		 * 
+		 */
+		//ENCRYPTION + IV GENERATION
+		Stopwatch ivGenTimer = Stopwatch.createStarted();
+		Cipher encrypt = null;
+		IvParameterSpec iv = null;
+		try {
+			encrypt = Cipher.getInstance(algorithm, PROVIDER);
+			encrypt.init(Cipher.ENCRYPT_MODE, secret);
+			iv = new IvParameterSpec(encrypt.getIV());
+		} catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
+			e.printStackTrace();
+		}
+		ivGenTimer.stop();
+		long ivGenTime = ivGenTimer.elapsed(TimeUnit.NANOSECONDS);
+		byte[] ciphertext = null;
+		Stopwatch encryptTimer = Stopwatch.createStarted();
+		try{
+			ciphertext = encrypt.doFinal(param.getBytes(Charset.forName("US-ASCII")));
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		encryptTimer.stop();
+		long encryptTime = encryptTimer.elapsed(TimeUnit.NANOSECONDS);
 		
-		//IV GENERATION		
+		
+		//DECRYPTION
+		Stopwatch decryptTimer = Stopwatch.createStarted();
+		Cipher decrypt = null;
+		try {
+			decrypt = Cipher.getInstance(algorithm, PROVIDER);
+			decrypt.init(Cipher.DECRYPT_MODE, secret, iv);
+			decrypt.doFinal(ciphertext);
+		} catch (InvalidKeyException | InvalidAlgorithmParameterException | NoSuchAlgorithmException | NoSuchPaddingException | IllegalBlockSizeException | BadPaddingException e) {
+			e.printStackTrace();
+		}
+		decryptTimer.stop();
+		long decryptTime = decryptTimer.elapsed(TimeUnit.NANOSECONDS);
+		
+		total.stop();
+		long totalTime = total.elapsed(TimeUnit.NANOSECONDS);
+		
+		data.add(new StreamCipherDataSet(Integer.toString(x), algorithm, bitlen, ivlen, keyGenTime, ivGenTime, encryptTime, decryptTime, totalTime));
+		}
 	}
 
 }

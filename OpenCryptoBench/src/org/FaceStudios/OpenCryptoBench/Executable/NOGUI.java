@@ -297,7 +297,7 @@ public class NOGUI {
 			e.printStackTrace();
 		}
 		try {
-			print.write("Run, KeyGeneration, Encryption, Decryption, Total, BitLength, Method");
+			print.write("Run, Algorithm, BitLength, KeyGeneration, Encryption, Decryption, Total");
 			print.newLine();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -328,7 +328,12 @@ public class NOGUI {
 				//END OUTER BLOCK
 			}
 			
-			
+			try {
+				print.write("Run, Algorithm, BitLength, KeyGeneration, IVGeneration, Encryption, Decryption, Total");
+				print.newLine();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			//STREAM CIPHER DATA
 			for(int x = 0; x < streamcipherdata.size(); x++){
 				//OUTER BLOCK
@@ -350,16 +355,6 @@ public class NOGUI {
 			} catch (IOException | NullPointerException e) {
 			e.printStackTrace();
 		}
-		
-		
-		
-		/*
-		 * for(int x = 0; x<10; x++){
-		 
-			CryptoOps.invokeCrypto(Algorithm.DHSIM, thing, x);
-		}
-		*/
-		
-				
+						
 	}
 }

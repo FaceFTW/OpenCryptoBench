@@ -10,18 +10,20 @@ public class PublicKeyDataSet extends DataSet {
 	private long agreeTime;
 	private long keyCalcTime;
 	private long totalTime;
+	private PublicKeyCipher cipher;
 	
 	public enum PublicKeyCipher{ELGAMAL, RSA};
 	
-	public PublicKeyDataSet(String r, PublicKeyCipher cipher, long pug, long pig, long ag, long k, long t){
+	public PublicKeyDataSet(String r, PublicKeyCipher c, long pug, long pig, long ag, long k, long t){
 		run = r;
 		pubKeyGenTime = pug;
 		privKeyGenTime = pig;
 		agreeTime = ag;
 		keyCalcTime = k;
 		totalTime = t;
+		cipher = c;
 		
-		switch(cipher){
+		switch(c){
 		case ELGAMAL:
 			algorithm = "ElGamal";
 			pubBitLen = 0;
@@ -42,8 +44,8 @@ public class PublicKeyDataSet extends DataSet {
 		return run;
 	}
 	
-	public String getAlgorithm(){
-		return algorithm;
+	public PublicKeyCipher getAlgorithm(){
+		return cipher;
 	}
 	
 	public int getPublicKeyBitLength(){

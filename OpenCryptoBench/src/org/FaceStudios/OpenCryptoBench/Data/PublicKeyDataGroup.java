@@ -30,6 +30,7 @@ public class PublicKeyDataGroup extends DataGroup<PublicKeyDataSet> {
 
 	@Override
 	public void calcAggregate() {
+		long keyPairGenTime = 0;
 		long pubKeyGenTime = 0;
 		long privKeyGenTime = 0;
 		long agreeTime = 0;
@@ -37,14 +38,14 @@ public class PublicKeyDataGroup extends DataGroup<PublicKeyDataSet> {
 		long totalTime = 0;
 		
 		for(int x = 0; x < data.size(); x++){
-			pubKeyGenTime = pubKeyGenTime + data.get(x).getPublicKeyGenTime();
-			privKeyGenTime = privKeyGenTime + data.get(x).getPrivateKeyGenerationTime();
+			pubKeyGenTime = pubKeyGenTime + data.get(x).getPublicKeyDerivationTime();
+			privKeyGenTime = privKeyGenTime + data.get(x).getPrivateKeyDerivationTime();
 			agreeTime = agreeTime + data.get(x).getAgreementTime();
 			keyCalcTime = keyCalcTime + data.get(x).getKeyCalcTime();
 			totalTime = totalTime + data.get(x).getTotalTime();
 		}
 		
-		data.add(new PublicKeyDataSet("Aggregate", data.get(0).getAlgorithm(), pubKeyGenTime, privKeyGenTime, agreeTime, keyCalcTime, totalTime));
+		data.add(new PublicKeyDataSet("Aggregate", data.get(0).getAlgorithm(),keyPairGenTime, pubKeyGenTime, privKeyGenTime, agreeTime, keyCalcTime, totalTime));
 
 	}
 

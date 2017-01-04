@@ -3,10 +3,10 @@ package org.FaceStudios.OpenCryptoBench.Data;
 public class PublicKeyDataSet extends DataSet {
 	private String run;
 	private String algorithm;
-	private int pubBitLen;
-	private int privBitLen;
-	private long pubKeyGenTime;
-	private long privKeyGenTime;
+	private int keyPairBitLen;
+	private long keyPairGenTime;
+	private long pubKeyDerivTime;
+	private long privKeyDerivTime;
 	private long agreeTime;
 	private long keyCalcTime;
 	private long totalTime;
@@ -14,10 +14,11 @@ public class PublicKeyDataSet extends DataSet {
 	
 	public enum PublicKeyCipher{ELGAMAL, RSA};
 	
-	public PublicKeyDataSet(String r, PublicKeyCipher c, long pug, long pig, long ag, long k, long t){
+	public PublicKeyDataSet(String r, PublicKeyCipher c, long kpg, long pug, long pig, long ag, long k, long t){
 		run = r;
-		pubKeyGenTime = pug;
-		privKeyGenTime = pig;
+		keyPairGenTime = kpg;
+		pubKeyDerivTime = pug;
+		privKeyDerivTime = pig;
 		agreeTime = ag;
 		keyCalcTime = k;
 		totalTime = t;
@@ -26,13 +27,11 @@ public class PublicKeyDataSet extends DataSet {
 		switch(c){
 		case ELGAMAL:
 			algorithm = "ElGamal";
-			pubBitLen = 0;
-			privBitLen = 0;
+			keyPairBitLen = 2048;
 			break;
 		case RSA:
 			algorithm = "RSA";
-			pubBitLen = 0;
-			privBitLen = 0;
+			keyPairBitLen = 2048;
 			break;
 		default:
 			break;
@@ -48,20 +47,20 @@ public class PublicKeyDataSet extends DataSet {
 		return cipher;
 	}
 	
-	public int getPublicKeyBitLength(){
-		return pubBitLen;
+	public int getKeyPairBitLen(){
+		return keyPairBitLen;
 	}
 	
-	public int getPrivateKeyBitLength(){
-		return privBitLen;
+	public long getKeyPairGenerationTime(){
+		return keyPairGenTime;
 	}
 	
-	public long getPublicKeyGenTime(){
-		return pubKeyGenTime;
+	public long getPublicKeyDerivationeTime(){
+		return pubKeyDerivTime;
 	}
 	
-	public long getPrivateKeyGenerationTime(){
-		return privKeyGenTime;
+	public long getPrivateKeyDerivationTime(){
+		return privKeyDerivTime;
 	}
 	
 	public long getAgreementTime(){
@@ -78,7 +77,7 @@ public class PublicKeyDataSet extends DataSet {
 	
 	@Override
 	public String toString() {
-		return run+","+algorithm+","+pubBitLen+","+privBitLen+","+pubKeyGenTime+","+privKeyGenTime+","+agreeTime+","+keyCalcTime+","+totalTime;
+		return run+","+algorithm+","+keyPairBitLen+","+keyPairGenTime+","+pubKeyDerivTime+","+privKeyDerivTime+","+agreeTime+","+keyCalcTime+","+totalTime;
 	}
 
 }

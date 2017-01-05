@@ -55,7 +55,7 @@ public class PublicKeyDataSet extends DataSet {
 		return keyPairGenTime;
 	}
 	
-	public long getPublicKeyDerivationeTime(){
+	public long getPublicKeyDerivationTime(){
 		return pubKeyDerivTime;
 	}
 	

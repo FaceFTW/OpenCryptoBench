@@ -1,16 +1,44 @@
 package org.FaceStudios.OpenCryptoBench.Data;
 
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
+import java.security.PublicKey;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
+
+import javax.crypto.KeyAgreement;
+
+import org.FaceStudios.OpenCryptoBench.Data.PublicKeyDataSet.PublicKeyCipher;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import com.google.common.base.Stopwatch;
 
 public class PublicKeyDataGroup extends DataGroup<PublicKeyDataSet> {
 	private volatile ArrayList<PublicKeyDataSet> data;
 	private int runs;
+	private int keyPairBitLen;
+	private String algorithm;
 	
-	PublicKeyDataGroup(int x){
+	private static final BouncyCastleProvider PROVIDER = new BouncyCastleProvider();
+	
+	PublicKeyDataGroup(int x, PublicKeyCipher cipher){
 		data = new ArrayList<>();
 		runs = x;
+		switch(cipher){
+		case ELGAMAL:
+			algorithm = "ElGamal";
+			keyPairBitLen = 2048;
+			break;
+		case RSA:
+			algorithm = "RSA";
+			keyPairBitLen = 2048;
+			break;
+		default:
+			break;
+		
+		}
 	}
 
 	@Override
@@ -52,9 +80,45 @@ public class PublicKeyDataGroup extends DataGroup<PublicKeyDataSet> {
 	@Override
 	public synchronized void doBenchmark(String param) {
 		Stopwatch total = Stopwatch.createStarted();
-		Stopwatch pubKeyGenTimer = Stopwatch.createStarted();
+		
+		//KEY PAIR GENERATION
+		Stopwatch keyPairGenTimer = Stopwatch.createStarted();
+		KeyPair kp = null;
+		KeyPairGenerator gen;
+		try {
+			gen = KeyPairGenerator.getInstance(algorithm, PROVIDER);
+			gen.initialize(keyPairBitLen);
+			kp = gen.generateKeyPair();
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		keyPairGenTimer.stop();
+		long keyPairGenTime = keyPairGenTimer.elapsed(TimeUnit.NANOSECONDS);
 		
 		
+		//PUBLIC KEY DERIVATION TIME
+		Stopwatch pubKeyDerivTimer = Stopwatch.createStarted();
+		PublicKey pubkey = kp.getPublic();
+		pubKeyDerivTimer.stop();
+		long pubKeyDerivTime = pubKeyDerivTimer.elapsed(TimeUnit.NANOSECONDS);
+		
+		
+		//PRIVATE KEY DERIVATION TIME
+		Stopwatch privKeyDerivTimer = Stopwatch.createStarted();
+		PrivateKey privkey = kp.getPrivate();
+		privKeyDerivTimer.stop();
+		long privKeyDerivTime = privKeyDerivTimer.elapsed(TimeUnit.NANOSECONDS);
+		
+		
+		//ENCRYPTION TIME
+		Stopwatch agreeTimer = Stopwatch.createStarted();
+		KeyAgreement keyagree;
+		try {
+			keyagree = KeyAgreement.getInstance(algorithm, PROVIDER);
+			
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
 		
 	}
 

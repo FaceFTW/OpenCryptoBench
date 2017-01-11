@@ -8,25 +8,36 @@ A cryptography benchmark program written in Java
 ## Supported Algorithms
 OpenCrpytoBench supports these algorithms:
 
-*  AES (128-bit)
-*  DES (56-bit)
-*  Blowfish
-*  RC2/ARCFOUR/RC5
-*  3DES
-*  Serpent
-*  Twofish
-*  Salsa20
-*  HC256
-*  ISSAC
-*  Grain128a
-*  ThreeFish
+*  Block Ciphers
+  *  AES
+  *  DES
+  *  Blowfish
+  *  RC2
+  *  RC5
+  *  3DES
+  *  Serpent
+  *  Twofish
+  *  Threefish (Not Working right now)
+  
+*  Stream Ciphers
+  *  ARCFOUR (RC4)
+  *  Salsa20
+  *  HC256
+  *  ISSAC
+  *  Grain128a
+  
+*  Public Key Ciphers
+  *  RSA
+  *  ElGamal
 
 OpenCryptoBench will have support in the future for
 
 *  Diffie-Hellman Key Exchange (In Progress)
-*  RSA Key Exchange
-*  ECIES
-*  and more
+*  A fix to the Threefish benchmark
+*  X509 Certificate Validation Benchmarks
+*  X509 Certificate Revocation Lists (CRL)
+*  Post-Quantum Algorithms
+
 
 ## Legal Stuff
 OpenCryptoBench is free software: you can redistribute it and/or modify

@@ -30,7 +30,7 @@ public class PublicKeyDataGroup extends DataGroup<PublicKeyDataSet> {
 	
 	private static final BouncyCastleProvider PROVIDER = new BouncyCastleProvider();
 	
-	PublicKeyDataGroup(int x, PublicKeyCipher c){
+	public PublicKeyDataGroup(int x, PublicKeyCipher c){
 		data = new ArrayList<>();
 		runs = x;
 		cipher = c;

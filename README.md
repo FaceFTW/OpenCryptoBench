@@ -1,5 +1,5 @@
 # OpenCryptoBench
-A cryptography benchmark program written in Java
+A cryptography benchmark program written in Java. GUI will be added soon.
 
 [![codebeat badge](https://codebeat.co/badges/5676f716-312c-4159-8012-67f94ead1ab1)](https://codebeat.co/projects/github-com-facestudios-opencryptobench)
 
@@ -19,7 +19,7 @@ OpenCrpytoBench supports these algorithms:
   *  Twofish
   *  Threefish (Not Working right now)
   
-*  Stream Ciphers
+*  Stream Ciphers **UNDER FIX**
   *  ARCFOUR (RC4)
   *  Salsa20
   *  HC256
@@ -33,7 +33,7 @@ OpenCrpytoBench supports these algorithms:
 OpenCryptoBench will have support in the future for
 
 *  Diffie-Hellman Key Exchange (In Progress)
-*  A fix to the Threefish benchmark
+*  A fix to the Threefish benchmark and Stream Ciphers
 *  X509 Certificate Validation Benchmarks
 *  X509 Certificate Revocation Lists (CRL)
 *  Post-Quantum Algorithms
@@ -47,7 +47,7 @@ the Free Software Foundation, either version 3 of the License, or
 
 **This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See thesssssssssssssssss
 GNU General Public License for more details.**
 
 You should have received a copy of the GNU General Public License

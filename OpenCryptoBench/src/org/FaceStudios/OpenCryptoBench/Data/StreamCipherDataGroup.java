@@ -114,9 +114,8 @@ public class StreamCipherDataGroup extends DataGroup<StreamCipherDataSet> {
 		//KEY GENERATION
 		Stopwatch keyGenTimer = Stopwatch.createStarted();
 		SecretKey secret = null;
-		KeyGenerator gen;
 		try {
-			gen = KeyGenerator.getInstance(algorithm, PROVIDER);
+			KeyGenerator gen = KeyGenerator.getInstance(algorithm, PROVIDER);
 			gen.init(bitlen);
 			secret = gen.generateKey();
 		} catch (NoSuchAlgorithmException e) {
@@ -128,7 +127,7 @@ public class StreamCipherDataGroup extends DataGroup<StreamCipherDataSet> {
 		/*This part of the code gets weird:
 		 * Essentially the Cipher will be initialized
 		 * an IV will be extracted
-		 * Then the encryption will be done		 * 
+		 * Then the encryption will be done 
 		 */
 		//ENCRYPTION + IV GENERATION
 		Stopwatch ivGenTimer = Stopwatch.createStarted();

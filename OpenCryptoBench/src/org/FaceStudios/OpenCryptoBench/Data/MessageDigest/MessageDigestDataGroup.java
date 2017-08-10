@@ -37,11 +37,23 @@ public class MessageDigestDataGroup extends DataGroup<MessageDigestDataSet>{
 	@Override
 	public void calcAggregate() {
 		String run = "Aggregate";
-		long aggregateHashTime;
-		long aggregateCheckTime;
-		long aggregateTotalTime;
+		long aggregateHashTime = 0;
+		long aggregateCheckTime = 0;
+		long aggregateTotalTime = 0;
 		String method = data.get(0).getHashMethod();
 		int bitSize = data.get(0).getBitSize();
+		
+		for (int x = 0; x < runs; x++){
+			aggregateHashTime = aggregateHashTime + data.get(x).getHashTime();
+			aggregateCheckTime = aggregateCheckTime + data.get(x).getCheckTime();
+			aggregateTotalTime = aggregateTotalTime + data.get(x).getTotalTime();
+		}
+		
+		aggregateHashTime = aggregateHashTime/runs;
+		aggregateCheckTime = aggregateCheckTime/runs;
+		aggregateTotalTime = aggregateTotalTime/runs;
+		
+		data.add(new MessageDigestDataSet(run, aggregateHashTime, aggregateCheckTime, aggregateTotalTime, method, bitSize));
 	}
 
 	@Override

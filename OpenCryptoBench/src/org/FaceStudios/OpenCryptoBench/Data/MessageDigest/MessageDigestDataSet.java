@@ -36,6 +36,10 @@ public class MessageDigestDataSet extends DataSet {
     	return checkTime;
     }
     
+    public long getTotalTime(){
+    	return totalTime;
+    }
+    
     public String getHashMethod(){
     	return hashMethod;
     }

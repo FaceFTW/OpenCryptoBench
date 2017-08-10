@@ -1,29 +1,28 @@
-package org.FaceStudios.OpenCryptoBench.Data;
+package org.FaceStudios.OpenCryptoBench.Data.StreamCipher;
 
-public class BlockCipherDataSet extends DataSet {
+import org.FaceStudios.OpenCryptoBench.Data.DataSet;
+
+public class StreamCipherDataSet extends DataSet {
 	private String run;
 	private String algorithm;
 	private int bitlen;
+	private int ivlen;
 	private long keyGenTime;
+	private long ivGenTime;
 	private long encryptTime;
 	private long decryptTime;
 	private long totalTime;
 	
-	
-	public BlockCipherDataSet(String r, String a, int b, long k, long e, long d, long t){
+	public StreamCipherDataSet(String r, String a, int b, int i, long k, long i2, long e, long d, long t){
 		run = r;
 		algorithm = a;
 		bitlen = b;
+		ivlen = i;
 		keyGenTime = k;
+		ivGenTime = i2;
 		encryptTime = e;
 		decryptTime = d;
 		totalTime = t;
-	}
-	
-	@Override
-	public String toString() {
-		
-		return run+","+algorithm+","+keyGenTime+","+encryptTime+","+decryptTime+","+totalTime;
 	}
 	
 	public String getRun(){
@@ -38,8 +37,16 @@ public class BlockCipherDataSet extends DataSet {
 		return bitlen;
 	}
 	
+	public int getIVLength(){
+		return ivlen;
+	}
+	
 	public long getKeyGenTime(){
 		return keyGenTime;
+	}
+	
+	public long getIVGenTime(){
+		return ivGenTime;
 	}
 	
 	public long getEncryptTime(){
@@ -52,6 +59,11 @@ public class BlockCipherDataSet extends DataSet {
 	
 	public long getTotalTime(){
 		return totalTime;
+	}
+	
+	@Override
+	public String toString() {
+		return run+","+algorithm+","+bitlen+","+keyGenTime+","+ivGenTime+","+encryptTime+","+decryptTime+","+totalTime;
 	}
 
 }

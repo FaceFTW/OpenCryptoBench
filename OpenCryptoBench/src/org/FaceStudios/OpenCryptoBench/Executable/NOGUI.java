@@ -6,12 +6,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import org.FaceStudios.OpenCryptoBench.Data.BlockCipherDataGroup;
-import org.FaceStudios.OpenCryptoBench.Data.BlockCipherDataGroup.BlockCipher;
-import org.FaceStudios.OpenCryptoBench.Data.PublicKeyDataGroup;
-import org.FaceStudios.OpenCryptoBench.Data.PublicKeyDataSet.PublicKeyCipher;
-import org.FaceStudios.OpenCryptoBench.Data.StreamCipherDataGroup;
-import org.FaceStudios.OpenCryptoBench.Data.StreamCipherDataGroup.StreamCipher;
+import org.FaceStudios.OpenCryptoBench.Data.BlockCipher.BlockCipherDataGroup;
+import org.FaceStudios.OpenCryptoBench.Data.BlockCipher.BlockCipherDataGroup.BlockCipher;
+import org.FaceStudios.OpenCryptoBench.Data.StreamCipher.StreamCipherDataGroup;
+import org.FaceStudios.OpenCryptoBench.Data.StreamCipher.StreamCipherDataGroup.StreamCipher;
 
 
 public class NOGUI {
@@ -29,8 +27,7 @@ public class NOGUI {
 	private static volatile StreamCipherDataGroup issacdata;
 	private static volatile StreamCipherDataGroup grain128data;
 	private static volatile StreamCipherDataGroup hc256data;
-	private static volatile PublicKeyDataGroup rsadata;
-	private static volatile PublicKeyDataGroup elgamaldata;
+
 
 
 	public static void doNOGUI(){
@@ -274,42 +271,8 @@ public class NOGUI {
 		}
 		Runtime.getRuntime().gc();	
 
-
-		//RSA PUBLIC KEY
-		rsadata = new PublicKeyDataGroup(10, PublicKeyCipher.RSA);
-		Thread t14 = new Thread(new Runnable(){
-			public void run(){
-				rsadata.doBenchmark("Hello World");
-				rsadata.calcAggregate();
-			}
-		});
-		t14.start();
-		try{
-			t14.join();
-		} catch(InterruptedException e){
-			e.printStackTrace();
-		}
-		Runtime.getRuntime().gc();
-
-		//ELGAMAL PUBLIC KEY
-		elgamaldata = new PublicKeyDataGroup(10, PublicKeyCipher.ELGAMAL);
-		Thread t15 = new Thread(new Runnable(){
-			public void run(){
-				elgamaldata.doBenchmark("Hello World");
-				elgamaldata.calcAggregate();
-			}
-		});
-		t15.start();
-		try{
-			t15.join();
-		} catch(InterruptedException e){
-			e.printStackTrace();
-		}
-		Runtime.getRuntime().gc();
-
 		ArrayList<BlockCipherDataGroup> blockcipherdata = new ArrayList<BlockCipherDataGroup>();
 		ArrayList<StreamCipherDataGroup> streamcipherdata = new ArrayList<StreamCipherDataGroup>();
-		ArrayList<PublicKeyDataGroup> publickeydata = new ArrayList<>();
 
 		blockcipherdata.add(aesdata);
 		blockcipherdata.add(desdata);
@@ -327,8 +290,6 @@ public class NOGUI {
 		streamcipherdata.add(hc256data);
 		streamcipherdata.add(issacdata);
 		
-		publickeydata.add(rsadata);
-		publickeydata.add(elgamaldata);
 		//Start formatting the data
 
 		BufferedWriter print = null;
@@ -399,25 +360,6 @@ public class NOGUI {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			//PUBLIC KEY DATA
-			for(int x = 0; x < publickeydata.size(); x++){
-				//OUTER BLOCK
-
-				for(int y = 0; y < 11; x++){
-					//INNER BLOCK
-
-					print.write(publickeydata.get(x).get(y).toString());				
-					print.newLine();
-
-					//END INNER BLOCK
-				}
-				print.newLine();
-				print.newLine();
-
-				//END OUTER BLOCK
-			}
-			
-
 		} catch (IOException | NullPointerException e) {
 			e.printStackTrace();
 		}

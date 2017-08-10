@@ -1,4 +1,6 @@
-package org.FaceStudios.OpenCryptoBench.Data;
+package org.FaceStudios.OpenCryptoBench.Data.MessageDigest;
+
+import org.FaceStudios.OpenCryptoBench.Data.DataSet;
 
 public class MessageDigestDataSet extends DataSet {
     

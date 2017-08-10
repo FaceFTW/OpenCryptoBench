@@ -1,7 +1,8 @@
-package org.FaceStudios.OpenCryptoBench.Data;
+package org.FaceStudios.OpenCryptoBench.Data.MessageDigest;
 
 import java.util.ArrayList;
 
+import org.FaceStudios.OpenCryptoBench.Data.DataGroup;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 public class MessageDigestDataGroup extends DataGroup<MessageDigestDataSet>{

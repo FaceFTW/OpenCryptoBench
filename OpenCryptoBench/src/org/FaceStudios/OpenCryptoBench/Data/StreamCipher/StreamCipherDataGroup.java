@@ -1,4 +1,4 @@
-package org.FaceStudios.OpenCryptoBench.Data;
+package org.FaceStudios.OpenCryptoBench.Data.StreamCipher;
 
 import java.nio.charset.Charset;
 import java.security.InvalidAlgorithmParameterException;
@@ -15,6 +15,7 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 
+import org.FaceStudios.OpenCryptoBench.Data.DataGroup;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import com.google.common.base.Stopwatch;

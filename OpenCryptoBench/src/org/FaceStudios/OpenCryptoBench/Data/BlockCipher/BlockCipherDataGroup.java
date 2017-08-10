@@ -1,4 +1,4 @@
-package org.FaceStudios.OpenCryptoBench.Data;
+package org.FaceStudios.OpenCryptoBench.Data.BlockCipher;
 
 import java.nio.charset.Charset;
 import java.security.InvalidKeyException;
@@ -13,6 +13,7 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 
+import org.FaceStudios.OpenCryptoBench.Data.DataGroup;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import com.google.common.base.Stopwatch;

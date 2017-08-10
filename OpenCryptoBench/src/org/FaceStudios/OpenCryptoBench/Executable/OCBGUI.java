@@ -1,20 +1,17 @@
 package org.FaceStudios.OpenCryptoBench.Executable;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import javax.swing.JCheckBox;
-import javax.swing.JToolBar;
-import javax.swing.JButton;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.border.TitledBorder;
-import javax.swing.border.LineBorder;
 import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.GridLayout;
+
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
 public class OCBGUI {
 

@@ -21,4 +21,24 @@ public class MessageDigestDataSet extends DataSet {
     public String toString(){
         return run + "," + hashTime + "," + checkTime + "," + totalTime + "," + hashMethod + "," + bitSize;
     }
+    
+    public String getRun(){
+    	return run;
+    }
+    
+    public long getHashTime(){
+    	return hashTime;
+    }
+    
+    public long getCheckTime(){
+    	return checkTime;
+    }
+    
+    public String getHashMethod(){
+    	return hashMethod;
+    }
+    
+    public int getBitSize(){
+    	return bitSize;
+    }
 }

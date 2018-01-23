@@ -1,5 +1,7 @@
 # OpenCryptoBench
-A cryptography benchmark program written in Java. GUI will be added soon.
+A cryptography benchmark program written in Java. 
+
+Project is no longer in development really...
 
 [![codebeat badge](https://codebeat.co/badges/5676f716-312c-4159-8012-67f94ead1ab1)](https://codebeat.co/projects/github-com-facestudios-opencryptobench)
 
